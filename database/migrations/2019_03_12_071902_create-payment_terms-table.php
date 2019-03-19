@@ -20,7 +20,7 @@ class CreatePaymentTermsTable extends Migration {
 			$table->string('payment_name', 255);
 			$table->integer('days');
 			//$table->unsignedInteger('payment_type_id');
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 

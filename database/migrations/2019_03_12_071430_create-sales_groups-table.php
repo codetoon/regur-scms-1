@@ -20,7 +20,7 @@ class CreateSalesGroupsTable extends Migration {
 			$table->string('sales_group_field', 255);
 			$table->string('sales_group_name', 255);
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 

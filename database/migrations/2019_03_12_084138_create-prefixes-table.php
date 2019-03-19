@@ -20,7 +20,7 @@ class CreatePrefixesTable extends Migration {
 			$table->string('prefix_key', 255);
 			$table->string('prefix_value', 255);
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 

@@ -22,7 +22,7 @@ class CreateAttributeSetsTable extends Migration {
 			
 			
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 

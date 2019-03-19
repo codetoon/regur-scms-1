@@ -25,7 +25,7 @@ class CreateTaxesTable extends Migration {
 			$table->boolean('sales_tax');
 			$table->boolean('purchase_tax');
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 

@@ -20,8 +20,8 @@ class CreateProductGroupsTable extends Migration {
 			$table->string('product_group_name', 255);
 			$table->unsignedInteger('attribute_set_id');
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
-			$table->foreign('attribute_set_id')->references('id')->on('attribute_sets')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
+			$table->foreign('attribute_set_id')->references('id')->on('attribute_sets');
 		});
 	}
 

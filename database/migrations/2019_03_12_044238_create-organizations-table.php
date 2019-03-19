@@ -27,7 +27,7 @@ class CreateOrganizationsTable extends Migration {
 			$table->string('website', 255);
 			$table->unsignedInteger('timezone_id');
 			$table->tinyInteger('financial_year_end');
-			$table->enum('unit_of_measure', ['metric', 'imperial']);
+			$table->tinyInteger('unit_of_measure');
 			$table->tinyInteger('date_format');
 			$table->string('address_name', 255);
 			$table->string('address_line_1', 255);
@@ -38,9 +38,9 @@ class CreateOrganizationsTable extends Migration {
 			$table->unsignedInteger('country_id');
 			$table->integer('postal_code');
 			
-			$table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-			$table->foreign('timezone_id')->references('id')->on('timezones')->onDelete('cascade');
-			$table->foreign('industry_id')->references('id')->on('industries')->onDelete('cascade'); 
+			$table->foreign('country_id')->references('id')->on('countries');
+			$table->foreign('timezone_id')->references('id')->on('timezones');
+			$table->foreign('industry_id')->references('id')->on('industries'); 
 		});
 	}
 

@@ -19,7 +19,7 @@ class CreateSupplierReturnReasonsTable extends Migration {
 			$table->unsignedInteger('organization_id');
 			$table->string('supplier_return_reason', 255);
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 

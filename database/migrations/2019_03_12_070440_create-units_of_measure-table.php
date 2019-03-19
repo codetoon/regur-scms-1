@@ -19,7 +19,7 @@ class CreateUnitsOfMeasureTable extends Migration {
 			$table->unsignedInteger('organization_id');
 			$table->tinyInteger('unit_of_measure');
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 

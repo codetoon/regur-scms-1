@@ -19,7 +19,7 @@ class CreateShippingCompaniesTable extends Migration {
 			$table->unsignedInteger('organization_id');
 			$table->string('company_name', 255);
 			
-			$table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
 	}
 
