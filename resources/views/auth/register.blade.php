@@ -54,10 +54,10 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="mobile_number" class="col-md-4 col-form-label text-md-right">{{ __('Contact number') }}</label>
+                            <label for="mobile_number" class="col-md-4 col-form-label text-md-right">{{ __('Mobile number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="mobile_number" type="mobile_number" class="form-control{{ $errors->has('mobile_number') ? ' is-invalid' : '' }}" name="mobile_numberber" value="{{ old('mobile_number') }}" required>
+                                <input id="mobile_number" type="text" class="form-control{{ $errors->has('mobile_number') ? ' is-invalid' : '' }}" name="mobile_number" value="{{ old('mobile_number') }}" required>
 
                                 @if ($errors->has('mobile_number'))
                                     <span class="invalid-feedback" role="alert">

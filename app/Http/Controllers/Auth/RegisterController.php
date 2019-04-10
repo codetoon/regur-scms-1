@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+	
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\User;
+use App\Organization;
+
 
 class RegisterController extends Controller
 {
@@ -64,16 +68,31 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+     protected function create(array $data)
     {
+    	$organization= Organization::create([
+    		'company_name'=> $data['company_name'],
+    		'trading_name'=> $data['company_name'],
+    		'trading_name_purchase'=> $data['company_name'],
+    	]);
+    	
+    	
+    	//return $organization;
+    	
+    	
+    	
         $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        	'mobile_number'=> $data['mobile_number'],
         	'country' => $data['country'],
-        	'company_name'=>$data['company_name']
+        	'organization_id'=> $organization->id
         ]);
+        
+        
         return $user;
-    }
+        return $organization;
+    } 
+    
+ 
 }
