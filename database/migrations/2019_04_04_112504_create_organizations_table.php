@@ -38,10 +38,7 @@ class CreateOrganizationsTable extends Migration
 			$table->string('state_region', 255);
 			$table->unsignedInteger('country_id');
 			$table->integer('postal_code');
-			$table->unsignedBigInteger('user_id');
 			 
-			$table->foreign('user_id')->references('id')->on('users');
-			
 			$table->foreign('country_id')->references('id')->on('countries');
 			$table->foreign('timezone_id')->references('id')->on('timezones');
 			$table->foreign('industry_id')->references('id')->on('industries');  
