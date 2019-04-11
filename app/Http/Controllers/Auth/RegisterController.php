@@ -80,13 +80,13 @@ class RegisterController extends Controller
     	]);
     	
     	
-    	
-    	
+    
         $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        	'organization_id'=> $organization->id
+        	'organization_id'=> $organization->id,
+        	'mobile_number'=> $data['mobile_number'],
         ]);
         
         DB::commit();
@@ -100,7 +100,7 @@ class RegisterController extends Controller
     		DB::rollback();
     		echo $e->getMessage();
     	}
-    } 
-    
  
+    }
+
 }
