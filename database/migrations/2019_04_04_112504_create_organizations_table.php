@@ -30,16 +30,42 @@ class CreateOrganizationsTable extends Migration
 			$table->tinyInteger('financial_year_end');
 			$table->tinyInteger('unit_of_measure');
 			$table->tinyInteger('date_format');
-			$table->string('address_name', 255);
-			$table->string('address_line_1', 255);
-			$table->string('address_line_2', 255);
-			$table->string('suburb', 255);
-			$table->string('city', 255);
-			$table->string('state_region', 255);
-			$table->unsignedInteger('country_id');
-			$table->integer('postal_code');
+			
+			
+			//contact
+			$table->string('fax_number', 255);
+			$table->string('telephone_number')->unique();
+			$table->string('ddi', 255);
+			$table->string('tollfree_number', 255);
+			$table->string('purchase_email', 255);
+			$table->string('sales_email', 255);
+			
+			//physical address
+			$table->string('physical_address_name', 255);
+			$table->string('physical_address_line_1', 255);
+			$table->string('physical_address_line_2', 255);
+			$table->string('physical_suburb', 255);
+			$table->string('physical_city', 255);
+			$table->string('physical_state_region', 255);
+			$table->unsignedInteger('physical_country_id');
+			$table->integer('physical_postal_code');
+			
+			
+			//postal address
+			$table->string('postal_address_name', 255);
+			$table->string('postal_address_line_1', 255);
+			$table->string('postal_address_line_2', 255);
+			$table->string('postal_suburb', 255);
+			$table->string('postal_city', 255);
+			$table->string('postal_state_region', 255);
+			$table->unsignedInteger('postal_country_id');
+			$table->integer('postal_postal_code');
+			
+			
+			
 			 
-			$table->foreign('country_id')->references('id')->on('countries');
+			$table->foreign('postal_country_id')->references('id')->on('countries');
+			$table->foreign('physical_country_id')->references('id')->on('countries');
 			$table->foreign('timezone_id')->references('id')->on('timezones');
 			$table->foreign('industry_id')->references('id')->on('industries');  
 			
