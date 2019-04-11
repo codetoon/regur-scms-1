@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 	
 use App\Http\Controllers\Controller;
+use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,14 +51,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(Request $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         	'mobile_number'=>['required', 'numeric'],
-        	'country'=>['required', 'string', 'max:255'],
         	'company_name'=>['required', 'string', 'max:255']
         ]);
     }
@@ -68,16 +68,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-     protected function create(array $data)
-    {
-    	$organization= Organization::create([
+     protected function create(Request $data)
+    {	DB::beginTransaction();
+    	try {
+    		
+    	
+    	$organization= Organization::firstOrCreate([
     		'company_name'=> $data['company_name'],
     		'trading_name'=> $data['company_name'],
     		'trading_name_purchase'=> $data['company_name'],
     	]);
     	
-    	
-    	//return $organization;
     	
     	
     	
@@ -85,13 +86,20 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        	'country' => $data['country'],
         	'organization_id'=> $organization->id
         ]);
         
+        DB::commit();
+        //return $user;
+        //return $organization;
+        return redirect('/organizationDetailForm');
         
-        return $user;
-        return $organization;
+       
+    	}
+    	catch (Exception $e){
+    		DB::rollback();
+    		echo $e->getMessage();
+    	}
     } 
     
  

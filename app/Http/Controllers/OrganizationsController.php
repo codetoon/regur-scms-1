@@ -6,5 +6,9 @@ use Illuminate\Http\Request;
 
 class OrganizationsController extends Controller
 {
- 	//
+ 	public function show(){
+ 		return view('OrganizationDetailsForm');
+ 	}
+ 	
+ 
 }
