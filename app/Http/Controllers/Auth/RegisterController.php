@@ -80,19 +80,22 @@ class RegisterController extends Controller
     	]);
     	
     	
-    	
+    	$splitName= explode(" ", $data['name'], 2);
     	
         $user= User::create([
-            'name' => $data['name'],
+            'first_name' => $splitName[0],
+        	'last_name'=> !empty($splitName[1])? $splitName[1] : "",
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        	'organization_id'=> $organization->id
+        	'organization_id'=> $organization->id,
+        	'mobile_number' => $data['mobile_number'],
+        	'company_name'=> $data['company_name'],
         ]);
         
         DB::commit();
-        //return $user;
-        //return $organization;
-        return redirect('/organizationDetailForm');
+        return $user;
+        return $organization;
+        //return redirect('/organizationDetailForm');
         
        
     	}

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'country', 'organization_id'
+        'first_name','last_name', 'email', 'password', 'organization_id', 'mobile_number', 'company_name'
     ];
 
     /**
@@ -38,19 +38,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    protected static function boot(){
-    	parent::boot();
-    	
-    	User::saved(function($model){
-    		
-    		$contact=Contact::create([
-    			'user_id'=> $model->id,
-    			'mobile_number'=> $model->mobile_number	
-    		]);
-    		
+   
     
-    		
-    		return $contact;
-    	});
-    }
 }
