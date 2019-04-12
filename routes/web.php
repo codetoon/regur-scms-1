@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/signup', 'Auth\RegisterController@create');
-Route::get('/organizationDetailsForm', 'OrganizationsController@show');
+Route::get('/organizationDetailsForm', 'OrganizationsController@showForm');
+Route::post('/organizationDetailsForm', 'OrganizationsController@create');

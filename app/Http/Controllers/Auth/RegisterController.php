@@ -75,8 +75,7 @@ class RegisterController extends Controller
     	
     	$organization= Organization::firstOrCreate([
     		'company_name'=> $data['company_name'],
-    		'trading_name'=> $data['company_name'],
-    		'trading_name_purchase'=> $data['company_name'],
+    		
     	]);
     	
     	
@@ -88,8 +87,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         	'organization_id'=> $organization->id,
-        	'mobile_number' => $data['mobile_number'],
-        	'company_name'=> $data['company_name'],
+        	'mobile_number' => $data['mobile_number']
         ]);
         
         DB::commit();
