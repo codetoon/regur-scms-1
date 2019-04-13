@@ -36,7 +36,7 @@ class OrganizationsController extends Controller
  		
  	}
  	protected function create(Request $data){
- 		$organization=Organization::create(request()->except(['_token']));
+ 		$organization=Organization::updateOrCreate(request()->except(['_token']));
  			/*	[
  			'trading_name'=> $data['company_name'],
  			'trading_name_purchase'=> $data['company_name'],

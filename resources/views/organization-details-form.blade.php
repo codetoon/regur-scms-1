@@ -53,19 +53,16 @@
                             </div>
                         </div>
                         
-                        <div class="form-group row">
-                            <label for="industry" class="col-md-4 col-form-label text-md-right">{{ __('Industry') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="industry" type="text" class="form-control{{ $errors->has('industry') ? ' is-invalid' : '' }}" name="industry" value="{{ old('industry') }}" required autofocus>
-
-                                @if ($errors->has('industry'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('industry') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                        <div class="form-group-row">
+							<label for="timezone" class="col-form-label text-md-right">{{ __('Industry') }}</label>
+							
+								<select class="form-control" name="industry_id" id="industry_id" value="{{ old('industry_', $organization->industry_id)}}">
+								@foreach($industries as $industry) 
+									<option value= "{{ $industry->id }}">{{ $industry->industry_name }}</option>
+								@endforeach
+								</select>
+							
+						</div>
                         
                         <div class="form-group row">
                             <label for="organization_type" class="col-md-4 col-form-label text-md-right">{{ __('Organization Type') }}</label>
@@ -499,7 +496,7 @@
                             <label for="postal_postal_code" class="col-md-4 col-form-label text-md-right">{{ __('Postal Code') }}</label>
 
                             <div class="col-md-6">
-                                <input id="postal_postal_code" type="text" class="form-control{{ $errors->has('postal_postal_code') ? ' is-invalid' : '' }}" name="physical_postal_code" value="{{ old('physical_postal_code'), $organization->physical_postal_code }}" required autofocus>
+                                <input id="postal_postal_code" type="text" class="form-control{{ $errors->has('postal_postal_code') ? ' is-invalid' : '' }}" name="postal_postal_code" value="{{ old('postal_postal_code'), $organization->postal_postal_code }}" required autofocus>
 
                                 @if ($errors->has('postal_postal_code'))
                                     <span class="invalid-feedback" role="alert">
