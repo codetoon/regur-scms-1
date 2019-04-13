@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
-   // protected $primaryKey= 'id';
+    protected $primaryKey= 'id';
     
     protected $fillable= ['company_name', 'trading_name', 'trading_name_purchase', 
     		 'organization_type', 'base_currency', 'dashboard_data_source', 'gst_vat_number', 
@@ -15,10 +15,10 @@ class Organization extends Model
     		'sales_email', 'physical_address_name', 'physical_address_line_1',
     		 'physical_address_line_2' , 'physical_suburb', 'physical_city', 
     		'physical_state_region', 'physical_postal_code', 'postal_address_name',
-    		 'physical_address_line_1-line_1', 'physical_address_line_1',
-    		'postal_suburb', 'postal_city', 'physical_state_region', 
+    		 'postal_address_line_1', 'postal_address_line_2',
+    		'postal_suburb', 'postal_city', 'postal_state_region', 
     		 'postal_postal_code',
-    		//'industry_id', 'postal_country_id', 'physical_country_id', 'timezone_id',
+    		'industry_id', 'postal_country_id', 'physical_country_id', 'timezone_id' //foreign keys
     ];
     
     

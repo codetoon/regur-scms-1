@@ -6,16 +6,24 @@ use Illuminate\Http\Request;
 use App\Organization;
 use App\Country;
 use App\Timezone;
+use App\Industry;
+use App\User;
 
 class OrganizationsController extends Controller
-{
+{	
+	public function __construct(){
+		$this->middleware('auth');
+	}
  	public function showForm(){
  		$organization= new Organization();
  		$countries= Country::get();
  		$timezones= Timezone::get();
+ 		$industries= Industry::get();
+ 		//$user= User::find($id);
+ 		//$organization= Organization::where('organization_id', $id)->get();
  		//$countries= Country::pluck('id', 'country_name');
  		//$timezones= Timezone::pluck('id', 'timezone');
- 		return view('organization-details-form', compact('countries', 'timezones'));
+ 		return view('organization-details-form', compact('countries', 'timezones', 'industries', 'organization', 'users'));
  	}
  	
  	protected function validator(Request $data){
@@ -28,7 +36,7 @@ class OrganizationsController extends Controller
  		
  	}
  	protected function create(Request $data){
- 		$organization=Organization::updateOrCreate($data->all());
+ 		$organization=Organization::create(request()->except(['_token']));
  			/*	[
  			'trading_name'=> $data['company_name'],
  			'trading_name_purchase'=> $data['company_name'],
@@ -45,6 +53,7 @@ class OrganizationsController extends Controller
  			''
  		] 
  		);*/
+ 		return $organization;	
  		
  		
  	
