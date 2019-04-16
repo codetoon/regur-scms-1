@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Organization;
 use App\Country;
 use App\Timezone;
 use App\Industry;
 use App\User;
+
 
 class OrganizationsController extends Controller
 {	
@@ -15,15 +17,15 @@ class OrganizationsController extends Controller
 		$this->middleware('auth');
 	}
  	public function showForm(){
- 		$organization= new Organization();
+ 		//$organization= new Organization();
  		$countries= Country::get();
  		$timezones= Timezone::get();
  		$industries= Industry::get();
- 		//$user= User::find($id);
- 		//$organization= Organization::where('organization_id', $id)->get();
+ 		$user= Auth::User();
+ 		$organization= Organization::where('id', Auth::user()->organization_id)->get();
  		//$countries= Country::pluck('id', 'country_name');
  		//$timezones= Timezone::pluck('id', 'timezone');
- 		return view('organization-details-form', compact('countries', 'timezones', 'industries', 'organization', 'users'));
+ 		return view('organization-details-form', compact('countries', 'timezones', 'industries', 'organization', 'user'));
  	}
  	
  	protected function validator(Request $data){
