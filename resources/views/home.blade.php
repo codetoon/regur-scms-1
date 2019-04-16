@@ -21,103 +21,10 @@
     </div>
 </div> -->
 
-<div class="container-fluid"> 
-  <div class= "row no-gutters" ><!--no-gutters"> -->
-      <div class="sidebar-container sidebar-menu sidebar-menu-expanded sidebar-mobile">
-          <div class="bg-light sidebar sidebar-menu sidebar-menu-expanded sidebar-mobile">
-            <div class="sidebar-sticky-1">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                    <a class="nav-link active" href="#"  >
-                    <span id="sidebar-icon" data-feather="home"></span>
-                    <span class="sidebar-menu-item" >Dashboard <span class="sr-only">(current)</span></span> 
-                    </a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link " href="#"  >
-                     <span id="sidebar-icon" data-feather="file"></span>
-                     <span class="sidebar-menu-item">Orders</span> 
-                    </a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link dropdown" id="menu-item-2" href="#" data-toggle="collapse" data-target="#submenu-list-1">
-                    <span  id="sidebar-icon" data-feather="shopping-cart"></span>        
-                    <span class="sidebar-menu-item">Products</span>
-                    <span class="drop-arrow" data-feather="chevron-down"></span>
-                    </a>
-
-                        <ul class="collapse dropdown-content dropdown-sidebar-expanded " aria-labelledby="menu-item-2" id="submenu-list-1"  >
-                            <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 1</a></li>
-                            <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 2</a></li>
-                            <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 3333</a></li>
-                        </ul>
-
-                    </li>
-
-                    <li class="nav-item">
-                    <a class="nav-link dropdown" href="#" data-toggle="collapse" id="menu-item-2" data-target="#submenu-list-2">
-                    <span id="sidebar-icon" data-feather="users"></span>
-                    <span class="sidebar-menu-item" >Customers</span>
-                    <span class="drop-arrow" data-feather="chevron-down"></span>
-                    </a>
-                        <ul class="collapse dropdown-content" aria-labelledby="menu-item-2" id="submenu-list-2">
-                            <li><a href="#" class="submenu-list-item"><span data-feather="users"></span>Customer 1</a></li>
-                            <li><a href="#" class="submenu-list-item"><span data-feather="users"></span>Customer 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                        <span id="sidebar-icon" data-feather="bar-chart-2"></span>
-                        <span class="sidebar-menu-item" >Reports</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                        <span id="sidebar-icon" data-feather="layers"></span>
-                        <span class="sidebar-menu-item">Integrations</span>
-                        </a>
-                    </li>
-                </ul>
-
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span class="sidebar-menu-item">Saved reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-              <span id="sidebar-icon" data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span id="sidebar-icon" data-feather="file-text"></span>
-                    <span class="sidebar-menu-item" >Current month</span> 
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span id="sidebar-icon" data-feather="file-text"></span>
-                    <span class="sidebar-menu-item" >Last quarter</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span id="sidebar-icon" data-feather="file-text"></span>
-                    <span class="sidebar-menu-item" >Social engagement</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span id="sidebar-icon" data-feather="file-text"></span>
-                    <span class="sidebar-menu-item" >Year-end sale</span>
-                </a>
-              </li>
-            </ul>
-      </div>
-    </div>
-        </div>
       
         <main role="main" class="col">
             <div class="row main-content">
-                <div class="col">
+                <div class="col">   
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">Dashboard</h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
@@ -266,8 +173,7 @@
             </div>
      </main>
             
-       </div>
-  </div>
-  
-   
+      
+ 
+ 
 @endsection

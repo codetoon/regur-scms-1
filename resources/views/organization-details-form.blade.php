@@ -9,6 +9,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="">
+                    	
                         @csrf
 
                         <div class="form-group row">
@@ -320,7 +321,7 @@
                         
                         
                          <div class="form-group row">
-                            <label for="physical_suburb" class="col-md-4 col-form-label text-md-right">{{ __('physical_suburb') }}</label>
+                            <label for="physical_suburb" class="col-md-4 col-form-label text-md-right">{{ __('Suburb') }}</label>
 
                             <div class="col-md-6">
                                 <input id="physical_suburb" type="text" class="form-control{{ $errors->has('physical_suburb') ? ' is-invalid' : '' }}" name="physical_suburb" value="{{ old('physical_suburb', $organization[0]->physical_suburb) }}" required autofocus>
@@ -335,7 +336,7 @@
                         
                         
                          <div class="form-group row">
-                            <label for="physical_city" class="col-md-4 col-form-label text-md-right">{{ __('physical_city') }}</label>
+                            <label for="physical_city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
 
                             <div class="col-md-6">
                                 <input id="physical_city" type="text" class="form-control{{ $errors->has('physical_city') ? ' is-invalid' : '' }}" name="physical_city" value="{{ old('physical_city', $organization[0]->physical_city) }}" required autofocus>
@@ -508,7 +509,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Save') }}
                                 </button>
                             </div>
                          </div>  

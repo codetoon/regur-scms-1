@@ -16,8 +16,7 @@ class OrganizationsController extends Controller
 	public function __construct(){
 		$this->middleware('auth');
 	}
- 	public function showForm(){
- 		//$organization= new Organization();
+ 	 public function edit(){
  		$countries= Country::get();
  		$timezones= Timezone::get();
  		$industries= Industry::get();
@@ -26,8 +25,9 @@ class OrganizationsController extends Controller
  		//$countries= Country::pluck('id', 'country_name');
  		//$timezones= Timezone::pluck('id', 'timezone');
  		return view('organization-details-form', compact('countries', 'timezones', 'industries', 'organization', 'user'));
- 	}
+ 	} 
  	
+	
  	protected function validator(Request $data){
  		return validator::make($data, [
  			'trading_name'=> ['required', 'string', 'max:255'],
@@ -37,28 +37,9 @@ class OrganizationsController extends Controller
  		]);
  		
  	}
- 	protected function create(Request $data){
- 		$organization=Organization::updateOrCreate(request()->except(['_token']));
- 			/*	[
- 			'trading_name'=> $data['company_name'],
- 			'trading_name_purchase'=> $data['company_name'],
- 			'organization_type'=> $data['organization_type'],
- 			'base_currency'=> $data['base_currency'],
- 			'dashboard_data_source'=> $data['dashboard_data_source'],
- 			'gst_vat_number'=> $data['gst_vat_number'],
- 			'website'=> $data['website'],
- 			'financial_year_end'=> $data['financial_year_end'],
- 			'unit_of_measure'=> $data['unit_of_measure'],
- 			'date_format'=> $data['date_format'],
- 			'fax_number'=> $data['fax_number'],
- 			'telephone_number'=> $data['telephone_number'],
- 			''
- 		] 
- 		);*/
+ 	protected function update(Request $data){
+ 		$organization= Organization::where('id', Auth::user()->organization_id)->update($data->except('_token'));
  		return $organization;	
- 		
- 		
- 	
  	}
  	
  	

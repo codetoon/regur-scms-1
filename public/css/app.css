@@ -10,7 +10,7 @@
  
  
  
- body {
+body {
   font-size: .875rem;
 }
 
@@ -23,39 +23,55 @@
   color: #999;
 }
 
-.feather:hover{
-   color: #333;
-}
 
-.dropdown-content:hover{
-    color: #333;
-}
 
 /* Navbar  */
-.company-name{
-   width: 224.5px;
-    float: left;
-    height: 46px;
+.company{   
+    font-size: 20px;
+    text-align: center; 
+   
+}
+
+.company a{
+    font-family: inherit;
+    color: white;
+    text-decoration: none;
     
 }
-.toggle-button{
-    text-align: center;
-    padding-top: 5px;
-    border: 0.5px solid black;
-    cursor: pointer;
-}
+.company-name{
+    width: 224.5px;
+    float: left;
+    height: 46px;
+    padding: 4px 0px;
 
-#toggle-button-mobile{
-    display: none;
-    padding-left: 3px;
+    
 }
-
 .company-logo{
+    padding-top: 3px;
+    display: none;
     height: 46px;
     width: 52px;
 }
 
-   
+
+.toggle-button{
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+
+#toggle-button-mobile{
+    display: none;
+    color: white;
+    padding-left: 3px;
+}
+
+
+
+.sign-out-btn{
+    text-align: center;
+}   
 .nav-item{
     position: relative;
     display: inline-block;
@@ -87,19 +103,8 @@
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
 
-/*.dropdown-content-toggle{
-    position: absolute;
-    z-index: 1000;
-    background-color: white;
-    border: 1px solid black;
-    float: right;
-    left: 100%;
-    top: 0;
-}*/
-/*
 
-
- * Sidebar
+ /* Sidebar
  */
 
 .sidebar-container{
@@ -119,14 +124,23 @@
     left: 0;
     padding: 48px 0px 0px ; /* Height of navbar */
     z-index: 1; /* Behind the navbar */
+    
+}
+
+
+.drop-arrow{
+
 }
 
 .sidebar-menu-expanded{
     width: 224.5px;
+    
 }
 .sidebar-menu-collapsed{
     width: 52px;
+    
 }
+
 .sidebar-sticky {
   position: relative;
   top: 0;
@@ -148,9 +162,11 @@
     
 }
 
-.submenu-list-item:hover{
+
+
+a.submenu-list-item:hover .feather, a.submenu-list-item{
     text-decoration: none;
-    color: black;
+    color: #333 ;
 }
 .dropdown-content{
     /*position: relative;*/
@@ -160,7 +176,17 @@
     min-width: 150px;
     background-color: #f8f9fa;
     width: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
 
+}
+.dropdown-content:hover{
+    color: #333;
+}
+
+.dropdown-content li{
+    padding-bottom: 3px;
+    padding-top: 3px;
 }
 
 .dropdown-sidebar-collapsed{
@@ -208,6 +234,7 @@
 }
 
 
+
 /*
  * Content
  */
@@ -216,6 +243,16 @@
 
 [role="main"] {
   padding-top: 48px; /* Space for fixed navbar */ 
+}
+
+/* Anmation */
+@keyframes show {
+    0% {
+        display: none;
+    }
+    100% {
+        display: inline;
+    }
 }
 
 /* Mobile view */
@@ -229,40 +266,60 @@
         display: block;
         width: 100%;
         height: auto;
+        text-align: left;
+        padding-left: 16px;
     }
-
+    
     .nav-container{
         padding-left: 0px;
         padding-right: 3px;
+        padding-bottom:10px;
     }
     
-    
-        [role="main"] {
+    .row{
+        margin-right: 0px;
+    }
+    [role="main"] {
         padding-top: 0px;
     }
-    
     
     #toggle-button{
-        display: none;    
+        display: none;
+       
     }
+    
     #toggle-button-mobile{
         display: inline-block;
+         padding-left: 12px; 
+        cursor: pointer;
     }
+   
+    .sign-out-btn{
+        text-align: center;
+        padding-right: 10px;
+    }
+    
+    .sidebar-container{
+        position: fixed;
+        
+    }
+    
     .main-content{
-        padding-top: 0px;
+        padding-top: 90px;
+        
+        
     }
-   .main-content-view{
-        padding-top: 78px;
+    .main-content-view{
+        /*padding-top: 0px;*/
+        padding-top: 90px;
     }
-
-    .sidebar-menu-hide{
-        display: none;
-    }
+    
     
     .sidebar-menu{
-        padding-top: 78 px;
+        /*padding-top: 0px;*/
+        padding-top: 90px;
+        bottom: 0;
+        height: 100%;
     }
-    
-    
-}
- 
+   
+} 
