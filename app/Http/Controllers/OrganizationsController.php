@@ -24,7 +24,7 @@ class OrganizationsController extends Controller
  		$organization= Organization::where('id', Auth::user()->organization_id)->get();
  		//$countries= Country::pluck('id', 'country_name');
  		//$timezones= Timezone::pluck('id', 'timezone');
- 		return view('organization-details-form', compact('countries', 'timezones', 'industries', 'organization', 'user'));
+ 		return view('organization_details', compact('countries', 'timezones', 'industries', 'organization', 'user'));
  	} 
  	
 	

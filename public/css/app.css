@@ -201,7 +201,6 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     left: 0;
     float: left;
 }
-
 @supports ((position: -webkit-sticky) or (position: sticky)) {
   .sidebar-sticky {
     position: -webkit-sticky;
@@ -244,6 +243,29 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
 [role="main"] {
   padding-top: 48px; /* Space for fixed navbar */ 
 }
+
+
+
+/*org-details-tab*/
+.tab-flex-container{
+    margin: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+   
+  
+}
+
+.tab-flex-container>div{
+    height: auto;
+    text-align: center;
+     width: 45%;
+    margin: 2% 2.5%;
+    padding: 2%
+   
+}
+
+
 
 /* Anmation */
 @keyframes show {

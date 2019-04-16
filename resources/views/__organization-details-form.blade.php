@@ -55,7 +55,7 @@
                         </div>
                         
                         <div class="form-group-row">
-							<label for="timezone" class="col-form-label text-md-right">{{ __('Industry') }}</label>
+							<label for="industry" class="col-form-label text-md-right">{{ __('Industry') }}</label>
 							
 								<select class="form-control" name="industry_id" id="industry_id" value="{{ old('industry_', $organization[0]->industry_id)}}">
 								@foreach($industries as $industry) 

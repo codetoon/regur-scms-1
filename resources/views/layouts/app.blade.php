@@ -17,6 +17,7 @@
     <!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
     
 
@@ -132,7 +133,7 @@
                    <span class="drop-btn" data-feather="chevron-down" ></span>
                     </a>
                         <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="menu-item-3" id="submenu-list-3">
-                            <li><a href="/organizationDetailsForm" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
+                            <li><a href="/organizationDetails" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -174,9 +175,14 @@
      @endguest  
         </div>
 
-
+	<main role="main" class="col">
+            <div class="row main-content">
+                <div class="col">   
         <main class="py-4">
             @yield('content')
+        </main>
+        </div>
+        </div>
         </main>
     </div>
   </div>
