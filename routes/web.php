@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/signup', 'Auth\RegisterController@create');
-Route::get('/settings/organizationDetails', 'OrganizationsController@edit'); 
-Route::post('/settings/organizationDetails', 'OrganizationsController@update'); //update org details
-Route::get('/settings/adjustmentReasons', 'AdjustmentReasonsController@show');
+Route::get('/company/organizationDetails', 'OrganizationsController@edit'); 
+Route::post('/company/organizationDetails', 'OrganizationsController@update'); //update org details
+Route::get('/system/adjustmentReasons', 'System\AdjustmentReasonsController@show');
+Route::post('/system/adjustmentReasons', 'System\AdjustmentReasonsController@store');
+Route::delete('/system/adjustmentReasons/{adjustment}', 'System\AdjustmentReasonsController@destroy');
+Route::get('/system/creditReasons', 'System\CreditReasonsController@show');
+Route::post('/system/creditReasons', 'System\CreditReasonsController@store');
+Route::delete('/system/creditReasons/{creditReason}', 'System\CreditReasonsController@destroy');
+
+Route::get('/system/attributeSets', 'System\AttributeSetsController@show'); 
+ 

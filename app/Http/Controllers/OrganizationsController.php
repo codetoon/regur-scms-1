@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Organization;
 use App\Country;
@@ -33,7 +34,7 @@ class OrganizationsController extends Controller
  		$organization= Organization::where('id', Auth::user()->organization_id)->get();
  		//$countries= Country::pluck('id', 'country_name');
  		//$timezones= Timezone::pluck('id', 'timezone');
- 		return view('organization_details', compact('countries', 'timezones', 'industries', 'units',
+ 		return view('company.organization_details', compact('countries', 'timezones', 'industries', 'units',
  				'financial_year_endings','date_formats', 'organization_types', 'dashboard_data_sources', 'organization', 'user'));
  	} 
  	

@@ -133,10 +133,10 @@
                    <span class="drop-btn" data-feather="chevron-down" ></span>
                     </a>
                         <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="menu-item-3" id="submenu-list-3">
-                            <li><a href="/organizationDetails" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
+                            <li><a href="/company/organizationDetails" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
                             <li><a href="#" class="submenu-list-item dropdown collapsed" data-toggle="collapse" id="submenu-item" data-target="sub-submenu"><span data-feather="users"></span>{{ __('System') }}<span class="drop-btn" data-feather="chevron-down" ></span></a><ul class="collapse dropdown-content dropdown-sidebar-expanded"aria-labelledby="submenu-item" id="sub-submenu" >
                                 <li>
-                                    <a href="/adjustmentReasons" class=""><span data-feather="users"></span>{{ __('Adjustment Reasons') }}</a>
+                                    <a href="/system/adjustmentReasons" class=""><span data-feather="users"></span>{{ __('Adjustment Reasons') }}</a>
                                 </li>
                                 </ul>
                             </li>
