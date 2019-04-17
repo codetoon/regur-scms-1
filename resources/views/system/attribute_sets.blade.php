@@ -11,7 +11,7 @@
     <div class="col-md-3">
         <label for="type">Type</label>
         <select class="form-control" name="type" id="type">
-            <options value="product">Product</options>
+            <option value="product">Product</option>
         </select>
     </div>
     <div style="padding-top: 28px;"><button type="submit" class="btn btn-success">Add</button></div>

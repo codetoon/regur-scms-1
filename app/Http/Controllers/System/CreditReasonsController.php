@@ -23,6 +23,7 @@ class CreditReasonsController extends Controller
    protected function validator(Request $data){
    	return Validator::make($data, [
    			'credit_reason'=> ['required', 'string', 'max:255'],
+   			'organization_id'=>['required']
    	]);
    		
    }
