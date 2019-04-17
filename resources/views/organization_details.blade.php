@@ -7,17 +7,15 @@
 			<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#details">Details</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#configuration">Configuration</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#address">Address</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">Contact</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">Address</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contact">Contact</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">Images</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">Invoicing</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">Purchasing</a></li>
 		</ul>
-		
-		<div class="tab-content">
-			<div id="details" class="container tab-pane active">
-                <form method="POST" action="">
-                    @csrf
+		  <form method="POST" action="">
+            @csrf
+		      <div class="tab-content">
+			     <div id="details" class="container tab-pane active">
                     <div class="tab-flex-container">
                         <div>
                            <div class="form-group row">
@@ -56,7 +54,9 @@
                               <label class="col-sm-4 col-form-label" for="organization_type">Organization Type:</label>
                               <div class="col-sm-8">
                                   <select class="form-control" name="organization_type" id="organization_type" value="{{ old('organization_type')}}">
-                                  <option>1</option>
+                                    @foreach($organization_types as $key=> $organization_type)
+                                  <option value= "{{ $key }}">{{ $organization_type }}</option>
+                                    @endforeach
                                   </select>
                               </div>
                             </div>
@@ -64,18 +64,19 @@
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label" for="base_currency">Base Currency:</label>
                               <div class="col-sm-8">
-                                  <select class="form-control" name="base_currency" id="base_currency" value="{{ old('base_currency')}}">
-                                  <option>1</option>
-                                  </select>
+                                  <input type="text" id="base_currency" class="form-control{{ $errors->has('base_currency') ? ' is-invalid' : '' }}" name="base_currency" value="{{ old('base_currency', $organization[0]->base_currency) }}" required autofocus>
                               </div>
                             </div>
+                            
                         </div>
                         <div>
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label" for="dashboard_data_source">Dashboard Data Source:</label>
                               <div class="col-sm-8">
                                   <select class="form-control" name="dashboard_data_source" id="dashboard_data_source" value="{{ old('dashboard_data_source')}}">
-                                  <option>1</option>
+                                    @foreach($dashboard_data_sources as $key=>$dashboard_data_source)
+                                  <option value= "{{ $key }}">{{ $dashboard_data_source }}</option>
+                                    @endforeach
                                   </select>
                               </div>
                             </div>
@@ -95,10 +96,12 @@
                             </div>
                             
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label" for="timezone">Timezone:</label>
+                              <label class="col-sm-4 col-form-label" for="timezone_id">Timezone:</label>
                               <div class="col-sm-8">
-                                  <select class="form-control" name="timezone" id="timezone" value="{{ old('timezone')}}">
-                                  <option>1</option>
+                                  <select class="form-control" name="timezone_id" id="timezone_id" value="{{ old('timezone_id', $organization[0]->timezone_id)}}">
+                                    @foreach($timezones as $timezone)
+                                  <option value= "{{ $timezone->id }}">{{ $timezone->timezone }}</option>
+                                    @endforeach
                                   </select>
                               </div>
                             </div>
@@ -107,7 +110,9 @@
                               <label class="col-sm-4 col-form-label" for="financial_year_end">Financial Year End:</label>
                               <div class="col-sm-8">
                                   <select class="form-control" name="financial_year_end" id="financial_year_end" value="{{ old('financial_year_end')}}">
-                                  <option>1</option>
+                                    @foreach($financial_year_endings as $key=> $financial_year_ending)
+                                    <option value= "{{ $key }}">{{ $financial_year_ending }}</option>
+                                    @endforeach
                                   </select>
                               </div>
                             </div>
@@ -116,7 +121,9 @@
                               <label class="col-sm-4 col-form-label" for="unit_of_measure">Measurement Unit:</label>
                               <div class="col-sm-8">
                                   <select class="form-control" name="unit_of_measure" id="unit_of_measure" value="{{ old('unit_of_measure')}}">
-                                  <option>1</option>
+                                  @foreach($units as $key=> $unit)
+                                      <option value= "{{ $key }}">{{ $unit }}</option>
+                                    @endforeach
                                   </select>
                               </div>
                             </div>
@@ -125,13 +132,15 @@
                               <label class="col-sm-4 col-form-label" for="date_format">Date Format:</label>
                               <div class="col-sm-8">
                                   <select class="form-control" name="date_format" id="date_format" value="{{ old('date_format')}}">
-                                  <option>1</option>
+                                    @foreach($date_formats as $key=> $date_format)
+                                        <option value= "{{ $key }}">{{ $date_format }}</option>
+                                    @endforeach
                                   </select>
                               </div>
                             </div>
                         </div>
                      </div>
-                </form>
+               
                
 			</div>
 		
@@ -145,16 +154,187 @@
                               <div class="col-sm-8">
                                   <input type="text" id="postal_address_name" class="form-control {{ $errors->has('postal_address_name') ? ' is-invalid' : '' }}" name="postal_address_name" value="{{ old('postal_address_name', $organization[0]->postal_address_name) }}" required autofocus >
                               </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="postal_address_line_1">Address Line 1:</label>
+                            <div class="col-sm-8">
+                                 <input type="text" id="postal_address_line_1" class="form-control {{ $errors->has('postal_address_line_1') ? ' is-invalid' : '' }}" name="postal_address_line_1" value="{{ old('postal_address_line_1', $organization[0]->postal_address_line_1) }}" required autofocus >
                             </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="postal_address_line_2">Address Line 2:</label>
+                            <div class="col-sm-8">
+                                 <input type="text" id="postal_address_line_2" class="form-control {{ $errors->has('postal_address_line_2') ? ' is-invalid' : '' }}" name="postal_address_line_2" value="{{ old('postal_address_line_2', $organization[0]->postal_address_line_2) }}" required autofocus >
+                             </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="postal_suburb">Suburb:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="postal_suburb" class="form-control {{ $errors->has('postal_suburb') ? ' is-invalid' : '' }}" name="postal_suburb" value="{{ old('postal_suburb', $organization[0]->postal_suburb) }}" required autofocus >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="postal_city">City:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="postal_city" class="form-control {{ $errors->has('postal_city') ? ' is-invalid' : '' }}" name="postal_city" value="{{ old('postal_city', $organization[0]->postal_city) }}" required autofocus >
+                            </div>
+                        </div>
+                        
+                    	<div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="postal_state_region">State/ Region:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="postal_state_region" class="form-control {{ $errors->has('postal_state_region') ? ' is-invalid' : '' }}" name="postal_state_region" value="{{ old('postal_state_region', $organization[0]->postal_state_region) }}" required autofocus >
+                              </div>
+                            </div>
+                        
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="postal_postal_code">Postal Code:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="postal_postal_code" class="form-control {{ $errors->has('postal_postal_code') ? ' is-invalid' : '' }}" name="postal_postal_code" value="{{ old('postal_postal_code', $organization[0]->postal_postal_code) }}" required autofocus >
+                              </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="country">Country:</label>
+                              <div class="col-sm-8">
+                                  <select class="form-control" name="postal_country_id" id="country" value="{{ old('postal_country_id', $organization[0]->postal_country_name)}}">
+                                  @foreach($countries as $country) 
+									<option value= "{{ $country->id }}">{{ $country->country_name }}</option>
+                                  @endforeach
+                                  </select>
+                              </div>
+                            </div>
+                            
                     </div>
                     
                     <div>
                         <h3>Physical Address</h3>
+                        
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="physical_address_name">Address Name:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="physical_address_name" class="form-control {{ $errors->has('physical_address_name') ? ' is-invalid' : '' }}" name="physical_address_name" value="{{ old('physical_address_name', $organization[0]->physical_address_name) }}" required autofocus >
+                              </div>
+                            </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="physical_address_line_1">Address Line 1:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="physical_address_line_1" class="form-control {{ $errors->has('physical_address_line_1') ? ' is-invalid' : '' }}" name="physical_address_line_1" value="{{ old('physical_address_line_1', $organization[0]->physical_address_line_1) }}" required autofocus >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="physical_address_line_2">Address Line 2:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="physical_address_line_2" class="form-control {{ $errors->has('physical_address_line_2') ? ' is-invalid' : '' }}" name="physical_address_line_2" value="{{ old('physical_address_line_2', $organization[0]->physical_address_line_2) }}" required autofocus >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="physical_suburb">Suburb:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="physical_suburb" class="form-control {{ $errors->has('physical_suburb') ? ' is-invalid' : '' }}" name="physical_suburb" value="{{ old('physical_suburb', $organization[0]->physical_suburb) }}" required autofocus >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label" for="physical_city">City:</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="physical_city" class="form-control {{ $errors->has('physical_city') ? ' is-invalid' : '' }}" name="physical_city" value="{{ old('physical_city', $organization[0]->physical_city) }}" required autofocus >
+                            </div>
+                        </div>
+                        
+                    	<div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="physical_state_region">State/ Region:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="physical_state_region" class="form-control {{ $errors->has('physical_state_region') ? ' is-invalid' : '' }}" name="physical_state_region" value="{{ old('physical_state_region', $organization[0]->physical_state_region) }}" required autofocus >
+                              </div>
+                            </div>
+                        
+                    	<div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="physical_postal_code">Postal Code:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="physical_postal_code" class="form-control {{ $errors->has('physical_postal_code') ? ' is-invalid' : '' }}" name="physical_postal_code" value="{{ old('physical_postal_code', $organization[0]->physical_postal_code) }}" required autofocus >
+                              </div>
+                            </div>
+                        
+                      <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="country">Country:</label>
+                              <div class="col-sm-8">
+                                  <select class="form-control" name="physical_country_id" id="country" value="{{ old('physical_country_id', $organization[0]->physical_country_name)}}">
+                                  @foreach($countries as $country) 
+									<option value= "{{ $country->id }}">{{ $country->country_name }}</option>
+                                  @endforeach
+                                  </select>
+                              </div>
+                            </div>
                     </div>
                 </div>
 			</div>
+            
+            <div id="configuration" class="container tab-pane fade">
+            </div>
+            
+            <div id="contact" class="container tab-pane fade">
+                <div class="tab-flex-container">
+                    <div>
+                       <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="telephone_number">Telephone Number:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="telephone_number" class="form-control {{ $errors->has('telephone_number') ? ' is-invalid' : '' }}" name="telephone_number" value="{{ old('telephone_number', $organization[0]->telephone_number) }}" required autofocus >
+                              </div>
+                         </div>
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="ddi">DDI:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="ddi" class="form-control {{ $errors->has('ddi') ? ' is-invalid' : '' }}" name="ddi" value="{{ old('ddi', $organization[0]->ddi) }}" required autofocus >
+                              </div>
+                            </div>
+                           
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="tollfree_number">Tollfree Number:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="tollfree_number" class="form-control {{ $errors->has('tollfree_number') ? ' is-invalid' : '' }}" name="tollfree_number" value="{{ old('tollfree_number', $organization[0]->tollfree_number) }}" required autofocus >
+                              </div>
+                            </div>
+                           
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="purchase_email">Purchase Email:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="purchase_email" class="form-control {{ $errors->has('purchase_email') ? ' is-invalid' : '' }}" name="purchase_email" value="{{ old('purchase_email', $organization[0]->purchase_email) }}" required autofocus >
+                              </div>
+                            </div>
+                           
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="sales_email">Sales Email:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="sales_email" class="form-control {{ $errors->has('sales_email') ? ' is-invalid' : '' }}" name="sales_email" value="{{ old('sales_email', $organization[0]->sales_email) }}" required autofocus >
+                              </div>
+                            </div>
+                           
+                        <div class="form-group row">
+                              <label class="col-sm-4 col-form-label" for="fax_number">Fax Number:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" id="fax_number" class="form-control {{ $errors->has('fax_number') ? ' is-invalid' : '' }}" name="fax_number" value="{{ old('fax_number', $organization[0]->fax_number) }}" required autofocus >
+                              </div>
+                        </div>
+                           
+                        
+                        
+                    </div>
+                </div>
+            </div>
+             <div class="form-group">
+                <button type="submit" class="btn btn-primary" style="float: right; margin-bottom: 20px">
+                    {{ __('Save') }}
+                </button>
+            </div>      
 		</div>
-	</div>
+    </form>
+</div>
 
 	
 @endsection
