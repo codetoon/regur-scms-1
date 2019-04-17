@@ -25,6 +25,7 @@ class CreateTaxesTable extends Migration
 			$table->decimal('tax_rate', 5, 2);
 			$table->boolean('sales_tax');
 			$table->boolean('purchase_tax');
+			$table->boolean('obslete');
 			
 			$table->foreign('organization_id')->references('id')->on('organizations');
 		});

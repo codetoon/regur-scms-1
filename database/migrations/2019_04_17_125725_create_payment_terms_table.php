@@ -13,16 +13,15 @@ class CreatePaymentTermsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_terms', function(Blueprint $table)
-		{
-			$table->increments('id');
+        Schema::create('payment_terms', function (Blueprint $table) {
+            $table->increments('id');
 			$table->timestamps();
 			$table->unsignedInteger('organization_id');
-			$table->string('payment_name', 255);
+			$table->string('name', 255);
 			$table->integer('days');
-			//$table->unsignedInteger('payment_type_id');
+			$table->tinyInteger('payment_type');
 			$table->foreign('organization_id')->references('id')->on('organizations');
-		});
+        });
     }
 
     /**
@@ -32,8 +31,6 @@ class CreatePaymentTermsTable extends Migration
      */
     public function down()
     {
-        Schema::table('payment_terms', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('payment_terms');
     }
 }

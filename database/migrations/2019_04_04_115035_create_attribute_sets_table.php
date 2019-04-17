@@ -18,8 +18,8 @@ class CreateAttributeSetsTable extends Migration
 			$table->increments('id');
 			$table->timestamps();
 			$table->unsignedInteger('organization_id');
-			$table->string('attribute_set_name', 255);
-			$table->string('attribute_type', 255);
+			$table->string('attribute_set', 255);
+			$table->tinyInteger('type');
 			
 			
 			
