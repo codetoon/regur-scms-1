@@ -9,5 +9,9 @@ class AttributeSetsController extends Controller
 {
     public function show(){
     	return view('system.attribute_sets');
-		}
+	}
+	
+	public function store(){
+		
+	}
 }

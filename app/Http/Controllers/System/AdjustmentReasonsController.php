@@ -25,6 +25,7 @@ class AdjustmentReasonsController extends Controller
    protected function validator(Request $data){
    	return Validator::make($data, [
    			'adjustment_reason'=> ['required', 'string', 'max:255'],
+   			'organization_id'=> ['required']
    	]);
    		
    }
@@ -43,7 +44,7 @@ class AdjustmentReasonsController extends Controller
    	$adjustment= AdjustmentReason::findOrFail($id);
    	$adjustment->delete();
    	
-   	return redirect('/settings/adjustmentReasons');
+   	return redirect('/system/adjustmentReasons');
    }
    	
    

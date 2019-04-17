@@ -28,6 +28,10 @@ Route::delete('/system/adjustmentReasons/{adjustment}', 'System\AdjustmentReason
 Route::get('/system/creditReasons', 'System\CreditReasonsController@show');
 Route::post('/system/creditReasons', 'System\CreditReasonsController@store');
 Route::delete('/system/creditReasons/{creditReason}', 'System\CreditReasonsController@destroy');
+Route::get('/system/customerTypes', 'System\CustomerTypesController@show');
+Route::post('/system/customerTypes', 'System\CustomerTypesController@store');
+Route::delete('/system/customerTypes/{customerType}', 'System\CustomerTypesController@destroy');
+Route::delete('/system/creditReasons/{creditReason}', 'System\CreditReasonsController@destroy');
 
 Route::get('/system/attributeSets', 'System\AttributeSetsController@show'); 
  
