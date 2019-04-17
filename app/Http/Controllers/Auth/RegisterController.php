@@ -91,8 +91,8 @@ class RegisterController extends Controller
         ]);
         
         DB::commit();
-        return $user;
-        return $organization;
+        //return $user;
+        //return $organization;
         //return redirect('/organizationDetailForm');
         
        

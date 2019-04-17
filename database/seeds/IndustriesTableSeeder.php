@@ -38,7 +38,6 @@ class IndustriesTableSeeder extends Seeder
 		['industry_name' =>'Metals and Fabrication'],
         ['industry_name' =>'Mining'],
 		['industry_name' =>'Office Equipment and Supplies'],
-        ['industry_name' =>'Other'],
 		['industry_name' =>'Pharmaceutical'],
         ['industry_name' =>'Plastic and Rubber Products'],
 		['industry_name' =>'Prinitng and Publishing'],
@@ -46,6 +45,7 @@ class IndustriesTableSeeder extends Seeder
 		['industry_name' =>'Textiles'],
         ['industry_name' =>'Tobacco and other Horticulture Products'],
 		['industry_name' =>'Transportation/ Logistics'],
+        ['industry_name' =>'Other']
         	
         		
         ];
