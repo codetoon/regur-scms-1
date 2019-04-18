@@ -28,7 +28,7 @@ class CreditReasonsController extends Controller
    		
    }
    
-   protected function store(Request $data){
+   /* protected function store(Request $data){
    		$organization= Organization::where('id', Auth::user()->organization_id)->get();
    		$creditreason= CreditReason::create([
    				'credit_reason'=> $data['credit_reason'],
@@ -36,11 +36,22 @@ class CreditReasonsController extends Controller
    		]);
    		
    		return $creditreason;
+   } */
+   
+   protected function store(Request $data){
+   		$organization= new Organization();
+   		$creditReason= CreditReason::create([
+   			'credit_reason'=> $data['credit_reason'],
+   			'organization_id'=> Auth::user()->organization_id
+   		]);
+   		
+   		return $creditReason;
+   		//return redirect('system/creditReasons');
    }
    
    protected function destroy($id){
-   	$creditreason= CreditReason::findOrFail($id);
-   	$creditreason->delete();
+   	$creditReason= CreditReason::findOrFail($id);
+   	$creditReason->delete();
    	
    	return redirect('/system/creditReasons');
    }

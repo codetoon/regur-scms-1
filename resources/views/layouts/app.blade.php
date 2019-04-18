@@ -269,12 +269,37 @@
 			  }
 			  
 			})
-			 
+         
+         /*$(document).ready(function(){
+         $("#add-btn").submit(function(event){
+             alert('ok');
+             event.preventDefault();
+             var credit_reason= $("#credit_reason").val();
+             if(credit_reason!= ""){
+                 $.ajax({
+                     url: '{{ Request::url()}}/system/creditReasons',
+                     type: 'POST',
+                     data: { "credit_reason": {"credit_reason"}},
+                    success: function(){
+                        alert('ok');
+                    }
+                     })
+                 }
+                 })
+
+         }*/
+        
         </script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     	<script src="{{ asset('js/app.js') }}"></script>
-   		
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="{{ assets('js/demo.js') }}"></script>
+   		<script>
+             
+        
+        </script>
 </body>
 </html>

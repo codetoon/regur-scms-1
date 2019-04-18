@@ -4,14 +4,14 @@
 <div><h5>Credit Reasons</h5></div>
 
 <div>
-    <form method="post" action="">
+    <form method="post" action="" id="credit_reasons_form">
         @csrf
         <label for="credit_reason"><sup>*</sup>Credit Reason:</label>
             <div class="form-group row">
                 <div class="col-md-9">
-                    <input type="text" id="" class="form-control" name="credit_reason" value="{{ old('credit_reason')}}" required autofocus >
+                    <input type="text" id="credit_reason" class="form-control" name="credit_reason" value="{{ old('credit_reason')}}" required autofocus >
                 </div>
-                <button type="submit" class="btn btn-success">Add</button>
+                <button type="submit" class="btn btn-success" id="add-btn">Add</button>
         </div>
     </form>
 </div>
@@ -23,7 +23,7 @@
             <th scope="col">Delete</th>
         </tr>
     </thead>
-    <tbody>
+   <!-- <tbody>
     @foreach($creditReason as $credit_reason)
         <tr>
             <td>{{ $credit_reason->credit_reason}}</td>
@@ -36,6 +36,7 @@
             </td>
         </tr>
     @endforeach
-    </tbody>
+    </tbody>-->
 </table>
+
 @endsection

@@ -22,7 +22,7 @@
                 <option value="1">1</option>
             </select>
         </div>
-        <div style="padding-top: 28px;"><button type="submit" class="btn btn-success">Add</button></div>
+        <div style="padding-top: 28px; padding-left:10px"><button type="submit" class="btn btn-success">Add</button></div>
     </div>
 </form>
 
@@ -33,7 +33,22 @@
         <th scope="col">Type</th>
         <th scope="col">Delete</th>
     </thead>
-    
+    <tbody>
+        @foreach($paymentTerm as $payment_term)
+        <tr>
+            <td>{{ $payment_term->name}}</td>
+            <td>{{ $payment_term->days }}</td>
+            <td>{{ $payment_term->type}}</td>
+            <td>
+                <form method="post" action="/system/paymentTerms/{{ $paymentTerm[0]->id}}">
+                    @csrf
+                    @method('DELETE')
+                    <a href="/system/paymentTerms/{{ $paymentTerm[0]->id}}"><button><span data-feather="delete"></span></button></a>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
     
 </table>
 

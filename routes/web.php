@@ -41,5 +41,15 @@ Route::get('/system/paymentTerms', 'System\PaymentTermsController@show');
 Route::post('/system/paymentTerms', 'System\PaymentTermsController@store');
 Route::delete('/system/paymentTerms/{paymentTerm}', 'System\PaymentTermsController@destroy');
 
+Route::get('/system/productGroups', 'System\ProductGroupsController@show');
+Route::post('/system/productGroups', 'System\ProductGroupsController@store');
+Route::delete('/system/productGroups', 'System\ProductGroupsController@destroy');
+
+Route::get('/system/shippingCompanies', 'System\ShippingCompaniesController@show');
+Route::post('/system/shippingCompanies', 'System\ShippingCompaniesController@store');
+Route::delete('/system/shippingCompanies', 'System\ShippingCompaniesController@delete');
+
+
+
 Route::get('/system/attributeSets', 'System\AttributeSetsController@show'); 
  
