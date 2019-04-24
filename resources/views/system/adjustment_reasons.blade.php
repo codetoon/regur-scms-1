@@ -26,18 +26,6 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($adjustment as $adjustment_reason)
-        <tr>
-            <td>{{ $adjustment_reason->adjustment_reason}}</td>
-            <td>
-                <form action="/system/adjustmentReasons/{{$adjustment[0]->id}}" method="post">
-                @csrf
-                @method('DELETE')
-                    <a href="/system/adjustmentReasons/{{$adjustment[0]->id}}"><button><span data-feather="delete"></span></button></a>
-                </form>    
-            </td>
-        </tr>
-    @endforeach
     </tbody>
 </table>
 @endsection

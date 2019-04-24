@@ -38,13 +38,14 @@ class AdjustmentReasonsController extends Controller
    		]);
    		
    		return $adjustment;
+   		//return redirect('/system/adjustment-reasons');
    }
    
    protected function destroy($id){
    	$adjustment= AdjustmentReason::findOrFail($id);
    	$adjustment->delete();
    	
-   	return redirect('/system/adjustmentReasons');
+   	return redirect('/system/adjustment-reasons');
    }
    	
    

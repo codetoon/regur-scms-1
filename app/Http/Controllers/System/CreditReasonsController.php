@@ -5,8 +5,17 @@ namespace App\Http\Controllers\System;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\CreditReason;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
+//use Yajra\DataTables\Facades\DataTables;
 use App\Organization;
+use App\CreditReason;
+use Symfony\Component\VarDumper\Tests\Cloner\DataTest;
+
+//use App\Organization;
+
 
 class CreditReasonsController extends Controller
 {
@@ -15,10 +24,17 @@ class CreditReasonsController extends Controller
 	}
 	
    public function show(){
-   		$organization= Organization::where('id', Auth::user()->organization_id)->get();
-   		$creditReason= CreditReason::where('organization_id', Auth::user()->organization_id)->get();
-   		return view('system.credit_reasons', compact('organization', 'creditReason'));
+   		/* $creditReason= CreditReason::where('organization_id', Auth::user()->organization_id)->get();
+   		return view('system.credit_reasons', compact('creditReason'));  */
+   	return view('system.credit_reasons');
+   		
+   		
+   		
    }
+	 public function getData(){
+	 		$creditReason= CreditReason::where('organization_id', Auth::user()->organization_id);
+ 			return DataTables::of($creditReason)->make(true);
+ 		}
    
    protected function validator(Request $data){
    	return Validator::make($data, [
@@ -45,15 +61,15 @@ class CreditReasonsController extends Controller
    			'organization_id'=> Auth::user()->organization_id
    		]);
    		
-   		return $creditReason;
-   		//return redirect('system/creditReasons');
+   	//	return $creditReason;
+   		return redirect('system/credit-reasons');
    }
    
-   protected function destroy($id){
-   	$creditReason= CreditReason::findOrFail($id);
+   protected function destroy(Request $data){
+   	$creditReason= CreditReason::findOrFail($data->id);
    	$creditReason->delete();
    	
-   	return redirect('/system/creditReasons');
+   	//return redirect('/system/credit-reasons');
    }
    	
    

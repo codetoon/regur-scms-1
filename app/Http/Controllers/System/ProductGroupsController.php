@@ -36,14 +36,14 @@ class ProductGroupsController extends Controller
 				'organization_id'=> $organization[0]->id,
 				//'attribute_set_id'=>
 		]);
-		
+		return redirect('/system/product-groups');
 	}
 	
 	protected function destroy($id){
 		$productGroup= ProductGroup::findOrFail($id);
 		$productGroup->delete();
 		
-		return redirect('/system/productGroups');
+		return redirect('/system/product-groups');
 		
 	}
 }

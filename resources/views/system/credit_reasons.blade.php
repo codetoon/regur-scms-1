@@ -16,27 +16,15 @@
     </form>
 </div>
 
-<table class="table">
+<table class="table" id="datatable">
     <thead class="thead-light">
         <tr>
             <th scope="col">Credit Reason</th>
             <th scope="col">Delete</th>
         </tr>
     </thead>
-   <!-- <tbody>
-    @foreach($creditReason as $credit_reason)
-        <tr>
-            <td>{{ $credit_reason->credit_reason}}</td>
-            <td>
-                <form action="/system/creditReasons/{{$creditReason[0]->id}}" method="post">
-                @csrf
-                @method('DELETE')
-                    <a href="/system/creditReasons/{{$creditReason[0]->id}}"><button><span data-feather="delete"></span></button></a>
-                </form>    
-            </td>
-        </tr>
-    @endforeach
-    </tbody>-->
+    <tbody>
+    </tbody>
 </table>
 
 @endsection

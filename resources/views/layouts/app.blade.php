@@ -7,6 +7,7 @@
      <!-- Styles -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
     <!-- CSRF Token -->
@@ -19,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+   
     
 
 </head>
@@ -270,24 +272,6 @@
 			  
 			})
          
-         /*$(document).ready(function(){
-         $("#add-btn").submit(function(event){
-             alert('ok');
-             event.preventDefault();
-             var credit_reason= $("#credit_reason").val();
-             if(credit_reason!= ""){
-                 $.ajax({
-                     url: '{{ Request::url()}}/system/creditReasons',
-                     type: 'POST',
-                     data: { "credit_reason": {"credit_reason"}},
-                    success: function(){
-                        alert('ok');
-                    }
-                     })
-                 }
-                 })
-
-         }*/
         
         </script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -295,11 +279,83 @@
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     	<script src="{{ asset('js/app.js') }}"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-        <script src="{{ assets('js/demo.js') }}"></script>
-   		<script>
-             
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script>
+
+		/*view data in datatable*/
+        $(document).ready(function(){
+        credit_reasons_table = $('#datatable').DataTable({
+                processing: true,
+                language: {processing: '<i><span data-feather="loader">Loading...</span></i>'},
+                serverSide: true,
+                ajax: "{{ route('system.creditreason.data') }}",
+                columns: [
+                    {data: 'credit_reason'},
+                    {data: 'delete', searchable: false, orderable: false, render: function(row){
+                            var deleteBtnHTML= '<a href="javascript:void(0)"><button data-id="+row.id+" id="deleteBtn"><span data-feather="delete"></span>Delete</button></a>'
+                            
+                            return deleteBtnHTML;
+                    }
+                     
+                     }
+                
+                ],
+                dataSrc: ""
+            });
         
-        </script>
+            $(document).on('click',"#deleteBtn", function(e){
+                e.preventDefault();
+                var row= $(this).parents('tr')[0];
+                var data= credit_reasons_table.row(row).data();
+                
+                 $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+                 });
+                $.ajax({
+                url:"{{ route('system.creditreason.delete')}}",
+                dataType:'text',
+                data: data ,
+                method:"delete",
+                success:function(data){
+                	credit_reasons_table.ajax.reload();
+            }}
+            )
+            }); 
+        
+       
+         /*   save post data to DB*/
+         $("#credit_reasons_form").submit(function(e){
+                e.preventDefault();
+                var data= $("#credit_reasons_form").serialize();
+               
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+             });
+                $.ajax({
+               type: 'POST',
+               url: "/system/credit-reasons",
+               dataType:'text',
+               data: data,
+               success: function(data){
+                  console.log(data);
+                  credit_reasons_table.ajax.reload();
+                $("#credit_reasons_form")[0].reset();
+                  
+               },
+                error: function(error){
+                    alert('error'+error);
+                    console.log(error);
+                }
+            })
+            })
+            
+        });
+		</script>
+   		
 </body>
 </html>
