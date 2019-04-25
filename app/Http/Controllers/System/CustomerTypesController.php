@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Organization;
 use App\CustomerType;
+use Yajra\DataTables\DataTables;
 
 class CustomerTypesController extends Controller
 {
@@ -16,12 +17,15 @@ class CustomerTypesController extends Controller
 	}
 	
 	public function show(){
-		$organization= Organization::where('id', Auth::user()->organization_id)->get();
-		$customerType= CustomerType::where('organization_id', Auth::user()->organization_id)->get();
-		return view('system.customer_types', compact('organization', 'customerType'));
+		return view('system.customer_types');
 	}
 	
-	protected function validator(Request $data){
+	public function list(){
+		$customerType= CustomerType::where('organization_id', Auth::user()->organization_id)->get();
+		return DataTables::of($customerType)->make(true);
+	}
+	
+	public function validator(Request $data){
 		return Validator::make([
 				'customer_type'=> ['required', 'string', 'max:255'],
 				'organization_id'=> ['required']
@@ -29,19 +33,19 @@ class CustomerTypesController extends Controller
 		
 	}
 	
-	protected function store(Request $data){
-		$organization= Organization::where('id', Auth::user()->organization_id)->get();
+	public function store(Request $data){
+		$organization= new Organization();
 		$customerType= CustomerType::create([
 				'customer_type'=> $data['customer_type'],
-				'organization_id'=> $organization[0]->id
+				'organization_id'=> Auth::user()->organization_id
 		]);
-		return $customerType;
+		//return $customerType;
 	}
 	
-	protected function destroy($id){
-		$customerType= CustomerType::findOrFail($id);
+	public function destroy(Request $data){
+		$customerType= CustomerType::findOrFail($data->id);
 		$customerType->delete();
 		
-		return redirect('/system/customerTypes');
+		//return redirect('/system/customer-types');
 	}
 }

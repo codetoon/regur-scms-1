@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
-{
+{	
+	protected $table='organizations';
     protected $primaryKey= 'id';
     
     protected $fillable= ['company_name', 'trading_name', 'trading_name_purchase', 
@@ -38,4 +39,37 @@ class Organization extends Model
     public function country(){
     	$this->belongsTo(Country::class);
     }
+    
+    public function adjustmentReasons(){
+    	return $this->hasMany(AdjustmentReason::class);
+    }
+    
+    public function attributeSets(){
+    	return $this->hasMany(AttributeSet::class);
+    }
+    
+    public function creditReasons(){
+    	return $this->hasMany(CreditReason::class);
+    }
+    
+    public function paymentTerms(){
+    	return $this->hasMany(PaymentTerm::class);
+    }
+    
+    public function productGroups(){
+    	return $this->hasMany(ProductGroup::class);
+    }
+    
+    public function salesGroups(){
+    	return $this->hasMany(SalesGroup::class);
+    }
+    
+    public function shippingComp(){
+    	return $this->hasMany(ShippingCompany::class);
+    }
+    
+    public function uom(){
+    	return $this->hasMany(UnitOfMeasure::class);
+    }
 }
+

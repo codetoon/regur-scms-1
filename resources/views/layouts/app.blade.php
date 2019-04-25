@@ -48,8 +48,9 @@
 	                <a class=" text-white" href="#"><span data-feather="menu"></span></a> 
 	            </div>
 	            <div class="col-md-9 col-sm-9 col-9">
-	                <input class="form-control form-control-dark search-box" type="text" placeholder="Search" aria-label="Search">
-	            </div>
+                    <input class="form-control form-control-dark search-box" type="text" placeholder="Search" aria-label="Search">
+                </div>
+                
 	            <div class="col-md-2 col-sm-2 col-2 nav-container">
 	                <ul class="navbar-nav">
 	                    <li class="nav-item text-nowrap sign-out-btn">
@@ -68,7 +69,12 @@
 	            </div>
 	        </div>
     	</div>
-</div>
+</div>  
+        <div class="hide-loader" id="loader">
+        <div class="spinner-border text-dark "  role="status">
+                            <span class="sr-only"></span>
+        </div><p>Loading</p>
+            </div>
 
 <div class="container-fluid"> 
   <div class= "row no-gutters" ><!--no-gutters">-->
@@ -277,85 +283,13 @@
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script src="{{ asset('js/chart.js') }}"></script>
     	<script src="{{ asset('js/app.js') }}"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-		<script>
-
-		/*view data in datatable*/
-        $(document).ready(function(){
-        credit_reasons_table = $('#datatable').DataTable({
-                processing: true,
-                language: {processing: '<i><span data-feather="loader">Loading...</span></i>'},
-                serverSide: true,
-                ajax: "{{ route('system.creditreason.data') }}",
-                columns: [
-                    {data: 'credit_reason'},
-                    {data: 'delete', searchable: false, orderable: false, render: function(row){
-                            var deleteBtnHTML= '<a href="javascript:void(0)"><button data-id="+row.id+" id="deleteBtn"><span data-feather="delete"></span>Delete</button></a>'
-                            
-                            return deleteBtnHTML;
-                    }
-                     
-                     }
-                
-                ],
-                dataSrc: ""
-            });
-        
-            $(document).on('click',"#deleteBtn", function(e){
-                e.preventDefault();
-                var row= $(this).parents('tr')[0];
-                var data= credit_reasons_table.row(row).data();
-                
-                 $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-                 });
-                $.ajax({
-                url:"{{ route('system.creditreason.delete')}}",
-                dataType:'text',
-                data: data ,
-                method:"delete",
-                success:function(data){
-                	credit_reasons_table.ajax.reload();
-            }}
-            )
-            }); 
-        
-       
-         /*   save post data to DB*/
-         $("#credit_reasons_form").submit(function(e){
-                e.preventDefault();
-                var data= $("#credit_reasons_form").serialize();
-               
-               $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-             });
-                $.ajax({
-               type: 'POST',
-               url: "/system/credit-reasons",
-               dataType:'text',
-               data: data,
-               success: function(data){
-                  console.log(data);
-                  credit_reasons_table.ajax.reload();
-                $("#credit_reasons_form")[0].reset();
-                  
-               },
-                error: function(error){
-                    alert('error'+error);
-                    console.log(error);
-                }
-            })
-            })
-            
-        });
-		</script>
+		@stack('js-script')
+		
    		
 </body>
 </html>

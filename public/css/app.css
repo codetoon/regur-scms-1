@@ -67,8 +67,19 @@ body {
     padding-left: 3px;
 }
 
-
-
+#loader{
+    z-index: 1050;
+    left: 50%;
+    top: 50%;
+    position: fixed;
+     
+}
+.hide-loader{
+    visibility: hidden;
+}
+.show-loader{
+    visibility: visible;
+}
 .sign-out-btn{
     text-align: center;
 }   

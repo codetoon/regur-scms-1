@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\PaymentTerm;
 use App\Organization;
+use Yajra\DataTables\DataTables;
 
 class PaymentTermsController extends Controller
 {
@@ -15,12 +16,17 @@ class PaymentTermsController extends Controller
 	}
 	
 	public function show(){
-		$organization= Organization::where('id', Auth::user()->organization_id)->get();
-		$paymentTerm= PaymentTerm::where('organization_id', Auth::user()->organization_id)->get();
-		return view('system.payment_terms', compact('organization', 'paymentTerm'));
+		/* $organization= Organization::where('id', Auth::user()->organization_id)->get();
+		$paymentTerm= PaymentTerm::where('organization_id', Auth::user()->organization_id)->get(); */
+		return view('system.payment_terms');
 	}
 	
-	protected function validator(Request $data){
+	public function list(){
+		$paymentTerm= PaymentTerm::where('organization_id', Auth::user()->organization_id)->get();
+		return DataTables::of($paymentTerm)->make(true);
+	}
+	
+	public function validator(Request $data){
 		return Validator::make($data, [
 				'name'=> ['required', 'string', 'max:255'],
 				'days'=> ['required', 'numeric'],
@@ -29,22 +35,22 @@ class PaymentTermsController extends Controller
 		]);
 		 
 	}
-	protected function store(Request $data){
-		$organization= Organization::where('id', Auth::user()->organization_id)->get();
+	public function store(Request $data){
+		$organization= new Organization();
 		$paymentTerm= PaymentTerm::create([
 				'name'=> $data['name'],
-				'organization_id'=> $organization[0]->id,
+				'organization_id'=> Auth::user()->organization_id,
 				'days'=> $data['days'],
 				'payment_type'=> $data['payment_type']
 		]);
 		 
-		return $paymentTerm;
+		//return $paymentTerm;
 	}
 	 
-	protected function destroy($id){
-		$paymentTerm= PaymentTerm::findOrFail($id);
+	public function destroy(Request $data){
+		$paymentTerm= PaymentTerm::findOrFail($data->id);
 		$paymentTerm->delete();
 	
-		return redirect('/system/paymentTerms');
+		//return redirect('/system/payment-terms');
 	}
 }

@@ -15,13 +15,13 @@ class ProductGroupsController extends Controller
     	$this->middleware('auth');
 	}
 	
-	protected function show(){
+	public function show(){
 		$organization= Organization::where('id', Auth::User()->organization_id)->get();
 		$productGroup= ProductGroup::where('organization_id', Auth::User()->organization_id)->get();
 		return view('system.product_groups', compact('organization', 'productGroup'));
 	}
 	
-	protected function validator(Request $data){
+	public function validator(Request $data){
 		return validator::make($data, [
 				'product_group_name'=> ['required', 'string', 'max:255'],
 				'organization_id'=> ['required']
@@ -29,7 +29,7 @@ class ProductGroupsController extends Controller
 		]);	
 	}
 	
-	protected function store(Request $data){
+	public function store(Request $data){
 		$organization= Organization::where('id', Auth::User()->organization_id)->get();
 		$productGroup= ProductGroup::create([
 				'product_group_name'=> $data['product_group_name'],
@@ -39,11 +39,11 @@ class ProductGroupsController extends Controller
 		return redirect('/system/product-groups');
 	}
 	
-	protected function destroy($id){
+	public function destroy($id){
 		$productGroup= ProductGroup::findOrFail($id);
 		$productGroup->delete();
 		
-		return redirect('/system/product-groups');
+		//return redirect('/system/product-groups');
 		
 	}
 }

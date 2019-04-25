@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Organization;
 use App\ShippingCompany;
+use Yajra\DataTables\DataTables;
 
 class ShippingCompaniesController extends Controller
 {
@@ -14,16 +15,13 @@ class ShippingCompaniesController extends Controller
     	$this->middleware('auth');
     }
     
-    protected function show(){
-    	$organization= Organization::where('id', Auth::User()->organization_id)->get();
-    	$shippingComp= ShippingCompany::where('organization_id', Auth::User()->organization_id)->get();
-    	
-    	return view('system.shipping_companies', compact('organization', 'shippingComp'));
+    public function show(){
+    	return view('system.shipping_companies');
     }
     
-    protected function validator(Request $data){
-    	return Validator::make($data, [
-    			
-    	])
+    public function list(){
+    	$shippingComp= ShippingCompany::where('organization_id', Auth::User()->organization_id)->get();
+    	return DataTables::of($shippingComp)->make(true);
     }
+    
 }

@@ -6,7 +6,7 @@
 
 
 <div>
-    <form method="post" action="">
+    <form method="post" action="" id="customer_types_form">
         @csrf
         <label for="customer_type"><sup>*</sup>Customer Type:</label>
             <div class="form-group row">
@@ -18,26 +18,83 @@
     </form>
 </div>
 
-<table class="table">
-    <thead class="thead-light">
+<table class="table" id="customer_types_table">
+    <thead class="thead-light" >
         <tr>
             <th scope="col">Type Name</th>
             <th scope="col">Delete</th>
         </tr>
     </thead>
-    <tbody>
-    @foreach($customerType as $customer_type)
-        <tr>
-            <td>{{ $customer_type->customer_type}}</td>
-            <td>
-                <form action="/system/customerTypes/{{$customerType[0]->id}}" method="post">
-                @csrf
-                @method('DELETE')
-                    <a href="/system/customerTypes/{{$customerType[0]->id}}"><button><span data-feather="delete"></span></button></a>
-                </form>    
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
 </table>
 @endsection
+
+@push('js-script')
+<script type="text/javascript">
+	$(document).ready(function(){
+		customer_types_table= $("#customer_types_table").DataTable({
+			processing: true,
+	        serverSide: true,
+	        ajax: "/system/customer-types/list",
+	        columns: [
+	                  {data: 'customer_type'},
+	                  {data: 'delete', searchable: false, orderable: false, render: function(){
+	                      var deleteBtnHTML= '<a href="javascript:void(0)"><button id="delete_btn_customer_types"><span data-feather="delete"></span>Delete</button></a>'
+	                      
+	                      return deleteBtnHTML;
+	              			}
+	                  }
+		      	        ],
+		     dataSrc: ""
+		});
+
+	$(document).on('click', '#delete_btn_customer_types', function(e){
+			e.preventDefault();
+			var row= $(this).parents('tr')[0];
+			var data= customer_types_table.row(row).data();
+
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			})
+			$.ajax({
+				url: "/system/customer-types",
+				dataType:'text',
+				data: data ,
+				method:"delete",
+				success:function(data){
+					customer_types_table.ajax.reload();
+				   }
+				});
+		})
+	/*   save post data to DB*/
+	$("#customer_types_form").submit(function(e){
+      e.preventDefault();
+      var data= $("#customer_types_form").serialize();
+     
+     $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+   });
+      $.ajax({
+     type: 'POST',
+     url: "/system/customer-types",
+     dataType:'text',
+     data: data,
+     success: function(data){
+        console.log(data);
+        customer_types_table.ajax.reload();
+      $("#customer_types_form")[0].reset();
+        
+     },
+      error: function(error){
+          alert('error'+error);
+          console.log(error);
+      }
+  })
+  })
+		
+	})
+</script>
+@endpush

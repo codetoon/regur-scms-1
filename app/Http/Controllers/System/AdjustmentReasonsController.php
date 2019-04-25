@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\System;
 
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 use App\AdjustmentReason;
 use App\Organization;
+
+
 
 class AdjustmentReasonsController extends Controller
 {
@@ -17,12 +22,15 @@ class AdjustmentReasonsController extends Controller
 	}
 	
    public function show(){
-   		$organization= Organization::where('id', Auth::user()->organization_id)->get();
-   		$adjustment= AdjustmentReason::where('organization_id', Auth::user()->organization_id)->get();
-   		return view('system.adjustment_reasons', compact('organization', 'adjustment'));
+   		return view('system.adjustment_reasons');
    }
    
-   protected function validator(Request $data){
+   public function list(){
+   		$adjustmentReason= AdjustmentReason::where('organization_id', Auth::user()->organization_id);
+   		return DataTables::of($adjustmentReason)->make(true);
+   }
+   
+   public function validator(Request $data){
    	return Validator::make($data, [
    			'adjustment_reason'=> ['required', 'string', 'max:255'],
    			'organization_id'=> ['required']
@@ -30,22 +38,22 @@ class AdjustmentReasonsController extends Controller
    		
    }
    
-   protected function store(Request $data){
-   		$organization= Organization::where('id', Auth::user()->organization_id)->get();
+   public function store(Request $data){
+   		$organization= new Organization();
    		$adjustment= AdjustmentReason::create([
    				'adjustment_reason'=> $data['adjustment_reason'],
-   				'organization_id'=> $organization[0]->id
+   				'organization_id'=> Auth::user()->organization_id
    		]);
    		
    		return $adjustment;
    		//return redirect('/system/adjustment-reasons');
    }
    
-   protected function destroy($id){
-   	$adjustment= AdjustmentReason::findOrFail($id);
+   protected function destroy(Request $data){
+   	$adjustment= AdjustmentReason::findOrFail($data->id);
    	$adjustment->delete();
    	
-   	return redirect('/system/adjustment-reasons');
+   	//return redirect('/system/adjustment-reasons');
    }
    	
    

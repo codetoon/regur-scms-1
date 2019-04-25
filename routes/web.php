@@ -26,31 +26,48 @@ Route::get('/company/organizationDetails', 'OrganizationsController@edit');
 Route::post('/company/organizationDetails', 'OrganizationsController@update'); //update org details
 
 Route::get('/system/adjustment-reasons', 'System\AdjustmentReasonsController@show');
+Route::get('/system/adjustment-reasons/list', 'System\AdjustmentReasonsController@list');
 Route::post('/system/adjustment-reasons', 'System\AdjustmentReasonsController@store');
-Route::delete('/system/adjustment-reasons/{adjustment}', 'System\AdjustmentReasonsController@destroy');
+Route::delete('/system/adjustment-reasons', 'System\AdjustmentReasonsController@destroy');
 
 Route::get('/system/credit-reasons', 'System\CreditReasonsController@show');
-Route::get('/system/credit-reasons/data', 'System\CreditReasonsController@getData')->name('system.creditreason.data');
+Route::get('/system/credit-reasons/list', 'System\CreditReasonsController@list');
 Route::post('/system/credit-reasons', 'System\CreditReasonsController@store');
 Route::delete('/system/credit-reasons', 'System\CreditReasonsController@destroy')->name('system.creditreason.delete');
 
 Route::get('/system/customer-types', 'System\CustomerTypesController@show');
+Route::get('/system/customer-types/list', 'System\CustomerTypesController@list');
 Route::post('/system/customer-types', 'System\CustomerTypesController@store');
-Route::delete('/system/customer-types/{customerType}', 'System\CustomerTypesController@destroy');
+Route::delete('/system/customer-types', 'System\CustomerTypesController@destroy');
 
 Route::get('/system/payment-terms', 'System\PaymentTermsController@show');
+Route::get('/system/payment-terms/list', 'System\PaymentTermsController@list');
 Route::post('/system/payment-terms', 'System\PaymentTermsController@store');
-Route::delete('/system/payment-terms/{paymentTerm}', 'System\PaymentTermsController@destroy');
+Route::delete('/system/payment-terms', 'System\PaymentTermsController@destroy');
 
 Route::get('/system/product-groups', 'System\ProductGroupsController@show');
 Route::post('/system/product-groups', 'System\ProductGroupsController@store');
 Route::delete('/system/product-groups', 'System\ProductGroupsController@destroy');
 
+Route::get('/system/sales-groups', 'System\SalesGroupsController@show');
+Route::get('/system/sales-groups/list', 'System\SalesGroupsController@list');
+Route::post('/system/sales-groups', 'System\SalesGroupsController@store');
+Route::delete('/system/sales-groups', 'System\SalesGroupsController@destroy');
+
 Route::get('/system/shipping-companies', 'System\ShippingCompaniesController@show');
+Route::get('/system/shipping-companies/list', 'System\ShippingCompaniesController@list');
 Route::post('/system/shipping-companies', 'System\ShippingCompaniesController@store');
 Route::delete('/system/shipping-companies', 'System\ShippingCompaniesController@delete');
 
+Route::get('/system/units-of-measure', 'System\UnitsOfMeasureController@show');
+Route::get('/system/units-of-measure/list', 'System\UnitsOfMeasureController@list');
+Route::post('/system/units-of-measure', 'System\UnitsOfMeasureController@store');
+Route::delete('/system/units-of-measure', 'System\UnitsOfMeasureController@delete');
 
+Route::get('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@show');
+Route::get('/system/supplier-return-reasons/list', 'System\SupplierReturnReasonsController@list');
+Route::post('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@store');
+Route::delete('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@delete');
 
 Route::get('/system/attributeSets', 'System\AttributeSetsController@show'); 
  
