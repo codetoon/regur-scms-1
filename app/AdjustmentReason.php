@@ -30,14 +30,18 @@ class AdjustmentReason extends Model
     	$this->belongsTo('Organization::class');
     }
     
+    public function getValidator()
+    {
+    	return $this->validator;
+    }
     public function validate(){
     	$this->validator= Validator::make($this->attributesToArray(), [
     		'adjustment_reason'=> ['required', 'string', 'max:255'],
     		'organization_id'=>['required']
     	]);
     	if($this->validator->fails()){
-    		//return false;
-    		return redirect()->back()->withErrors($this->validator);
+    		return false;
+    		
     	}
     	else {
     		return true;

@@ -59,6 +59,7 @@ $(document).ready(function(){
             if(confirmation){
                 $("#loader").removeClass("hide-loader");
                 $("#loader").addClass("show-loader");
+                $("#page-activity").css('opacity', '0.6');
                var row= $(this).parents('tr')[0];
                var data= adjustment_reasons_table.row(row).data();
 
@@ -76,6 +77,7 @@ $(document).ready(function(){
                 adjustment_reasons_table.ajax.reload();
                 $("#loader").removeClass("show-loader");
                 $("#loader").addClass("hide-loader");
+                $("#page-activity").css('opacity', '1');
             }}
             )
             }
@@ -86,6 +88,7 @@ $(document).ready(function(){
                 $("#loader").removeClass("hide-loader");
                 $("#loader").addClass("show-loader");
                 $('#add-btn').prop('disabled', true);
+                $("#page-activity").css('opacity', '0.6');
               e.preventDefault();
               var data= $("#adjustment_reasons_form").serialize();
             
@@ -106,6 +109,7 @@ $(document).ready(function(){
                 $('#add-btn').prop('disabled', false);
                 $("#loader").removeClass("show-loader");
                 $("#loader").addClass("hide-loader");
+                $("#page-activity").css('opacity', '1');
 
              },
               error: function(error){

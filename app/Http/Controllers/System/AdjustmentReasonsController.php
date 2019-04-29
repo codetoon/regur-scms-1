@@ -40,20 +40,20 @@ class AdjustmentReasonsController extends Controller
    
    public function store(Request $data){
    		$organization= new Organization();
-   		$adjustment= AdjustmentReason::create([
+   		$adjustmentReason= AdjustmentReason::create([
    				'adjustment_reason'=> $data['adjustment_reason'],
    				'organization_id'=> Auth::user()->organization_id
    		]);
    		
-   		return $adjustment;
-   		//return redirect('/system/adjustment-reasons');
+   		if($adjustmentReason->getValidator()->failed()){
+   			return new JsonResponse($adjustmentReason->getValidator()->errors()->getMessages());
+   		}
    }
    
    protected function destroy(Request $data){
-   	$adjustment= AdjustmentReason::findOrFail($data->id);
-   	$adjustment->delete();
+   	$adjustmentReason= AdjustmentReason::findOrFail($data->id);
+   	$adjustmentReason->delete();
    	
-   	//return redirect('/system/adjustment-reasons');
    }
    	
    

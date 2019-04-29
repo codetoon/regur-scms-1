@@ -33,7 +33,7 @@ Route::delete('/system/adjustment-reasons', 'System\AdjustmentReasonsController@
 Route::get('/system/credit-reasons', 'System\CreditReasonsController@show');
 Route::get('/system/credit-reasons/list', 'System\CreditReasonsController@list');
 Route::post('/system/credit-reasons', 'System\CreditReasonsController@store');
-Route::delete('/system/credit-reasons', 'System\CreditReasonsController@destroy')->name('system.creditreason.delete');
+Route::delete('/system/credit-reasons/{creditReason}', 'System\CreditReasonsController@destroy');
 
 Route::get('/system/customer-types', 'System\CustomerTypesController@show');
 Route::get('/system/customer-types/list', 'System\CustomerTypesController@list');

@@ -3,9 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class SupplierReturnReason extends Model
-{
+{	
     protected $table= 'supplier_return_reasons';
     
     protected $fillable=['supplier_return_reason', 'organization_id'];
@@ -13,4 +14,5 @@ class SupplierReturnReason extends Model
     public function organizations(){
     		$this->belongsTo(Organization::class);
     }
+    
 }

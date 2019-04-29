@@ -11,7 +11,7 @@
         <label for="customer_type"><sup>*</sup>Customer Type:</label>
             <div class="form-group row">
                 <div class="col-md-9">
-                    <input type="text" id="customer_type" class="form-control" name="customer_type" value="{{ old('customer_type')}}" required autofocus >
+                    <input type="text" id="customer_type" class="form-control" name="customer_type" value="{{ old('customer_type')}}" autofocus >
                 </div>
                 <button type="submit" class="btn btn-success">Add</button>
         </div>
@@ -49,8 +49,14 @@
 
 	$(document).on('click', '#delete_btn_customer_types', function(e){
 			e.preventDefault();
-			var row= $(this).parents('tr')[0];
-			var data= customer_types_table.row(row).data();
+			var confirmation= confirm("Confirm delete?");
+                if(confirmation){
+                    $("#loader").removeClass("hide-loader");
+                    $("#loader").addClass("show-loader");
+                    $("#page-activity").css('opacity', '0.6');
+                    var row= $(this).parents('tr')[0];
+                    var data= customer_types_table.row(row).data();
+
 
 			$.ajaxSetup({
 				headers: {
@@ -64,37 +70,51 @@
 				method:"delete",
 				success:function(data){
 					customer_types_table.ajax.reload();
+                    $("#customer_types_form")[0].reset();
+                    $("#loader").removeClass("show-loader");
+                    $("#loader").addClass("hide-loader");
+                    $("#page-activity").css('opacity', '1');
 				   }
 				});
-		})
+		}
+    })
 	/*   save post data to DB*/
 	$("#customer_types_form").submit(function(e){
-      e.preventDefault();
-      var data= $("#customer_types_form").serialize();
-     
-     $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-   });
-      $.ajax({
-     type: 'POST',
-     url: "/system/customer-types",
-     dataType:'text',
-     data: data,
-     success: function(data){
-        console.log(data);
-        customer_types_table.ajax.reload();
-      $("#customer_types_form")[0].reset();
-        
-     },
-      error: function(error){
-          alert('error'+error);
-          console.log(error);
-      }
-  })
-  })
-		
+                e.preventDefault();
+               $("#loader").removeClass("hide-loader");
+               $("#loader").addClass("show-loader");
+               $("#page-activity").css('opacity', '0.6');
+             
+               var data= $("#customer_types_form").serialize();
+               $('#add-btn').prop('disabled', true);
+                 
+                    
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+               });
+                  $.ajax({
+                 type: 'POST',
+                 url: "/system/customer-types",
+                 dataType:'text',
+                 data: data,
+                 success: function(data){
+                    console.log(data);
+                    customer_types_table.ajax.reload();
+                    $("#customer_types_form")[0].reset();
+                    $("#loader").removeClass("show-loader");
+                    $("#loader").addClass("hide-loader");
+                    $("#page-activity").css('opacity', '1');
+
+                 },
+                  error: function(error){
+                      alert('error'+error);
+                      console.log(error);
+                  }
+              })
+              })
+
 	})
 </script>
 @endpush

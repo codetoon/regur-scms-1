@@ -35,14 +35,19 @@ class CreditReason extends Model
     	$this->belongsTo(Organization::class);
     }
     
+    public function getValidator()
+    {
+    	return $this->validator;
+    }
+    
     public function validate(){
     	$this->validator= Validator::make($this->attributesToArray(), [
     			'credit_reason'=> ['required', 'string', 'max:255'],
     			'organization_id'=>['required']
     	]);
     if($this->validator->fails()){
-    		//return false;
-    		return redirect()->back()->withErrors($this->validator);
+    		return false;
+    		//return redirect()->back()->withErrors($this->validator);
     	}
     	else {
     		return true;

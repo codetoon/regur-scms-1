@@ -37,7 +37,20 @@
 	                      return deleteBtnHTML;
 	              			}
 	                  }
-            ]
+            ],
+            dataSrc: ""
+        })
+        
+        $(document).on('click', '#delete_btn_supplier_return_reason', function(e){
+            e.preventDefault();
+            var confirmation= confirm("Confirm Delete?");
+            if(confirmation){
+                $("#loader").removeClass('hide-loader');
+                $("#loader").addClass('show-loader');
+                $("page-activity").css('opacity', '0.6');
+                var row= $(this).paren('tr')[0];
+                
+            }
         })
     })
 </script>

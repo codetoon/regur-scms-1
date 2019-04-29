@@ -13,6 +13,7 @@ use App\CreditReason;
 use Symfony\Component\VarDumper\Tests\Cloner\DataTest;
 
 use App\Organization;
+use Illuminate\Http\Illuminate\Http;
 
 
 class CreditReasonsController extends Controller
@@ -43,12 +44,17 @@ class CreditReasonsController extends Controller
    			'organization_id'=> Auth::user()->organization_id
    		]);
    		
-   	
+   		if($creditReason->getValidator()->failed()){
+   			return new JsonResponse($creditReason->getValidator()->errors()->getMessages(), 422); 
+   			/* return response()->json($creditReason->getValidator()->errors()->getMessages(), 422); */
+   		}
+   		
    }
    
-   public function destroy(Request $data){
-   	$creditReason= CreditReason::findOrFail($data->id);
+   public function destroy($id){
+   	$creditReason= CreditReason::findOrFail($id);
    	$creditReason->delete();
+ 
    	
    }
    	

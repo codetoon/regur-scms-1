@@ -3,25 +3,25 @@
 @section('content')
 <div><h5>Credit Reasons</h5></div>
 
-<div>
-    <form method="post" action="" id="credit_reasons_form">
+<div id="form">
+    <ul>
+       <li v-for="error in errors">
+       
+        </li>     
+        
+    </ul>
+    <form method="post" action="" @submit.prevent="onSubmit" id="credit_reasons_form">
         @csrf
         <label for="credit_reason"><sup>*</sup>Credit Reason:</label>
             <div class="form-group row">
                 <div class="col-md-9">
-                    <input type="text" id="credit_reason" class="form-control{{ $errors->has('credit_reason') ? ' is-invalid' : '' }}" name="credit_reason" value="{{ old('credit_reason')}}"  autofocus>
-                     @if ($errors->has('credit_reason'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('credit_reason') }}</strong>
-                        </span>
-                        @endif
-                </div>
-                <button type="submit"  class="btn btn-success" id="add-btn">Add</button>
+                    <input type="text" id="credit_reason" class="form-control" v-model="credit_reason">
+                     </div>
+                <button type="submit"  class="btn btn-success" id="add-btn" >Add</button>
         </div>
     </form>
 </div>
-
-<table class="table" id="datatable">
+<table class="table" id="credit_reasons_table">
     <thead class="thead-light">
         <tr>
             <th scope="col">Credit Reason</th>
@@ -33,13 +33,16 @@
 </table>
 
 @endsection
-
 @push('js-script')
-<script>
 
-	/*view data in datatable*/
+
+
+<script type="text/javascript">
+  
+    
+    /*view data in datatable*/
         $(document).ready(function(){
-        credit_reasons_table = $('#datatable').DataTable({
+        credit_reasons_table = $('#credit_reasons_table').DataTable({
                 processing: false,
                 serverSide: true,
                 ajax: "/system/credit-reasons/list",
@@ -56,69 +59,57 @@
                 ],
                 dataSrc: ""
             });
-        
-            $(document).on('click',"#delete_btn", function(e){
-                e.preventDefault();
-               var confirmation= confirm("Confirm delete?");
-                if(confirmation){
-                    $("#loader").removeClass("hide-loader");
-                    $("#loader").addClass("show-loader");
-                    var row= $(this).parents('tr')[0];
-                    var data= credit_reasons_table.row(row).data();
-
-                     $.ajaxSetup({
-                      headers: {
-                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                      }
-                     });
-                    $.ajax({
-                    url:"{{ route('system.creditreason.delete')}}",
-                    dataType:'text',
-                    data: data ,
-                    method:"delete",
-                    success:function(data){
-                        credit_reasons_table.ajax.reload();
-                        $("#loader").removeClass("show-loader");
-                        $("#loader").addClass("hide-loader");
-                }}
-                )
-                }
-            }); 
-        
-       
-         /*   save post data to DB*/
-         $("#credit_reasons_form").submit(function(e){
-                e.preventDefault();
-               $("#loader").removeClass("hide-loader");
-               $("#loader").addClass("show-loader");
-             
-               var data= $("#credit_reasons_form").serialize();
-               $('#add-btn').prop('disabled', true);
-               $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-             });
-                $.ajax({
-               type: 'POST',
-               url: "/system/credit-reasons",
-               dataType:'text',
-               data: data,
-               success: function(data){
-                  console.log(data);
-                  credit_reasons_table.ajax.reload();
-                $("#credit_reasons_form")[0].reset();
-                $('#add-btn').prop('disabled', false);
-                $("#loader").removeClass("show-loader");
-                $("#loader").addClass("hide-loader");
-               },
-                error: function(error){
-                    /*alert('error'+error);*/
-                    console.log(error);
-                }
-            })
-            })
+        });
+    
+     $form= new Vue({
+        el: "#form",
+        data: {
+            credit_reason:"",
+            errors: [],
             
-        }); 
-		</script>
+            
+        },
+      methods: {
+            
+          onSubmit: function(){
+              this.requestLoad();
+              axios.post('/system/credit-reasons', this.$data).then(function(){
+                  $("#credit_reasons_form")[0].reset();
+                  credit_reasons_table.ajax.reload();
+                  this.onSucc();
+                  
+                  
+              }).catch(function(error){
+                this.errors= error.response.data.message;
+                /*this.errors= error.responseJSON;*/
+                alert(this.errors);
+                credit_reasons_table.ajax.reload();
+                 this.onSucc();
+              });
+              
+          },
+          requestLoad: function(){
+            $("#loader").removeClass("hide-loader");
+            $("#loader").addClass("show-loader");
+            $("#page-activity").css('opacity', '0.6');
+            $('#add-btn').prop('disabled', 'true');
+        },
+          
+          onSucc: function(){
+            $("#loader").removeClass("show-loader");
+            $("#loader").addClass("hide-loader");
+            $("#page-activity").css('opacity', '1');
+            $("#add-btn").prop('disabled', 'false');
+            alert('success');
+          }
+          
+       
+          
+          
+      }
+    });       
+        
+   
+    
+</script>
 @endpush

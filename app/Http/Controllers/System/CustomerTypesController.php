@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 use App\Organization;
 use App\CustomerType;
-use Yajra\DataTables\DataTables;
+
 
 class CustomerTypesController extends Controller
 {
@@ -25,13 +29,6 @@ class CustomerTypesController extends Controller
 		return DataTables::of($customerType)->make(true);
 	}
 	
-	public function validator(Request $data){
-		return Validator::make([
-				'customer_type'=> ['required', 'string', 'max:255'],
-				'organization_id'=> ['required']
-		]);
-		
-	}
 	
 	public function store(Request $data){
 		$organization= new Organization();
@@ -39,13 +36,14 @@ class CustomerTypesController extends Controller
 				'customer_type'=> $data['customer_type'],
 				'organization_id'=> Auth::user()->organization_id
 		]);
-		//return $customerType;
+		if($customerType->getValidator()->failed()){
+			return new JsonResponse($customerType->getValidator()->errors()->getMessages());
+		}
 	}
 	
 	public function destroy(Request $data){
 		$customerType= CustomerType::findOrFail($data->id);
 		$customerType->delete();
 		
-		//return redirect('/system/customer-types');
 	}
 }
