@@ -8,16 +8,16 @@
 @verbatim
     <div class="alert alert-danger" v-if="errors.length">
         <ul>
-            <li v-for="error in errors" ></li>
+            <li v-for="error in errors" >{{ error }}</li>
         </ul>
     </div>
 @endverbatim
-    <form method="post" action="" @submit.prevent="onSubmit" id="adjustment_reasons_form">
+    <form method="post" action="" @submit.prevent="onSubmit" >
         @csrf
         <label for="adjustment_reason"><sup>*</sup>Adjustment Reason:</label>
             <div class="form-group row">
                 <div class="col-md-9">
-                    <input type="text" id="adjustment_reason" class="form-control{{ $errors->has('adjustment_reason') ? ' is-invalid' : '' }}"  name="adjustment_reason" value="{{ old('adjustment_reason')}}"  autofocus >
+                    <input type="text" id="adjustment_reason" class="form-control" value="{{ old('adjustment_reason')}}" v-model="adjustment_reason"  autofocus >
                 </div>
                 <button type="submit" class="btn btn-success" id="adjustment_reason_add">Add</button>
         </div>
@@ -69,7 +69,7 @@ $(document).on('click',"#adjustment_reason_delete", function(e){
             var row= $(this).parents('tr')[0];
             var data= adjustment_reasons_table.row(row).data();
 
-            axios.delete('/system/adjustment-reasons'+ data.id)
+            axios.delete('/system/adjustment-reasons/'+ data.id)
                 .then(function(response){
                     adjustment_reasons_table.ajax.reload();
                     hideLoader();
@@ -86,7 +86,7 @@ var app= new Vue({
     el: "#adjustment_reasons_app",
     
     data: {
-        adjustment_reason:"",
+        adjustment_reason: "",
         errors: [],
         
     },
@@ -95,21 +95,22 @@ var app= new Vue({
         onSubmit: function(){
                 showLoader();              
                 var that= this;
-                $('#adjustment_reason_add').prop('disabled', 'true');
+                $('#adjustment_reason_add').prop('disabled', true);
                 
                 axios.post('/system/adjustment-reasons', this.$data)
                   
                     .then(function(){
                         that.errors=[];
-                        $("#adjustment_reasons_form")[0].reset();
+                        that.adjustment_reason="";
                         adjustment_reasons_table.ajax.reload();
-                        $('#adjustment_reasons_add_btn').prop('disabled', 'false');
+                        $('#adjustment_reason_add').prop('disabled', false);
                         hideLoader();
                     })
+            
                     .catch(function(error){
                         that.errors= error.response.data;
                         hideLoader();
-                        
+                        $('#adjustment_reason_add').prop('disabled', false);
                     });
               
         }

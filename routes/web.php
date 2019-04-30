@@ -28,7 +28,7 @@ Route::post('/company/organizationDetails', 'OrganizationsController@update'); /
 Route::get('/system/adjustment-reasons', 'System\AdjustmentReasonsController@show');
 Route::get('/system/adjustment-reasons/list', 'System\AdjustmentReasonsController@list');
 Route::post('/system/adjustment-reasons', 'System\AdjustmentReasonsController@store');
-Route::delete('/system/adjustment-reasons', 'System\AdjustmentReasonsController@destroy');
+Route::delete('/system/adjustment-reasons/{adjustmentReason}', 'System\AdjustmentReasonsController@destroy');
 
 Route::get('/system/credit-reasons', 'System\CreditReasonsController@show');
 Route::get('/system/credit-reasons/list', 'System\CreditReasonsController@list');

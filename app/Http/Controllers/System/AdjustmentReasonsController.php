@@ -22,7 +22,7 @@ class AdjustmentReasonsController extends Controller
 	}
 	
    public function show(){
-   		return view('system.adjustment_reasons');
+   		return view('system.adjustment-reasons');
    }
    
    public function list(){
@@ -46,12 +46,15 @@ class AdjustmentReasonsController extends Controller
    		]);
    		
    		if($adjustmentReason->getValidator()->failed()){
-   			return new JsonResponse($adjustmentReason->getValidator()->errors()->getMessages());
+   			return new JsonResponse($adjustmentReason->getValidator()->errors()->all(), 422);
+   		}
+   		else{
+   			return ['message'=> 'Successful'];
    		}
    }
    
-   protected function destroy(Request $data){
-   	$adjustmentReason= AdjustmentReason::findOrFail($data->id);
+   protected function destroy($id){
+   	$adjustmentReason= AdjustmentReason::findOrFail($id);
    	$adjustmentReason->delete();
    	
    }

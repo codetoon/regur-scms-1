@@ -99,20 +99,20 @@
             onSubmit: function(){
                 showLoader();              
                 var that= this;
-                $('#credit_reasons_add').attr('disabled', true);
+                $('#credit_reasons_add').prop('disabled', true);
                 axios.post('/system/credit-reasons', this.$data)
                   
                     .then(function(){
                         that.errors=[];
-                        $("#credit_reasons_form")[0].reset();
+                        that.credit_reason="";
                         credit_reasons_table.ajax.reload();
-                        $('#credit_reasons_add').attr('disabled', false);
+                        $('#credit_reasons_add').prop('disabled', false);
                         hideLoader();
                     })
                     .catch(function(error){
                         that.errors= error.response.data;
                         hideLoader();
-                        $('#credit_reasons_add').attr('disabled', false);
+                        $('#credit_reasons_add').prop('disabled', false);
                     });
               
                 

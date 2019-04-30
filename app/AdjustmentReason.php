@@ -39,10 +39,11 @@ class AdjustmentReason extends Model
     		'adjustment_reason'=> ['required', 'string', 'max:255'],
     		'organization_id'=>['required']
     	]);
+    	
     	if($this->validator->fails()){
     		return false;
-    		
     	}
+    	
     	else {
     		return true;
     	}
