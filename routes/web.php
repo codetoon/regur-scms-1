@@ -52,7 +52,7 @@ Route::delete('/system/product-groups', 'System\ProductGroupsController@destroy'
 Route::get('/system/sales-groups', 'System\SalesGroupsController@show');
 Route::get('/system/sales-groups/list', 'System\SalesGroupsController@list');
 Route::post('/system/sales-groups', 'System\SalesGroupsController@store');
-Route::delete('/system/sales-groups', 'System\SalesGroupsController@destroy');
+Route::delete('/system/sales-groups/{salesGroup}', 'System\SalesGroupsController@destroy');
 
 Route::get('/system/shipping-companies', 'System\ShippingCompaniesController@show');
 Route::get('/system/shipping-companies/list', 'System\ShippingCompaniesController@list');
