@@ -47,7 +47,7 @@ Route::delete('/system/payment-terms/{paymentTerm}', 'System\PaymentTermsControl
 
 Route::get('/system/product-groups', 'System\ProductGroupsController@show');
 Route::post('/system/product-groups', 'System\ProductGroupsController@store');
-Route::delete('/system/product-groups', 'System\ProductGroupsController@destroy');
+Route::delete('/system/product-groups{productGroup}', 'System\ProductGroupsController@destroy');
 
 Route::get('/system/sales-groups', 'System\SalesGroupsController@show');
 Route::get('/system/sales-groups/list', 'System\SalesGroupsController@list');
@@ -57,7 +57,7 @@ Route::delete('/system/sales-groups/{salesGroup}', 'System\SalesGroupsController
 Route::get('/system/shipping-companies', 'System\ShippingCompaniesController@show');
 Route::get('/system/shipping-companies/list', 'System\ShippingCompaniesController@list');
 Route::post('/system/shipping-companies', 'System\ShippingCompaniesController@store');
-Route::delete('/system/shipping-companies', 'System\ShippingCompaniesController@delete');
+Route::delete('/system/shipping-companies/{shippingCompany}', 'System\ShippingCompaniesController@destroy');
 
 Route::get('/system/units-of-measure', 'System\UnitsOfMeasureController@show');
 Route::get('/system/units-of-measure/list', 'System\UnitsOfMeasureController@list');

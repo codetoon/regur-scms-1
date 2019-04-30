@@ -55,17 +55,19 @@
             ajax: "/system/sales-groups/list",
             columns: [
                 {data: 'sales_group_name'},
+                {data: 'obsolete', searchable: false, orderable: false, render:function(){
+                        var obseleteHTML= '<div class="form-check"><input type="checkbox" class="form-check-input" value=""></div> ';
+                        return obseleteHTML;
+                    }
+                 },
                 {data: 'delete', searchable: false, orderable: false, render: function(){
 	                      var deleteBtnHTML= '<a href="javascript:void(0)"><button id="delete_btn_sales_groups"><span data-feather="delete"></span>Delete</button></a>';
 	                      
 	                      return deleteBtnHTML;
 	              			}
 	                  },
-                {data: 'obsolete', searchable: false, orderable: false, render:function(){
-                        var obseleteHTML= '<div class="form-check"><input type="checkbox" class="form-check-input" value=""></div> ';
-                        return obseleteHTML;
-                }
-	                  }
+                
+	                  
                 
             ]
         })
