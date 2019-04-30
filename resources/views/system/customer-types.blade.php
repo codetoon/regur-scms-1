@@ -5,15 +5,22 @@
 <div><h2>Customer Types</h2></div>
 
 
-<div>
-    <form method="post" action="" id="customer_types_form">
+<div id="customer_types_app">
+@verbatim
+    <div class="alert alert-danger" v-if="errors.length">
+        <ul>
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </div>
+@endverbatim
+    <form method="post" action="" @submit.prevent= "onSubmit">
         @csrf
         <label for="customer_type"><sup>*</sup>Customer Type:</label>
             <div class="form-group row">
                 <div class="col-md-9">
-                    <input type="text" id="customer_type" class="form-control" name="customer_type" value="{{ old('customer_type')}}" autofocus >
-                </div>
-                <button type="submit" class="btn btn-success">Add</button>
+                    <input type="text" id="customer_type" class="form-control" name="customer_type" value="{{ old('customer_type')}}" v-model="customer_type" autofocus >
+                </div> 
+                <button type="submit" class="btn btn-success" id="customer_type_add">Add</button>
         </div>
     </form>
 </div>
@@ -31,90 +38,75 @@
 @push('js-script')
 <script type="text/javascript">
 	$(document).ready(function(){
-		customer_types_table= $("#customer_types_table").DataTable({
-			processing: true,
-	        serverSide: true,
-	        ajax: "/system/customer-types/list",
-	        columns: [
-	                  {data: 'customer_type'},
-	                  {data: 'delete', searchable: false, orderable: false, render: function(){
-	                      var deleteBtnHTML= '<a href="javascript:void(0)"><button id="delete_btn_customer_types"><span data-feather="delete"></span>Delete</button></a>'
-	                      
-	                      return deleteBtnHTML;
-	              			}
-	                  }
-		      	        ],
-		     dataSrc: ""
-		});
+        customer_types_table= $("#customer_types_table").DataTable({
+            procesing: false,
+            serverSide: true,
+            ajax: "/system/customer-types/list",
+            columns: [
+                {data: 'customer_type'},
+                {data: 'delete', searchable: false, orderable: false, render: function(){
+                    var deleteHTML= '<a href="javascript:void(0)"><button id="customer_type_delete"><span data-feather= "delete"></span>Delete</button>';
+                    return deleteHTML;
+                }}
+            ],
+            
+            dataSrc: ""
+        })
+    });
+                      
+    $(document).on('click', '#customer_type_delete', function(){
+        var confirmation= confirm("Confirm delete?");
+        if(confirmation){
+            showLoader();
+            var row= $(this).parents('tr')[0];
+            var data= customer_types_table.row(row).data();
+            
+            axios.delete('/system/customer-types/'+ data.id)
+                .then(function(response){
+                customer_types_table.ajax.reload();
+                hideLoader();
+            })
+            .catch(function(error){
+                errors= error.response.data;
+                hideLoader();
+            })
+            
+        }
+    });
+    
+    
+    var app = new Vue({
+        el: "#customer_types_app",
+        
+        data: {
+            customer_type: "",
+            errors: []
+        },
+        
+        methods: {
+            onSubmit: function(){
+                showLoader();
+                var that= this;
+                $('#customer_type_add').prop('disabled', true);
+                axios.post('/system/customer-types', this.$data)
+                  
+                    .then(function(){
+                        that.errors=[];
+                        that.customer_type="";
+                        customer_types_table.ajax.reload();
+                        $('#customer_type_add').prop('disabled', false);
+                        hideLoader();
+                    })
+                    .catch(function(error){
+                        that.errors= error.response.data;
+                        hideLoader();
+                        $('#customer_type_add').prop('disabled', false);
+                    });
+              
+            }
+        }
+    });
 
-	$(document).on('click', '#delete_btn_customer_types', function(e){
-			e.preventDefault();
-			var confirmation= confirm("Confirm delete?");
-                if(confirmation){
-                    $("#loader").removeClass("hide-loader");
-                    $("#loader").addClass("show-loader");
-                    $("#page-activity").css('opacity', '0.6');
-                    var row= $(this).parents('tr')[0];
-                    var data= customer_types_table.row(row).data();
-
-
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			})
-			$.ajax({
-				url: "/system/customer-types",
-				dataType:'text',
-				data: data ,
-				method:"delete",
-				success:function(data){
-					customer_types_table.ajax.reload();
-                    $("#customer_types_form")[0].reset();
-                    $("#loader").removeClass("show-loader");
-                    $("#loader").addClass("hide-loader");
-                    $("#page-activity").css('opacity', '1');
-				   }
-				});
-		}
-    })
-	/*   save post data to DB*/
-	$("#customer_types_form").submit(function(e){
-                e.preventDefault();
-               $("#loader").removeClass("hide-loader");
-               $("#loader").addClass("show-loader");
-               $("#page-activity").css('opacity', '0.6');
-             
-               var data= $("#customer_types_form").serialize();
-               $('#add-btn').prop('disabled', true);
-                 
-                    
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-               });
-                  $.ajax({
-                 type: 'POST',
-                 url: "/system/customer-types",
-                 dataType:'text',
-                 data: data,
-                 success: function(data){
-                    console.log(data);
-                    customer_types_table.ajax.reload();
-                    $("#customer_types_form")[0].reset();
-                    $("#loader").removeClass("show-loader");
-                    $("#loader").addClass("hide-loader");
-                    $("#page-activity").css('opacity', '1');
-
-                 },
-                  error: function(error){
-                      alert('error'+error);
-                      console.log(error);
-                  }
-              })
-              })
-
-	})
+    
 </script>
 @endpush

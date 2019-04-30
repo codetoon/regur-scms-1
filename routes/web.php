@@ -38,7 +38,7 @@ Route::delete('/system/credit-reasons/{creditReason}', 'System\CreditReasonsCont
 Route::get('/system/customer-types', 'System\CustomerTypesController@show');
 Route::get('/system/customer-types/list', 'System\CustomerTypesController@list');
 Route::post('/system/customer-types', 'System\CustomerTypesController@store');
-Route::delete('/system/customer-types', 'System\CustomerTypesController@destroy');
+Route::delete('/system/customer-types/{customerType}', 'System\CustomerTypesController@destroy');
 
 Route::get('/system/payment-terms', 'System\PaymentTermsController@show');
 Route::get('/system/payment-terms/list', 'System\PaymentTermsController@list');

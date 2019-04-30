@@ -36,8 +36,8 @@ class CustomerType extends Model
     
     public function validate(){
     	$this->validator= Validator::make($this->attributesToArray(), [
-    			'customer_type'=> ['required', 'string', 'max:255'],
-    			'organization_id'=> ['required']
+    			'customer_type'=> 'required|string|max:255',
+    			'organization_id'=> 'required'
     	]);
     	
     	if($this->validator->fails()){

@@ -21,7 +21,7 @@ class CustomerTypesController extends Controller
 	}
 	
 	public function show(){
-		return view('system.customer_types');
+		return view('system.customer-types');
 	}
 	
 	public function list(){
@@ -36,13 +36,18 @@ class CustomerTypesController extends Controller
 				'customer_type'=> $data['customer_type'],
 				'organization_id'=> Auth::user()->organization_id
 		]);
+		
 		if($customerType->getValidator()->failed()){
-			return new JsonResponse($customerType->getValidator()->errors()->getMessages());
+			return new JsonResponse($customerType->getValidator()->errors()->all(), 422);
+		}
+		
+		else{
+			return ['message'=> 'Successful'];
 		}
 	}
 	
-	public function destroy(Request $data){
-		$customerType= CustomerType::findOrFail($data->id);
+	public function destroy($id){
+		$customerType= CustomerType::findOrFail($id);
 		$customerType->delete();
 		
 	}
