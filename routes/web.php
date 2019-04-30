@@ -43,7 +43,7 @@ Route::delete('/system/customer-types/{customerType}', 'System\CustomerTypesCont
 Route::get('/system/payment-terms', 'System\PaymentTermsController@show');
 Route::get('/system/payment-terms/list', 'System\PaymentTermsController@list');
 Route::post('/system/payment-terms', 'System\PaymentTermsController@store');
-Route::delete('/system/payment-terms', 'System\PaymentTermsController@destroy');
+Route::delete('/system/payment-terms/{paymentTerm}', 'System\PaymentTermsController@destroy');
 
 Route::get('/system/product-groups', 'System\ProductGroupsController@show');
 Route::post('/system/product-groups', 'System\ProductGroupsController@store');
