@@ -3,17 +3,26 @@
 @section('content')
 <div><h5>Supplier Return Reasons</h5></div>
 
-<form method="post" id="supplier_return_reasons_form">
+<div id="supplier_return_reasons_app">
+@verbatim
+    <div class="alert alert-danger" v-if="errors.length">
+        <ul>
+            <li v-for= "error in errors">{{ error }}</li>
+        </ul>
+    </div>
+@endverbatim
+<form method="post" action="" @submit.prevent="onSubmit">
     @csrf
     <label for="supplier_return_reason"><sup>*</sup>Supplier Return Reason</label>
             <div class="form-group row">
                 <div class="col-md-9">
-                    <input type="text" id="supplier_return_reason" class="form-control" name="supplier_return_reason" value="{{ old('supplier_return_reason')}}" required autofocus>
+                    <input type="text" id="supplier_return_reason" class="form-control" value="{{ old('supplier_return_reason')}}" v-model="supplier_return_reason" autofocus>
                 </div>
-                <button type="submit" class="btn btn-success">Add</button>
+                <button type="submit" class="btn btn-success" id="supplier_return_reason_add">Add</button>
         </div>
     
 </form>
+</div>
 <table class="table" id="supplier_return_reasons_table">
     <thead class="thead-light">
         <th scope="col">Supplier Return Reason</th>
@@ -24,35 +33,83 @@
 
 @push('js-script')
 <script type="text/javascript">
+    /*view data in datatable*/
     $(document).ready(function(){
-        supplier_return_reasons_table= $("#supplier_return_reasons_table").DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "/system/supplier-return-reasons/list",
-            columns: [
-                {data: 'supplier_return_reason' },
-                 {data: 'delete', searchable: false, orderable: false, render: function(){
-	                      var deleteBtnHTML= '<a href="javascript:void(0)"><button id="delete_btn_supplier_return_reason"><span data-feather="delete"></span>Delete</button></a>'
-	                      
-	                      return deleteBtnHTML;
-	              			}
-	                  }
-            ],
-            dataSrc: ""
-        })
+        supplier_return_reasons_table = $('#supplier_return_reasons_table').DataTable({
+                processing: false,
+                serverSide: true,
+                ajax: "/system/supplier-return-reasons/list",
+                columns: [
+                    {data: 'supplier_return_reason'},
+                    {data: 'delete', searchable: false, orderable: false, render: function(){
+                            var deleteBtnHTML= '<a href="javascript:void(0)"><button id="supplier_return_reason_delete"><span data-feather="delete"></span>Delete</button></a>'
+                            
+                            return deleteBtnHTML;
+                    }
+                     
+                     }
+                
+                ],
+                dataSrc: ""
+            });
+        });
+    
+    $(document).on('click', '#supplier_return_reason_delete', function(e){
+        e.preventDefault();
+        var confirmation= confirm('Confirm delete?');
         
-        $(document).on('click', '#delete_btn_supplier_return_reason', function(e){
-            e.preventDefault();
-            var confirmation= confirm("Confirm Delete?");
-            if(confirmation){
-                $("#loader").removeClass('hide-loader');
-                $("#loader").addClass('show-loader');
-                $("page-activity").css('opacity', '0.6');
-                var row= $(this).paren('tr')[0];
+        if(confirmation){
+            showLoader();
+            var row= $(this).parents('tr')[0];
+            var data= supplier_return_reasons_table.row(row).data();
+            
+            axios.delete('/system/supplier-return-reasons/'+ data.id)
+                .then(function(response){
+                    supplier_return_reasons_table.ajax.reload();
+                    hideLoader();
+            })
+            .catch(function(error){
+                if(error.response.status= 422){
+                    /* errors= error.response.data;*/
+                     supplier_return_reasons_table.ajax.reload();
+                     hideLoader();
+                }
+            })
+        }
+    });
+    
+    var app= new Vue({
+        el: "#supplier_return_reasons_app",
+        data: {
+            supplier_return_reason: "",
+            errors: []
+        },
+        
+        methods: {
+            onSubmit: function(){
+                showLoader();
+                var that= this;
+                $("#supplier_return_reason_add").prop('disabled', true);
+                
+                axios.post('/system/supplier-return-reasons', this.$data)
+                    .then(function(){
+                        that.errors= [];
+                        that.supplier_return_reason= "";
+                        supplier_return_reasons_table.ajax.reload();
+                        $("#supplier_return_reason_add").prop('disabled', false);
+                        hideLoader();
+                })
+                .catch(function(error){
+                    that.errors= error.response.data;
+                    hideLoader();
+                    $("#supplier_return_reason_add").prop('disabled', false);
+                });
+                
+                
                 
             }
-        })
-    })
+        }
+    });
 </script>
 
 @endpush

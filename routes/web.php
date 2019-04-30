@@ -67,7 +67,7 @@ Route::delete('/system/units-of-measure', 'System\UnitsOfMeasureController@delet
 Route::get('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@show');
 Route::get('/system/supplier-return-reasons/list', 'System\SupplierReturnReasonsController@list');
 Route::post('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@store');
-Route::delete('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@delete');
+Route::delete('/system/supplier-return-reasons/{supplierReturnReason}', 'System\SupplierReturnReasonsController@destroy');
 
 Route::get('/system/attributeSets', 'System\AttributeSetsController@show'); 
  
