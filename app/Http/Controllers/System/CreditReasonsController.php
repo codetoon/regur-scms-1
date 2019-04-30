@@ -23,7 +23,7 @@ class CreditReasonsController extends Controller
 	}
 	
    public function show(){
-   	return view('system.credit_reasons');
+   	return view('system.credit-reasons');
    		
    		
    		
@@ -45,8 +45,11 @@ class CreditReasonsController extends Controller
    		]);
    		
    		if($creditReason->getValidator()->failed()){
-   			return new JsonResponse($creditReason->getValidator()->errors()->getMessages(), 422); 
-   			/* return response()->json($creditReason->getValidator()->errors()->getMessages(), 422); */
+   			return new JsonResponse($creditReason->getValidator()->errors()->all(), 422);	
+   		}
+   		
+   		else{
+   			return ['message' => 'Successful'];
    		}
    		
    }
