@@ -19,7 +19,7 @@ class CreateAttributesTable extends Migration
 			$table->timestamps();
 			$table-> string('attribute_name', 255);
 			$table-> string('default_value', 255);
-			$table->boolean('required');
+			$table->boolean('required')->nullable(0);
 			$table->unsignedInteger('attribute_set_id');
 			
 			$table->foreign('attribute_set_id')->references('id')->on('attribute_sets');

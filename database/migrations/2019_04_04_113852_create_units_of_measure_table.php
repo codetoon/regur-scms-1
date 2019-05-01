@@ -18,7 +18,7 @@ class CreateUnitsOfMeasureTable extends Migration
 			$table->increments('id');
 			$table->timestamps();
 			$table->unsignedInteger('organization_id');
-			$table->tinyInteger('unit_of_measure');
+			$table->string('unit_of_measure', 255);
 			
 			$table->foreign('organization_id')->references('id')->on('organizations');
 		});
