@@ -17,6 +17,7 @@ class CreateAttributesTable extends Migration
 		{
 			$table->increments('id');
 			$table->timestamps();
+			$table-> string('attribute_name', 255);
 			$table-> string('default_value', 255);
 			$table->boolean('required');
 		});

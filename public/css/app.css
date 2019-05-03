@@ -304,13 +304,13 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     width: 20px;
     height: 20px;
 }
-.taxes_checkbox{
+.settings_checkbox{
     width: 20px;
     height: 20px;
     margin-left: 15px;
     margin-top: 8px;
 }
-#tax_add, #attribute_set_add{
+.settings_add_btn{
     margin-top: 28px;
 }
 #product_group_add{

@@ -47,7 +47,7 @@
                     <label for="sales_tax">Sales Tax</label>
                 </div>
                 <div class="row">
-                    <input class="taxes_checkbox" type="checkbox" id="sales_tax" v-model="sales_tax">
+                    <input class="settings_checkbox" type="checkbox" id="sales_tax" v-model="sales_tax">
                 </div>
             </div>
             <div class="col-md-1">
@@ -55,10 +55,10 @@
                     <label for="purchase_tax">Purchase Tax </label>
                 </div>
                 <div class="row">
-                <input class="taxes_checkbox" type="checkbox" id="purchase_tax" v-model="purchase_tax">
+                <input class="settings_checkbox" type="checkbox" id="purchase_tax" v-model="purchase_tax">
                 </div>
             </div>
-             <button type="submit" class="btn btn-success" id="tax_add" >Add</button>
+             <button type="submit" class="btn btn-success settings_add_btn" id="tax_add" >Add</button>
         </div>
     </form>
 </div>

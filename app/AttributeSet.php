@@ -10,7 +10,7 @@ class AttributeSet extends Model
 {	
 	protected $table="attribute_sets";
 	
-	protected $fillable= ['attribute_set', 'type', 'organization_id'];
+	protected $fillable= ['name', 'type', 'organization_id'];
 	
 	private $validator;
 	
