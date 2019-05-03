@@ -11,6 +11,8 @@ class ShippingCompany extends Model
 	
     protected $fillable= ['company_name', 'organization_id'];
     
+    protected $attributes= ['active'=> "1"];
+    
     private $validator;
     
     public function __construct(array $attributes = [])
@@ -43,7 +45,8 @@ class ShippingCompany extends Model
     	 
     	$this->validator= Validator::make($this->attributesToArray(), [
     			'company_name'=> 'required|string|max:255',
-    			'organization_id'=> 'required'
+    			'organization_id'=> 'required',
+    			
     	]);
     	 
     	if($this->validator->fails()){

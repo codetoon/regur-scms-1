@@ -97,21 +97,21 @@
                         </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link dropdown collapsed" id="menu-item-1" href="#" data-toggle="collapse" data-target="#submenu-list-1" > 
-                        <span  class="sidebar-icon" data-feather="shopping-cart"></span>        
-                        <span class="sidebar-menu-item">{{ __('Products') }}</span>
-                        <span class="drop-btn" data-feather="chevron-down"></span>
+                         <a class="nav-link dropdown collapsed" id="menu-item-1" href="#" data-toggle="collapse" data-target="#submenu-list-1" > 
+                    <span  class="sidebar-icon" data-feather="shopping-cart"></span>        
+                    <span class="sidebar-menu-item">Products</span>
+                    <span class="drop-btn" data-feather="chevron-down"></span>
+    
+                    
+                    </a>
 
+                        <ul class="collapse dropdown-content dropdown-sidebar-expanded menu" aria-labelledby="menu-item-1" id="submenu-list-1" >
+                            <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 1</a></li>
+                            <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 2</a></li>
+                            <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 3333</a></li>
+                        </ul>
 
-                        </a>
-
-                            <ul class="collapse dropdown-content dropdown-sidebar-expanded menu" aria-labelledby="menu-item-1" id="submenu-list-1"  >
-                                <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 1</a></li>
-                                <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 2</a></li>
-                                <li><a href="#" class="submenu-list-item"><span data-feather="shopping-cart"></span>Product 3333</a></li>
-                            </ul>
-
-                        </li>
+                    </li>
 
                         <li class="nav-item">
                         <a class="nav-link dropdown collapsed" href="#" data-toggle="collapse" id="menu-item-2" data-target="#submenu-list-2" >
@@ -204,9 +204,21 @@
       </div>
     </div> 
 </div> 
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>     
+        <script src="{{ asset('js/functions.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
+        <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://unpkg.com/vue@2.6.8/dist/vue.js"></script>
+		@stack('js-script')
   
      <script>
-         
      function createCookie(key, value) {
          var cookie = escape(key) + "=" + escape(value) + ";";
          document.cookie = cookie;
@@ -215,33 +227,33 @@
      }
 			 $(document).ready(function(){
 			  $('#toggle-button').click(function(){
-			      if( $('.sidebar-menu-item').is(':visible') ){
-			          $('.company-name').css({'display': 'none'});
-			          $('.company-logo').css({'display': 'inline-block'});
-			          $('.sidebar-menu-item').hide();
-			          $('.drop-btn').hide();
-			          //$('.dropdown-content').hide(500);
-			          $('.sidebar-menu').removeClass('sidebar-menu-expanded');
-			          $('.sidebar-menu').addClass('sidebar-menu-collapsed');
-			          $('.dropdown-content').removeClass('dropdown-sidebar-expanded');
-			          $('.dropdown-content').addClass('dropdown-sidebar-collapsed');
-			          createCookie("sidebar", "hidden");
-			          
-			
-			      }
+			     if( $('.sidebar-menu-item').is(':visible') ){
+                     $('.company-name').css({'display': 'none'});
+                     $('.company-logo').css({'display': 'inline-block'});
+                     $('.sidebar-menu-item').hide();
+                     $('.drop-btn').hide();
+                     //$('.dropdown-content').hide(500);
+                     $('.sidebar-menu').removeClass('sidebar-menu-expanded');
+                     $('.sidebar-menu').addClass('sidebar-menu-collapsed');
+                     $('.dropdown-content').removeClass('dropdown-sidebar-expanded');
+                     $('.dropdown-content').addClass('dropdown-sidebar-collapsed');
+                     createCookie("sidebar", "hidden");
+                     
+
+                 }
 			      
 			      else if($('.sidebar-menu-item').is(':hidden')){
 			         $( '.company-name').css({display: 'inline-block'});
-			         $('.company-logo').css({display: 'none'});
-			         $('.sidebar-menu-item').show();
-			         $('.drop-btn').show();
-			         $('.sidebar-menu').removeClass('sidebar-menu-collapsed');
-			         $('.sidebar-menu').addClass('sidebar-menu-expanded');
-			         $('.dropdown-content').addClass('dropdown-sidebar-expanded');
-			         $('.dropdown-content').removeClass('dropdown-sidebar-collapsed');
-			         createCookie("sidebar", "visible");
-			      }
-			      
+                    $('.company-logo').css({display: 'none'});
+                    $('.sidebar-menu-item').show();
+                    $('.drop-btn').show();
+                    $('.sidebar-menu').removeClass('sidebar-menu-collapsed');
+                    $('.sidebar-menu').addClass('sidebar-menu-expanded');
+                    $('.dropdown-content').addClass('dropdown-sidebar-expanded');
+                    $('.dropdown-content').removeClass('dropdown-sidebar-collapsed');
+                    createCookie("sidebar", "visible");
+                 }
+                 
 			      else{
 			          return;
 			      }
@@ -250,17 +262,15 @@
 			 $('#toggle-button-mobile').click(function(){
 			     if($('.sidebar-menu-item').is(':visible')){
 			         $('.sidebar-menu').hide("slide", {direction: "left"}, 100);
-			         $('.sidebar-menu').css({'height': '100%'});
 			         $('.main-content').addClass('main-content-view');
 			      }
 			
 			     else if($('.sidebar-menu-item').is(':hidden')){
 			          $('.sidebar-menu').show("slide", {direction: "left"}, 100);
-			          $('.sidebar-menu').css({'height': '100%'});
 			          $('.main-content').removeClass('main-content-view');
-			      }
+                    
 			     
-			             
+                 }
 			     else{
 			         return;
 			      }
@@ -272,30 +282,19 @@
 			
 			$(".dropdown").click(function(){
 			  if($(this).hasClass('collapsed')){
-			      $(this).find(".drop-btn").css({ transform: 'rotate(180deg)'})
+			      $(this).find(".drop-btn").css({ transform: 'rotate(180deg)'});
 			  }
 			  
 			  else{
 			      $(this).find(".drop-btn").css({ transform: 'rotate(0deg)'});
+                 
 			  }
 			  
 			})
          
         
         </script>
-        <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-        <script src="{{ asset('js/chart.js') }}"></script>
-    	<script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/functions.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
-        <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://unpkg.com/vue@2.6.8/dist/vue.js"></script>
-		@stack('js-script')
+        
 		
    		
 </body>

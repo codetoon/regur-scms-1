@@ -46,8 +46,9 @@ Route::post('/system/payment-terms', 'System\PaymentTermsController@store');
 Route::delete('/system/payment-terms/{paymentTerm}', 'System\PaymentTermsController@destroy');
 
 Route::get('/system/product-groups', 'System\ProductGroupsController@show');
+Route::get('/system/product-groups/list', 'System\ProductGroupsController@list');
 Route::post('/system/product-groups', 'System\ProductGroupsController@store');
-Route::delete('/system/product-groups{productGroup}', 'System\ProductGroupsController@destroy');
+Route::delete('/system/product-groups/{productGroup}', 'System\ProductGroupsController@destroy');
 
 Route::get('/system/sales-groups', 'System\SalesGroupsController@show');
 Route::get('/system/sales-groups/list', 'System\SalesGroupsController@list');
@@ -62,12 +63,25 @@ Route::delete('/system/shipping-companies/{shippingCompany}', 'System\ShippingCo
 Route::get('/system/units-of-measure', 'System\UnitsOfMeasureController@show');
 Route::get('/system/units-of-measure/list', 'System\UnitsOfMeasureController@list');
 Route::post('/system/units-of-measure', 'System\UnitsOfMeasureController@store');
-Route::delete('/system/units-of-measure', 'System\UnitsOfMeasureController@delete');
+Route::delete('/system/units-of-measure/{uom}', 'System\UnitsOfMeasureController@delete');
 
 Route::get('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@show');
 Route::get('/system/supplier-return-reasons/list', 'System\SupplierReturnReasonsController@list');
 Route::post('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@store');
 Route::delete('/system/supplier-return-reasons/{supplierReturnReason}', 'System\SupplierReturnReasonsController@destroy');
 
-Route::get('/system/attributeSets', 'System\AttributeSetsController@show'); 
+Route::get('/system/attribute-sets', 'System\AttributeSetsController@show'); 
+Route::get('/system/attribute-sets/list', 'System\AttributeSetsController@list');
+Route::post('/system/attribute-sets', 'System\AttributeSetsController@store');
+Route::delete('/system/attribute-sets/{attributeSet}', 'System\AttributeSetsController@destroy');
+
+Route::get('/system/taxes', 'System\TaxesController@show');
+Route::get('/system/taxes/list', 'System\TaxesController@list');
+Route::post('/system/taxes', 'System\TaxesController@store');
+Route::delete('/system/taxes/{tax}', 'System\TaxesController@destroy');
+
+Route::get('/system/attributes/{attribute}', 'System\AttributesController@show');
+Route::get('system/attributes/list', 'System\AttributesController@list');
+Route::post('system/attributes', 'System\AttributesController@store');
+Route::delete('system/attributes/{attribute}', 'System\AttributesController@destroy');
  

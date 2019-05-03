@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div><h5>Payment terms</h5></div>
+<div><h5>Product Groups</h5></div>
 
 <form method="post" action="">
     @csrf
@@ -17,7 +17,7 @@
                 <option value="1"></option>
             </select>
         </div>
-        <div class="add-btn" style="padding-top: 28px; padding-left:10px"><button type="submit" class="btn btn-success">Add</button></div>
+        <div class="add-btn"><button type="submit" class="btn btn-success" id="product_group_add">Add</button></div>
     </div>
 </form>
 
@@ -28,9 +28,14 @@
         <th scopt="col">Delete</th>
     </thead>
     <tbody>
-        <tr>
-            
-        </tr>
     </tbody>
 </table>
 @endsection
+
+@push('js-script')
+<script type="text/javascript">
+    
+
+</script>
+
+@endpush

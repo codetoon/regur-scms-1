@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use App\CreditReason;
 use Symfony\Component\VarDumper\Tests\Cloner\DataTest;
-
 use App\Organization;
 use Illuminate\Http\Illuminate\Http;
 
@@ -32,9 +31,6 @@ class CreditReasonsController extends Controller
 	 		$creditReason= CreditReason::where('organization_id', Auth::user()->organization_id);
  			return DataTables::of($creditReason)->make(true);
  		}
-   
-   
-   
    
    public function store(Request $data){
    		$organization= new Organization();
@@ -57,9 +53,7 @@ class CreditReasonsController extends Controller
    public function destroy($id){
    	$creditReason= CreditReason::findOrFail($id);
    	$creditReason->delete();
- 
-   	
-   }
+  }
    	
    
 }

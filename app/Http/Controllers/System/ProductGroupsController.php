@@ -16,9 +16,7 @@ class ProductGroupsController extends Controller
 	}
 	
 	public function show(){
-		$organization= Organization::where('id', Auth::User()->organization_id)->get();
-		$productGroup= ProductGroup::where('organization_id', Auth::User()->organization_id)->get();
-		return view('system.product_groups', compact('organization', 'productGroup'));
+		return view('system.product-groups');
 	}
 	
 	public function validator(Request $data){

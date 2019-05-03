@@ -1,3 +1,5 @@
+
+
 function showLoader(){
 	$("#loader").removeClass("hide-loader");
     $("#loader").addClass("show-loader");
@@ -11,3 +13,6 @@ function hideLoader(){
     $("#page-activity").css('opacity', '1');
 }
 
+$(document).ready(function(){
+	feather.replace();
+})

@@ -136,6 +136,7 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
+    height: 100%;
     padding: 48px 0px 0px ; /* Height of navbar */
     z-index: 1; /* Behind the navbar */
     
@@ -298,7 +299,19 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     padding-left: 10px;
 }
 
+.tax_checkbox{
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+}
 
+#tax_add, #attribute_set_add{
+    margin-top: 28px;
+}
+#product_group_add{
+    
+    padding-left:10px
+}
 /* Mobile view */
 @media only screen and (max-width: 767px) {
     .responsive #top #main .sidebar {display:block !important; clear: both; }
