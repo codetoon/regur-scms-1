@@ -37,7 +37,7 @@ class AttributeSet extends Model
 	
 	public function validate(){
 		$this->validator= Validator::make($this->attributesToArray(), [
-				'attribute_set'=> 'required|string|max: 255',
+				'name'=> 'required|string|max: 255',
 				'type'=> 'required|string|max: 255',
 				'organization_id'=> 'required'
 		]);
