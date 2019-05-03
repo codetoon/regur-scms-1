@@ -18,48 +18,48 @@ class CreateOrganizationsTable extends Migration
 			$table->increments('id');
 			$table->timestamps();
 			$table->string('company_name', 255);
-			$table->string('trading_name', 255);
-			$table->string('trading_name_purchase', 255);
-			$table->unsignedInteger('industry_id');
-			$table->tinyInteger('organization_type');
-			$table->string('base_currency', 255);
-			$table->tinyInteger('dashboard_data_source');
-			$table->string('gst_vat_number', 255);
-			$table->string('website', 255);
-			$table->unsignedInteger('timezone_id');
-			$table->tinyInteger('financial_year_end');
-			$table->tinyInteger('unit_of_measure');
-			$table->tinyInteger('date_format');
+			$table->string('trading_name', 255)->nullable();
+			$table->string('trading_name_purchase', 255)->nullable();
+			$table->unsignedInteger('industry_id')->nullable();
+			$table->tinyInteger('organization_type')->nullable();
+			$table->string('base_currency', 255)->nullable();
+			$table->tinyInteger('dashboard_data_source')->nullable();
+			$table->string('gst_vat_number', 255)->nullable();
+			$table->string('website', 255)->nullable();
+			$table->unsignedInteger('timezone_id')->nullable();
+			$table->tinyInteger('financial_year_end')->nullable();
+			$table->tinyInteger('unit_of_measure')->nullable();
+			$table->tinyInteger('date_format')->nullable();
 			
 			
 			//contact
-			$table->string('fax_number', 255);
-			$table->string('telephone_number')->unique();
-			$table->string('ddi', 255);
-			$table->string('tollfree_number', 255);
-			$table->string('purchase_email', 255);
-			$table->string('sales_email', 255);
+			$table->string('fax_number', 255)->nullable();
+			$table->string('telephone_number')->unique()->nullable();
+			$table->string('ddi', 255)->nullable();
+			$table->string('tollfree_number', 255)->nullable();
+			$table->string('purchase_email', 255)->nullable();
+			$table->string('sales_email', 255)->nullable();
 			
 			//physical address
-			$table->string('physical_address_name', 255);
-			$table->string('physical_address_line_1', 255);
-			$table->string('physical_address_line_2', 255);
-			$table->string('physical_suburb', 255);
-			$table->string('physical_city', 255);
-			$table->string('physical_state_region', 255);
-			$table->unsignedInteger('physical_country_id');
-			$table->integer('physical_postal_code');
+			$table->string('physical_address_name', 255)->nullable();
+			$table->string('physical_address_line_1', 255)->nullable();
+			$table->string('physical_address_line_2', 255)->nullable();
+			$table->string('physical_suburb', 255)->nullable();
+			$table->string('physical_city', 255)->nullable();
+			$table->string('physical_state_region', 255)->nullable();
+			$table->unsignedInteger('physical_country_id')->nullable();
+			$table->integer('physical_postal_code')->nullable();
 			
 			
 			//postal address
-			$table->string('postal_address_name', 255);
-			$table->string('postal_address_line_1', 255);
-			$table->string('postal_address_line_2', 255);
-			$table->string('postal_suburb', 255);
-			$table->string('postal_city', 255);
-			$table->string('postal_state_region', 255);
-			$table->unsignedInteger('postal_country_id');
-			$table->integer('postal_postal_code');
+			$table->string('postal_address_name', 255)->nullable();
+			$table->string('postal_address_line_1', 255)->nullable();
+			$table->string('postal_address_line_2', 255)->nullable();
+			$table->string('postal_suburb', 255)->nullable();
+			$table->string('postal_city', 255)->nullable();
+			$table->string('postal_state_region', 255)->nullable();
+			$table->unsignedInteger('postal_country_id')->nullable();
+			$table->integer('postal_postal_code')->nullable();
 			
 			
 			
