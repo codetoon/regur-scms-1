@@ -14,8 +14,10 @@
     <form method="post" action="" @submit.prevent="onSubmit">
     <div class="form-group row">
         <div class="col-md-3">
+
             <label for="name">Attribute Set Name</label>
             <input id="name" class="form-control" type="text" v-model="name">
+
         </div>
         <div class="col-md-3">
             <label for="type">Type</label>
@@ -25,7 +27,9 @@
             @endforeach
             </select>
         </div>
+
         <div ><button type="submit" class="btn btn-success settings_add_btn" id="attribute_set_add">Add</button></div>
+
     </div>
     </form>
 </div>
@@ -47,6 +51,7 @@
             serverSide: true,
             ajax: "/system/attribute-sets/list",
             columns: [
+
                 {data: null, name: 'name', render: function(row){
                     return '<a target="_blank" href="/system/attributes/'+row.id+'">'+row.name+'</a>'
                 }
@@ -96,6 +101,7 @@ var app= new Vue({
         
         data: {
             name:"",
+            /*attribute_set:"",*/
             type:"",
             errors: [],
             },

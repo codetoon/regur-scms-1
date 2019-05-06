@@ -76,6 +76,46 @@ $(document).ready(function(){
         });
     });
     
+var app= new Vue({
+        el: "#attributes_app",
+        
+        data: {
+            attribute_name: "",
+            default_value: "",
+            errors: [],
+            required: false
+            },
+        methods: {
+            onSubmit: function(){
+                showLoader();              
+                var that= this;
+                
+          
+                $('#attribute_add').prop('disabled', true);
+                axios.post('/system/attributes', this.$data)
+                  
+                    .then(function(){
+                        that.errors=[];
+                        that.attribute_name="";
+                        that.default_value="";
+                        that.required= "";
+                        attributes_table.ajax.reload();
+                        $('#attribute_add').prop('disabled', false);
+                        hideLoader();
+                    })
+                    .catch(function(error){
+                        that.errors= error.response.data;
+                        hideLoader();
+                        $('#attribute_add').prop('disabled', false);
+                    });
+              
+                
+            },
+            
+        },
+          
+});  
+    
 </script>
 
 @endpush

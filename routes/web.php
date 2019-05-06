@@ -84,4 +84,10 @@ Route::get('/system/attributes/{attribute}', 'System\AttributesController@show')
 Route::get('/system/attributes/list/{attribute}', 'System\AttributesController@list')->name('attributes.list');
 Route::post('/system/attributes', 'System\AttributesController@store');
 Route::delete('/system/attributes/{attribute}', 'System\AttributesController@destroy');
+
+Route::get('system/attributes', 'System\AttributesController@show');
+Route::get('system/attributes/list', 'System\AttributesController@list');
+Route::post('system/attributes', 'System\AttributesController@store');
+Route::delete('system/attributes/{attribute}', 'System\AttributesController@destroy');
+
  

@@ -24,7 +24,11 @@ class PaymentTermsController extends Controller
 	
 	public function list(){
 		$paymentTerm= PaymentTerm::where('organization_id', Auth::user()->organization_id)->get();
-		return DataTables::of($paymentTerm)->make(true);
+		return DataTables::of($paymentTerm)
+		->editColumn('payment_type', function($row){			
+			return $row['payment_type'];
+		})
+		->make(true);
 	}
 	
 	public function store(Request $data){

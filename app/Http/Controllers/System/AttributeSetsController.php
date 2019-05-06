@@ -36,6 +36,7 @@ class AttributeSetsController extends Controller
    		
    		$attributeSet= AttributeSet::create([
    			'name'=> $data['name'],
+   			/* 'attribute_set'=> $data['attribute_set'], */
    			'type'=> $data['type'],
    			'organization_id'=> Auth::user()->organization_id
    		]);
