@@ -85,10 +85,12 @@ Route::get('/system/attributes/list/{attribute}', 'System\AttributesController@l
 Route::post('/system/attributes', 'System\AttributesController@store');
 Route::delete('/system/attributes/{attribute}', 'System\AttributesController@destroy');
 
-Route::get('system/attributes', 'System\AttributesController@show');
-Route::get('system/attributes/list', 'System\AttributesController@list');
-Route::post('system/attributes', 'System\AttributesController@store');
-Route::delete('system/attributes/{attribute}', 'System\AttributesController@destroy');
+Route::get('/system/prefixes', 'System\PrefixesController@show');
+Route::get('/system/prefixes/list', 'System\PrefixesController@list');
+Route::post('/system/prefixes', 'System\PrefixesController@store');
+Route::delete('/system/prefixes/{prefix}', 'System\PrefixesController@destroy');
+
+
 
 
 

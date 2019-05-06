@@ -23,10 +23,13 @@
                 <input id="days" class="form-control" type="text" v-model="days"  autofocus>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 form-group">
                 <label for="payment_type">Type</label>
                 <select class="form-control" v-model="payment_type">
-                    <option value="1">1</option>
+                   <option disabled value="">Please select payment type</option>
+                @foreach($paymentTypes as $key=> $paymentType)
+                    <option value= "{{ $key }}">{{ $paymentType }}</option>
+                @endforeach
                 </select>
             </div>
             <div style="padding-top: 28px; padding-left:10px"><button type="submit" class="btn btn-success" id="payment_term_add">Add</button></div>

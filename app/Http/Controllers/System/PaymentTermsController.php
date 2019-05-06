@@ -13,20 +13,25 @@ use App\Organization;
 use Yajra\DataTables\DataTables;
 
 class PaymentTermsController extends Controller
-{
+{	
+	private $paymentTypes= [1=>'Days after', 2=>'Days following the end of the month', 
+							3=> 'Days of the month following', 4=>'End of the month following'
+	];
+	
     public function __construct(){
     	$this->middleware('auth');
 	}
 	
 	public function show(){
-		return view('system.payment-terms');
+		$paymentTypes= $this->paymentTypes;
+		return view('system.payment-terms', compact('paymentTypes'));
 	}
 	
 	public function list(){
 		$paymentTerm= PaymentTerm::where('organization_id', Auth::user()->organization_id)->get();
 		return DataTables::of($paymentTerm)
 		->editColumn('payment_type', function($row){			
-			return $row['payment_type'];
+			return ;
 		})
 		->make(true);
 	}

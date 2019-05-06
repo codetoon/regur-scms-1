@@ -20,6 +20,7 @@ class CreateProductGroupsTable extends Migration
 			$table->unsignedInteger('organization_id');
 			$table->string('product_group_name', 255);
 			$table->unsignedInteger('attribute_set_id');
+			$table->string('default_attribute_set');
 			
 			$table->foreign('organization_id')->references('id')->on('organizations');
 			$table->foreign('attribute_set_id')->references('id')->on('attribute_sets');

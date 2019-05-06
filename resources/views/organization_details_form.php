@@ -486,21 +486,6 @@
                         </div>
                         
                         
-<<<<<<< Updated upstream:resources/views/OrganizationDetailsForm.blade.php
-                         <div class="form-group row">
-                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="country" type="text" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}" required autofocus>
-
-                                @if ($errors->has('country'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('country') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-=======
                          <div class="form-group-row">
 							<label for="country" class="col-form-label text-md-right">Country</label>
 							
@@ -511,10 +496,7 @@
 								</select>
 							
 						</div>
->>>>>>> Stashed changes:resources/views/organization-details-form.blade.php
-                        
-                        
-                         <div class="form-group row">
+                        <div class="form-group row">
                             <label for="postal_postal_code" class="col-md-4 col-form-label text-md-right">{{ __('Postal Code') }}</label>
 
                             <div class="col-md-6">

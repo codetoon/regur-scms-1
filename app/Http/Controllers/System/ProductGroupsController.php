@@ -5,8 +5,14 @@ namespace App\Http\Controllers\System;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use App\ProductGroup;
 use App\Organization;
+use App\AttributeSet;
+use App\User;
 
 
 class ProductGroupsController extends Controller
@@ -16,32 +22,37 @@ class ProductGroupsController extends Controller
 	}
 	
 	public function show(){
-		return view('system.product-groups');
+		$attributeSets= AttributeSet::where('organization_id', Auth::user()->organization_id)->get();
+		return view('system.product-groups', compact('attributeSets'));
 	}
 	
-	public function validator(Request $data){
-		return validator::make($data, [
-				'product_group_name'=> ['required', 'string', 'max:255'],
-				'organization_id'=> ['required']
-				
-		]);	
+	public function list(){
+		$productGroup= DB::table('product_groups')->where('product_groups.organization_id', Auth::user()->organization_id)->join('attribute_sets', 'attribute_sets.id', '=', 'product_groups.attribute_set_id')
+					->select('attribute_sets.name', 'product_group_name', 'product_groups.id')->get();
+		return DataTables::of($productGroup)->make(true);
 	}
 	
 	public function store(Request $data){
-		$organization= Organization::where('id', Auth::User()->organization_id)->get();
+		$organization= new Organization();
 		$productGroup= ProductGroup::create([
 				'product_group_name'=> $data['product_group_name'],
-				'organization_id'=> $organization[0]->id,
-				//'attribute_set_id'=>
+				'attribute_set_id'=> $data['attribute_set_id'],
+				'organization_id'=> Auth::user()->organization_id
 		]);
-		return redirect('/system/product-groups');
+		
+		 
+		if($productGroup->getValidator()->failed()){
+			return new JsonResponse($productGroup->getValidator()->errors()->all(), 422);
+		}
+		else{
+			return ['message'=> 'Successful'];
+		}
 	}
-	
-	public function destroy($id){
+	 
+	protected function destroy($id){
 		$productGroup= ProductGroup::findOrFail($id);
 		$productGroup->delete();
-		
-		//return redirect('/system/product-groups');
-		
+	
 	}
+	
 }

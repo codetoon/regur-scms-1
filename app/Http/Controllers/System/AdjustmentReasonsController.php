@@ -30,14 +30,6 @@ class AdjustmentReasonsController extends Controller
    		return DataTables::of($adjustmentReason)->make(true);
    }
    
-   public function validator(Request $data){
-   	return Validator::make($data, [
-   			'adjustment_reason'=> ['required', 'string', 'max:255'],
-   			'organization_id'=> ['required']
-   	]);
-   		
-   }
-   
    public function store(Request $data){
    		$organization= new Organization();
    		$adjustmentReason= AdjustmentReason::create([

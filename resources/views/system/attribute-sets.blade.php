@@ -22,6 +22,7 @@
         <div class="col-md-3">
             <label for="type">Type</label>
             <select class="form-control" id="type" v-model="type">
+                <option disabled value="">Please select Attribute Type</option>
             @foreach($types as $key=> $type)
                 <option value= "{{ $key }}">{{ $type }}</option>
             @endforeach
@@ -37,7 +38,6 @@
     <thead class="thead-light">
         <th scope="col">Attribute Set Name</th>
         <th scope="col">Type</th>
-        <th scope="col">Number of Records</th>
         <th scope="col">Action</th>
     </thead>
 </table>
@@ -57,7 +57,6 @@
                 }
                 },
                 {data: 'type'},
-                {data: null},
                 {data: 'delete', searchable: false, orderable: false, render: function(row){
                             var deleteBtnHTML= '<a href="javascript:void(0)"><button id="attribute_set_delete"><span data-feather="delete"></span>Delete</button></a>'
                             
@@ -101,7 +100,6 @@ var app= new Vue({
         
         data: {
             name:"",
-            /*attribute_set:"",*/
             type:"",
             errors: [],
             },

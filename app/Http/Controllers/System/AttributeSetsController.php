@@ -13,30 +13,33 @@ use App\AttributeSet;
 use Symfony\Component\VarDumper\Tests\Cloner\DataTest;
 use App\Organization;
 use Illuminate\Http\Illuminate\Http;
+use App\Lookup;
 
 class AttributeSetsController extends Controller
 {
+	/* private $types= [1=>'Product']; */
 	public function __construct(){
 		$this->middleware('auth');
 	}
-	
+
     public function show(){
-    	
-    	$types= [1=>'Product'];
+    	Lookup::getTypes();
     	return view('system.attribute-sets', compact('types'));
 	}
 	
 	public function list(){
-		$attributeSet= AttributeSet::where('organization_id', Auth::user()->organization_id);
-		return DataTables::of($attributeSet)->make(true);
+		$attributeSet= AttributeSet::where('organization_id', Auth::user()->organization_id	);
+		return DataTables::of($attributeSet)
+		->editColumn('type', function(){
+			return ;
+		}) 
+		->make(true);
 	}
 	
 	public function store(Request $data){
    		$organization= new Organization();
-   		
    		$attributeSet= AttributeSet::create([
    			'name'=> $data['name'],
-   			/* 'attribute_set'=> $data['attribute_set'], */
    			'type'=> $data['type'],
    			'organization_id'=> Auth::user()->organization_id
    		]);

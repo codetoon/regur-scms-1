@@ -316,6 +316,22 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     margin-top: 28px;
 }
 
+.prefixes_flex_container{
+   
+    margin: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    }
+
+.prefixes_flex_container>div{
+    height: auto;
+    text-align: center;
+     width: 32%;
+    margin: 2% 0.6%;
+   
+   
+}
 /* Mobile view */
 @media only screen and (max-width: 767px) {
     .responsive #top #main .sidebar {display:block !important; clear: both; }
