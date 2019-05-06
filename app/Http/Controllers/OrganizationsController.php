@@ -12,6 +12,7 @@ use App\Industry;
 use App\User;
 
 
+
 class OrganizationsController extends Controller
 {	
 	public function __construct(){
@@ -53,5 +54,5 @@ class OrganizationsController extends Controller
  		return $organization;	
  	}
  	
- 	
+
 }

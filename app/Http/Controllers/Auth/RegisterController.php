@@ -58,10 +58,6 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         	'mobile_number'=>['required', 'numeric'],
-<<<<<<< HEAD
-=======
-        	'country'=>['required', 'string', 'max:255'],
->>>>>>> database-design-2
         	'company_name'=>['required', 'string', 'max:255']
         ]);
     }
@@ -72,7 +68,6 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-<<<<<<< HEAD
      protected function create(Request $data)
     {	DB::beginTransaction();
     	try {
@@ -84,8 +79,8 @@ class RegisterController extends Controller
     	]);
     	
     	
+
     	$splitName= explode(" ", $data['name'], 2);
-    	
         $user= User::create([
             'first_name' => $splitName[0],
         	'last_name'=> !empty($splitName[1])? $splitName[1] : "",
@@ -93,6 +88,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         	'organization_id'=> $organization->id,
         	'mobile_number' => $data['mobile_number']
+
         ]);
         
         DB::commit();
@@ -106,21 +102,6 @@ class RegisterController extends Controller
     		DB::rollback();
     		echo $e->getMessage();
     	}
-    } 
-    
  
-=======
-    protected function create(array $data)
-    {
-        $user= User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        	'mobile_number'=> $data['mobile_number'],
-        	'country' => $data['country'],
-        	'company_name'=>$data['company_name']
-        ]);
-        return $user;
-    }
->>>>>>> database-design-2
+}
 }

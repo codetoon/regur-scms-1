@@ -61,8 +61,6 @@ class CreateOrganizationsTable extends Migration
 			$table->unsignedInteger('postal_country_id')->nullable();
 			$table->integer('postal_postal_code')->nullable();
 			
-			
-			
 			 
 			$table->foreign('postal_country_id')->references('id')->on('countries');
 			$table->foreign('physical_country_id')->references('id')->on('countries');

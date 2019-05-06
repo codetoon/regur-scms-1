@@ -22,8 +22,6 @@ class Organization extends Model
     		'industry_id', 'postal_country_id', 'physical_country_id', 'timezone_id' //foreign keys
     ];
     
-    
-    
     public function users(){
     	return $this->hasMany(User::class);
     }
