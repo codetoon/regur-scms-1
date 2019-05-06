@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalesGroupsTable extends Migration
+class CreateAttributesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateSalesGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales_groups', function(Blueprint $table)
+        Schema::create('attributes', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->timestamps();
-			$table->unsignedInteger('organization_id');
-			$table->string('sales_group_field_label', 255);
-			$table->string('sales_group_name', 255);
+			$table-> string('attribute_name', 255);
+			$table-> string('default_value', 255);
+			$table->boolean('required')->nullable(0);
+			$table->unsignedInteger('attribute_set_id');
 			
-			$table->foreign('organization_id')->references('id')->on('organizations');
+			$table->foreign('attribute_set_id')->references('id')->on('attribute_sets');
 		});
     }
 
@@ -32,7 +33,7 @@ class CreateSalesGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::table('sales_groups', function (Blueprint $table) {
+        Schema::table('attributes', function (Blueprint $table) {
             //
         });
     }

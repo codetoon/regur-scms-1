@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+
 use App\Organization;
 use App\Tax;
 use Yajra\DataTables\DataTables;
@@ -53,4 +54,3 @@ class TaxesController extends Controller
     	$tax->delete();
     }
 }
-	

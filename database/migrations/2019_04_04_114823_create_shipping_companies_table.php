@@ -19,6 +19,7 @@ class CreateShippingCompaniesTable extends Migration
 			$table->timestamps();
 			$table->unsignedInteger('organization_id');
 			$table->string('company_name', 255);
+			$table->boolean('active')->nullable(0);
 			
 			$table->foreign('organization_id')->references('id')->on('organizations');
 		});

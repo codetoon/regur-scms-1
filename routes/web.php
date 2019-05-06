@@ -90,4 +90,3 @@ Route::get('system/attributes/list', 'System\AttributesController@list');
 Route::post('system/attributes', 'System\AttributesController@store');
 Route::delete('system/attributes/{attribute}', 'System\AttributesController@destroy');
 
- 

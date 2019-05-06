@@ -22,9 +22,10 @@ class CreateTaxesTable extends Migration
 			//$table->unsignedInteger('default_purchase_tax_id');
 			$table->string('tax_description', 255);
 			$table->string('tax_code', 255);
-			$table->decimal('tax_rate', 5, 2);
+			$table->string('tax_rate', 255);
 			$table->boolean('sales_tax');
 			$table->boolean('purchase_tax');
+			$table->boolean('active');
 			
 			$table->foreign('organization_id')->references('id')->on('organizations');
 		});

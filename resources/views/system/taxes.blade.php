@@ -16,23 +16,23 @@
         @csrf
         <div class="form-group row">
             <div class="col-md-3">
-                 <label for="default_sales_tax">Default Sales Tax</label>
-                 <select id="default_sales_tax" class="form-control" type="text" ><!--v-model="default_sales_tax"-->
-                        <option>No Tax (0%)</option>
+                <label for="default_sales_tax">Default Sales Tax</label>
+                <select class="form-control" id="default_sales_tax">
+                        <option value="">No Tax(0%)</option>
                 </select>
-            </div> 
+            </div>
             <div class="col-md-3">
-            <label for="default_purchase_tax">Default Purchase Tax</label>
-                    <select id="default_purchase_tax" class="form-control" type="text" ><!--v-model="default_purchase_tax">-->
-                        <option>No Tax (0%)</option>
-                    </select>
-            </div> 
+                <label for="default_purchase_tax">Default Purchase Tax</label>
+                <select class="form-control" id="default_purchase_tax">
+                        <option value="">No Tax(0%)</option>
+                </select>
+            </div>
         </div>
         <div class="form-group row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="tax_description">Tax Description/Name</label>
                 <input id="tax_description" class="form-control" type="text" v-model="tax_description">
-            </div> 
+            </div>
             <div class="col-md-2">
                 <label for="tax_code">Tax Code</label>
                 <input id="tax_code" class="form-control" type="text" v-model="tax_code">
@@ -62,8 +62,10 @@
         </div>
     </form>
 </div>
-    <table class="table" id="taxes_table">
-        <thead class="thead-light">
+
+<table class="table" id="taxes_table">
+    <thead class="thead-light">
+        <tr>
             <th scope="col">Tax Description/Name</th>
             <th scope="col">Tax Code</th>
             <th scope="col">Tax Rate</th>
@@ -116,13 +118,17 @@
         });
     });
     
-    var app= new Vue({
+    
+
+var app= new Vue({
+
         el: "#taxes_app",
         
         data: {
             tax_description: "",
-            tax_code: "",
+            tax_code:"",
             tax_rate: "",
+            toggle: "",
             sales_tax: false,
             purchase_tax: false,
             errors: [],
@@ -131,18 +137,18 @@
             onSubmit: function(){
                 showLoader();              
                 var that= this;
-                
-          
+             
                 $('#tax_add').prop('disabled', true);
+                alert(this.$data);
                 axios.post('/system/taxes', this.$data)
                   
-                    .then(function(response){
+                    .then(function(){
                         that.errors=[];
-                        that.tax_description= "";
-                        that.tax_code= "";
-                        that.tax_rate= "";
+                        that.tax_description="";
+                        that.tax_code="";
+                        that.tax_rate="";
+                        that.purchase_tax=false;
                         that.sales_tax= false;
-                        that.purchase_tax= false;
                         taxes_table.ajax.reload();
                         $('#tax_add').prop('disabled', false);
                         hideLoader();
@@ -154,12 +160,11 @@
                     });
               
                 
-            },
+            
             
         },
           
-        });   
-
-</script>        
-        
+        }
+});  
+</script>
 @endpush
