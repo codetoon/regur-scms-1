@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Organization extends Model
 {	
 	protected $table='organizations';
-    protected $primaryKey= 'id';
+    
+	protected $primaryKey= 'id';
     
     protected $fillable= ['company_name', 'trading_name', 'trading_name_purchase', 
     		 'organization_type', 'base_currency', 'dashboard_data_source', 'gst_vat_number', 
@@ -21,6 +23,45 @@ class Organization extends Model
     		 'postal_postal_code',
     		'industry_id', 'postal_country_id', 'physical_country_id', 'timezone_id' //foreign keys
     ];
+    
+    private $validator;
+    
+    public function __construct(array $attributes = [])
+    {
+    	parent::__construct( $attributes );
+    
+    }
+    
+    
+    protected static function boot(){
+    	parent::boot();
+    	 
+    	self::saving(function($model){
+    		return $model->validate();
+    	});
+    		 
+    }
+    
+    public function getValidator()
+    {
+    	return $this->validator;
+    }
+    
+    public function validate(){
+    	 
+    	$this->validator= Validator::make($this->attributesToArray(), [
+    			'company_name'=> 'required|string|max:255'
+    	]);
+    	 
+    	if($this->validator->fails()){
+    		return false;
+    
+    	}
+    	else {
+    		return true;
+    	}
+    }
+    
     
     public function users(){
     	return $this->hasMany(User::class);
