@@ -59,7 +59,9 @@ $(document).ready(function(){
         columns:  [
                     {data: 'name'},
                     {data: 'days'},
-                    {data: 'payment_type'},
+                    {data: null, name: 'payment_type', render: function(row){
+    					return row.payment_type;
+                        }},
                     {data: 'delete', searchable: false, orderable: false, render: function(row){
                             var deleteBtnHTML= '<a href="javascript:void(0)"><button id="payment_term_delete"><span data-feather="delete"></span>Delete</button></a>'
                             

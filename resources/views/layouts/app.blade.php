@@ -205,7 +205,8 @@
     </div> 
 </div> 
         
-        
+       
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>     
         <script src="{{ asset('js/functions.js') }}"></script>
@@ -216,7 +217,8 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
         <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://unpkg.com/vue@2.6.8/dist/vue.js"></script>
-		@stack('js-script')
+        
+		
   
      <script>
      function createCookie(key, value) {
@@ -294,7 +296,7 @@
          
         
         </script>
-        
+        @stack('js-script')
 		
    		
 </body>

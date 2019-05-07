@@ -10,30 +10,28 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\PaymentTerm;
 use App\Organization;
+use App\Lookup;
 use Yajra\DataTables\DataTables;
 
 class PaymentTermsController extends Controller
 {	
-	private $paymentTypes= [1=>'Days after', 2=>'Days following the end of the month', 
-							3=> 'Days of the month following', 4=>'End of the month following'
-	];
 	
     public function __construct(){
     	$this->middleware('auth');
 	}
 	
 	public function show(){
-		$paymentTypes= $this->paymentTypes;
+		$paymentTypes= Lookup::getPaymentTypes();
 		return view('system.payment-terms', compact('paymentTypes'));
 	}
 	
 	public function list(){
 		$paymentTerm= PaymentTerm::where('organization_id', Auth::user()->organization_id)->get();
 		return DataTables::of($paymentTerm)
-		->editColumn('payment_type', function($row){			
-			return ;
-		})
-		->make(true);
+		->editColumn('payment_type', function($row){
+			$key= $row->payment_type;
+			return Lookup::getPaymentTypeLabels($key);
+		})->make(true);
 	}
 	
 	public function store(Request $data){

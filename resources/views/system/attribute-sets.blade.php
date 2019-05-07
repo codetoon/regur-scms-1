@@ -23,8 +23,8 @@
             <label for="type">Type</label>
             <select class="form-control" id="type" v-model="type">
                 <option disabled value="">Please select Attribute Type</option>
-            @foreach($types as $key=> $type)
-                <option value= "{{ $key }}">{{ $type }}</option>
+            @foreach($attributeSetTypes as $key=> $attributeSetType)
+                <option value= "{{ $key }}">{{ $attributeSetType }}</option>
             @endforeach
             </select>
         </div>
@@ -53,10 +53,12 @@
             columns: [
 
                 {data: null, name: 'name', render: function(row){
-                    return '<a target="_blank" href="/system/attributes/'+row.id+'">'+row.name+'</a>'
+                    return '<a target="_blank" href="/system/attributes/'+row.id+'">'+row.name+'</a>';
                 }
                 },
-                {data: 'type'},
+                {data: null, name: 'type', render: function(row){
+					return row.type;
+                    }},
                 {data: 'delete', searchable: false, orderable: false, render: function(row){
                             var deleteBtnHTML= '<a href="javascript:void(0)"><button id="attribute_set_delete"><span data-feather="delete"></span>Delete</button></a>'
                             

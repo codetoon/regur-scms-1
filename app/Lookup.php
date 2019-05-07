@@ -15,6 +15,11 @@ class Lookup extends Model
 	private static $organizationTypes= [1=>'Company',2=> 'Personal',3=> 'Partnership',4=> 'SoleTrader',
  			5=> 'Trust',6=> 'Charity', 7=>'Club',8=> 'Society'];
 	private static $dashboard_data_sources= [ 1=>'Sales Invoice', 2=>'Other'];
+	private static $attributeSetTypes= [1=>'Product', 2=>'Other'];
+	private static $paymentTypes= [1=>'Days after', 2=>'Days following the end of the month',
+			3=> 'Days of the month following', 4=>'End of the month following'
+	];
+	
 	
 	public static  function getUnits(){
 		return  self::$measurementUnits;
@@ -36,5 +41,31 @@ class Lookup extends Model
 		return self::$dashboard_data_sources;
 	}
 	
+	public static function getAttributeSetTypes(){
+		return self::$attributeSetTypes;
+	}
+	public static function getAttributeSetTypeLabels($selectedKey){
+		
+		foreach (self::$attributeSetTypes as $key=> $attributeSetType){
+			if($selectedKey== $key){
+				$result[$key]= $attributeSetType;
+			}
+		}
+		return array_values($result);
+	}
+	
+	public static function getPaymentTypes(){
+		return self::$paymentTypes;
+	}
+	
+	public static function getPaymentTypeLabels($selectedKey){
+	
+		foreach (self::$paymentTypes as $key=> $paymentType){
+			if($selectedKey== $key){
+				$result[$key]= $paymentType;
+			}
+		}
+		return array_values($result);
+	}
 	
 }

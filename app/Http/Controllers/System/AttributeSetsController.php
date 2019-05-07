@@ -16,24 +16,24 @@ use Illuminate\Http\Illuminate\Http;
 use App\Lookup;
 
 class AttributeSetsController extends Controller
-{
-	/* private $types= [1=>'Product']; */
+{ 
 	public function __construct(){
 		$this->middleware('auth');
 	}
 
     public function show(){
-    	Lookup::getTypes();
-    	return view('system.attribute-sets', compact('types'));
+    	$attributeSetTypes= Lookup::getAttributeSetTypes();
+    	return view('system.attribute-sets', compact('attributeSetTypes'));
 	}
 	
 	public function list(){
 		$attributeSet= AttributeSet::where('organization_id', Auth::user()->organization_id	);
+		//$types= Lookup::getAttributeSetTypeLabels();
 		return DataTables::of($attributeSet)
-		->editColumn('type', function(){
-			return ;
-		}) 
-		->make(true);
+		->editColumn('type', function($row){
+			$key= $row->type;
+			return Lookup::getAttributeSetTypeLabels($key);
+		})->make(true);
 	}
 	
 	public function store(Request $data){
