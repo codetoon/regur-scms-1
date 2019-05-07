@@ -18,10 +18,19 @@
 			     <div id="details" class="container tab-pane active">
                     <div class="tab-flex-container">
                         <div>
+                        @if ($errors->any())
+						    <div class="alert alert-danger">
+						        <ul>
+						            @foreach ($errors->all() as $error)
+						                <li>{{ $error }}</li>
+						            @endforeach
+						        </ul>
+						    </div>
+						@endif
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label" for="company-name">Company Name:</label>
                               <div class="col-sm-8">
-                                  <input type="text" id="company_name" class="form-control {{ $errors->has('company_name') ? ' is-invalid' : '' }}" name="company_name" value="{{ old('company_name', $organization[0]->company_name) }}"  autofocus >
+                                  <input type="text" id="company_name" class="form-control" name="company_name" value="{{ old('company_name', $organization[0]->company_name) }}"  autofocus >
                               </div>
                             </div>
                             
@@ -311,7 +320,7 @@
                         <div class="form-group row">
                               <label class="col-sm-4 col-form-label" for="sales_email">Sales Email:</label>
                               <div class="col-sm-8">
-                                  <input type="text" id="sales_email" class="form-control {{ $errors->has('sales_email') ? ' is-invalid' : '' }}" name="sales_email" value="{{ old('sales_email', $organization[0]->sales_email) }}"   autofocus >
+                                  <input type="text" id="sales_email" class="form-control" name="sales_email" value="{{ old('sales_email', $organization[0]->sales_email) }}"   autofocus >
                               </div>
                             </div>
                            
@@ -338,3 +347,4 @@
 
 	
 @endsection
+

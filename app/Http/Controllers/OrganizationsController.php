@@ -28,9 +28,7 @@ class OrganizationsController extends Controller
  		$dateFormats= Lookup::getDateFormats();
  		$organizationTypes= Lookup::getOrganizationTypes() ;
  		$dashboardDataSources= Lookup::getDashboardDataSrc();
- 		
- 		$user= Auth::User();
- 		$organization= Organization::where('id', Auth::user()->organization_id)->get();
+ 		$organization= Organization::where('id', Auth::user()->organization_id)->get()->all();
  		return view('company.organization_details', compact('countries', 'timezones', 'industries', 'measurementUnits',
  				'financialYearEndings','dateFormats', 'organizationTypes', 'dashboardDataSources', 'organization', 'user'));
  	} 
@@ -38,7 +36,10 @@ class OrganizationsController extends Controller
  	
  	protected function update(Request $data){
  		$organization= Organization::where('id', Auth::user()->organization_id)->update($data->except('_token'));
- 		return $organization;	
+ 		
+ 		if($organization->getValidator()->failed()){
+ 			return redirect('/company/organization-details')->withErrors($organization->getValidator())->withInput();
+ 			}	
  	}
  	
 
