@@ -19,7 +19,31 @@ class Lookup extends Model
 	private static $paymentTypes= [1=>'Days after', 2=>'Days following the end of the month',
 			3=> 'Days of the month following', 4=>'End of the month following'
 	];
-	
+	private static $prefixKeys= [
+			'po_prefix'=> 'Purchase Order Prefix',
+			'next_po_num'=> 'Next Purchase Order Number',
+			'sr_prefix'=> 'Supplier Return Prefix',
+			'next_sr_num'=> 'Next Supplier Return Number',
+			'sa_prefix'=> 'Stock Adjustment Prefix',
+			'next_sa_num'=> 'Next Stock Adjustment Number',
+			'st_prefix'=> 'Stock Take Prefix',
+			'next_st_num'=> 'Next Stock Take Number',
+			'to_prefix'=> 'Transfer Order Prefix',
+			'next_to_num'=> 'Next Transfer Order Number',
+			'assem_prefix'=> 'Assembly Prefix',
+			'next_assem_prefix'=> 'Next Assembly Number',
+			'dissem_prefix'=> 'Disassembly Prefix',
+			'sq_prefix'=> 'Sales Quote Prefix',
+			'next_sq_num'=> 'Next Sales Quote Number',
+			'so_prefix'=> 'Sales Order Prefix',
+			'next_so_num'=> 'Next Sales Order Number',
+			'ss_prefix'=> 'Sales Shipment Prefix',
+			'si_prefix'=> 'Sales Invoice Prefix',
+			'cn_prefix'=> 'Credit Note Prefix',
+			'next_cn_num'=> 'Next Credit Note Number',
+			'pb_prefix'=> 'Product Batch Prefix' 
+			
+	];
 	
 	public static  function getUnits(){
 		return  self::$measurementUnits;
@@ -66,6 +90,11 @@ class Lookup extends Model
 			}
 		}
 		return array_values($result);
+	}
+	
+	public static  function getPrefixKeys(){
+		return  self::$prefixKeys;
+		
 	}
 	
 }

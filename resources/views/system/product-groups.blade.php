@@ -21,6 +21,7 @@
             <div class="col-md-3">
                 <label for="attribute_set_id">Default Attribute Set</label>
                 <select class="form-control"  id="attribute_set_id" v-model="attribute_set_id" autofocus>
+                         <option disabled value="">Please select Attribute Set</option>
                     @foreach($attributeSets as $attributeSet)
                         <option value= "{{ $attributeSet->id }}">{{ $attributeSet->name }}</option>
                     @endforeach

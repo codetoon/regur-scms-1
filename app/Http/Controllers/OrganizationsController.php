@@ -36,10 +36,8 @@ class OrganizationsController extends Controller
  	
  	protected function update(Request $data){
  		$organization= Organization::where('id', Auth::user()->organization_id)->update($data->except('_token'));
- 		
- 		if($organization->getValidator()->failed()){
- 			return redirect('/company/organization-details')->withErrors($organization->getValidator())->withInput();
- 			}	
+
+ 		return redirect('/company/organization-details');
  	}
  	
 

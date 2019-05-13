@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Prefix extends Model
 {
     protected $table= "prefixes";
     
-    protected $fillable= ['organization_id', 'prefix_key', 'prefix_value'];
+    protected $fillable= ['organization_id', 'prefix_value', 'prefix_key'];
+    
+    private $validator;
     
     public function __construct(array $attributes= []){
     	parent::__construct($attributes);
@@ -43,4 +46,7 @@ class Prefix extends Model
     	}
     
     }
+    
+   
+    
 }
