@@ -64,6 +64,32 @@
         })
     });
     
+    $(document).on('click',"#attribute_set_delete", function(e){
+        e.preventDefault();
+        var confirmation= confirm("Confirm delete?");
+        
+        if(confirmation){
+            showLoader();
+            var row= $(this).parents('tr')[0];
+            var data= product_groups_table.row(row).data();
+            
+            axios.delete('/system/product-groups/'+ data.id )
+                .then(function(response){
+                    product_groups_table.ajax.reload();
+                    hideLoader();
+                })
+                
+                .catch(function(error){
+                 if(error.response.status== 422){
+                     product_groups_table.ajax.reload();
+                    /* errors= error.response.data;*/
+                     hideLoader();
+                 }
+             })
+                    
+        }
+   }); 
+    
     var app= new Vue({
         el: "#product_groups_app",
         

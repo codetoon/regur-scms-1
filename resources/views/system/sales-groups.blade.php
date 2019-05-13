@@ -55,9 +55,13 @@
             ajax: "/system/sales-groups/list",
             columns: [
                 {data: 'sales_group_name'},
-                {data: 'obsolete', searchable: false, orderable: false, render:function(){
-                        var obseleteHTML= '<div class="form-check"><input type="checkbox" class="form-check-input" value=""></div> ';
-                        return obseleteHTML;
+                {data: null, searchable: false, orderable: false, render:function(row){
+                        if(row.active === "1"){
+                         return '<div class="form-check"><input type="checkbox" class="form-check-input" checked></div> ';  
+                     }
+                    else{
+                       return '<div class="form-check"><input type="checkbox" value="0" class="form-check-input"></div>'; 
+                    }
                     }
                  },
                 {data: 'delete', searchable: false, orderable: false, render: function(){

@@ -45,8 +45,10 @@ class PrefixesController extends Controller
 			}
 			 
 			else{
-				return ['message' => 'Successful'];
+				return redirect('/system/prefixes');
 			}
+			
+			
 		}
 		
 		 

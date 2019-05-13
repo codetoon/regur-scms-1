@@ -13,6 +13,8 @@ class SalesGroup extends Model
 	
 	private $validator;
 	
+	protected $attributes= ['active'=> "1"];
+	
 	public function __construct(array $attributes = [])
 	{
 		parent::__construct( $attributes );

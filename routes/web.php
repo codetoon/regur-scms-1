@@ -63,7 +63,7 @@ Route::delete('/system/shipping-companies/{shippingCompany}', 'System\ShippingCo
 Route::get('/system/units-of-measure', 'System\UnitsOfMeasureController@show');
 Route::get('/system/units-of-measure/list', 'System\UnitsOfMeasureController@list');
 Route::post('/system/units-of-measure', 'System\UnitsOfMeasureController@store');
-Route::delete('/system/units-of-measure/{uom}', 'System\UnitsOfMeasureController@delete');
+Route::delete('/system/units-of-measure/{uom}', 'System\UnitsOfMeasureController@destroy');
 
 Route::get('/system/supplier-return-reasons', 'System\SupplierReturnReasonsController@show');
 Route::get('/system/supplier-return-reasons/list', 'System\SupplierReturnReasonsController@list');

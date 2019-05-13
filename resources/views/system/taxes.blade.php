@@ -139,7 +139,7 @@ var app= new Vue({
                 var that= this;
              
                 $('#tax_add').prop('disabled', true);
-                alert(this.$data);
+                
                 axios.post('/system/taxes', this.$data)
                   
                     .then(function(){
