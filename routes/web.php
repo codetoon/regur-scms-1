@@ -90,7 +90,6 @@ Route::get('/system/prefixes/list', 'System\PrefixesController@list');
 Route::post('/system/prefixes', 'System\PrefixesController@store');
 Route::delete('/system/prefixes/{prefix}', 'System\PrefixesController@destroy');
 
-
-
+Route::get('/system/currency-rates', 'System\CurrencyRatesController@show');
 
 
