@@ -35,6 +35,10 @@ class AttributeSet extends Model
  		$this->belongsTo(Organization::class);   
 	}
 	
+	public function attributes(){
+		$this->hasMany(Attribute::class);
+	}
+	
 	public function validate(){
 		$this->validator= Validator::make($this->attributesToArray(), [
 				'name'=> 'required|string|max: 255',

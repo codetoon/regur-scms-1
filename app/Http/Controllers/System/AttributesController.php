@@ -19,14 +19,35 @@ class AttributesController extends Controller
 		$this->middleware('auth');
 	}
 	
-	public function show(){
-
-		return view('system.attributes');
+	public function show($id){
+		$attributeSet= AttributeSet::where('id', $id)->get();
+		return view('system.attributes', compact('attributeSet'));
+		
 	}
 	
-	public function list(){
-		$attribute= new Attribute();
+	public function list($id){
+		$attribute= DB::table('attributes')->where('attribute_sets.id', $id)->join('attribute_sets', 'attribute_sets.id', '=', 'attributes.attribute_set_id')
+		->select('*')->get();
 		return DataTables::of($attribute)->make(true);
 	}
+	
+	public function store(Request $data){
+		$attribute= Attribute::create([
+				'attribute_name'=> $data['attribute_name'],
+				'default_value'=> $data['default_value'],
+				'required'=> $data['required'],
+				'attribute_set_id'=> $data['attribute_set_id']
+		]);
+		
+		if($attribute->getValidator()->failed()){
+			return new JsonResponse($attribute->getValidator()->errors()->all());
+		}
+		
+		else{
+			return ['message' => 'Successful'];
+		}
+	}
+	
+	
 
 }

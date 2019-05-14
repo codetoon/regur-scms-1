@@ -25,7 +25,7 @@
 <table class="table" id="shipping_comp_table">
     <thead class="thead-light">
         <th>Company Name</th>
-        <th>Obsolete</th>
+        <th>Active</th>
     </thead>
 </table>
 @endsection

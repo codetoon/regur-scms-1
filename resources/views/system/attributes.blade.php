@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div><h5>Attributes</h5></div>
+<div><h5>{{$attributeSet[0]->name}}</h5></div>
 <div id="attributes_app">
 @verbatim
     <div class="alert alert-danger" v-if="errors.length">
@@ -52,7 +52,11 @@ $(document).ready(function(){
     attributes_table= $("#attributes_table").DataTable({
             processing: false,
             serverSide: true,
-            ajax: "attributes.list",
+            ajax: {url: "/system/attributes/{attribute}/list", data:{
+                id:1
+            }
+                  },
+            
             columns: [
                 {data: 'attribute_name'},
                 {data: 'default_value'},
@@ -62,8 +66,8 @@ $(document).ready(function(){
                      }
                     else{
                        return '<div class="form-check"><input type="checkbox" value="0" class="form-check-input"></div>'; 
+                        }
                     }
-                }
                 },
                  {data: 'delete', searchable: false, orderable: false, render: function(row){
                             var deleteBtnHTML= '<a href="javascript:void(0)"><button id="attribute_set_delete"><span data-feather="delete"></span>Delete</button></a>'
@@ -83,16 +87,16 @@ var app= new Vue({
             attribute_name: "",
             default_value: "",
             errors: [],
-            required: false
+            required: false,
+            attribute_set_id: "{{ $attributeSet[0]->id }}"
             },
         methods: {
             onSubmit: function(){
                 showLoader();              
                 var that= this;
                 
-          
                 $('#attribute_add').prop('disabled', true);
-                axios.post('/system/attributes', this.$data)
+                axios.post("/system/attributes/"+ this.$data.attribute_set_id, this.$data)
                   
                     .then(function(){
                         that.errors=[];

@@ -38,7 +38,7 @@
     <thead class="thead-light">
         <tr>
             <th scope="col">Name</th>
-            <th scope="col">Obsolete</th>
+            <th scope="col">Active</th>
             <th scope="col">Delete</th>
         </tr>
     </thead>

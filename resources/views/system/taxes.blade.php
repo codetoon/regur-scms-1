@@ -38,7 +38,7 @@
                 <input id="tax_code" class="form-control" type="text" v-model="tax_code">
             </div>
             <div class="col-md-2">
-                <label for="tax_rate">Tax Code</label>
+                <label for="tax_rate">Tax Rate</label>
                 <input id="tax_rate" class="form-control" type="text" v-model="tax_rate">
             </div>
             
