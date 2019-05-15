@@ -26,9 +26,11 @@ class AttributesController extends Controller
 	}
 	
 	public function list($id){
-		$attribute= DB::table('attributes')->where('attribute_sets.id', $id)->join('attribute_sets', 'attribute_sets.id', '=', 'attributes.attribute_set_id')
-		->select('*')->get();
+		$attribute= Attribute::where('attribute_set_id', $id)->get()->all();
+		/* $attribute= DB::table('attributes')->where('attributes.attribute_set_id', $id)->join('attribute_sets', 'attribute_sets.id', '=', 'attributes.attribute_set_id')
+		->select('attribute_name', 'default_value')->get(); */
 		return DataTables::of($attribute)->make(true);
+		
 	}
 	
 	public function store(Request $data){
@@ -48,6 +50,11 @@ class AttributesController extends Controller
 		}
 	}
 	
+	protected function destroy($id){
+		$attribute= Attribute::findOrFail($id);
+		$attribute->delete();
+	
+	}
 	
 
 }

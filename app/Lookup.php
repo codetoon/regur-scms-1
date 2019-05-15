@@ -45,6 +45,31 @@ class Lookup extends Model
 			
 	];
 	
+	private static $prefix=[
+			'po_prefix'=> '',
+			'next_po_num'=> '',
+			'sr_prefix'=> '',
+			'next_sr_num'=> '',
+			'sa_prefix'=> '',
+			'next_sa_num'=> '',
+			'st_prefix'=> '',
+			'next_st_num'=> '',
+			'to_prefix'=> '',
+			'next_to_num'=> '',
+			'assem_prefix'=> '',
+			'next_assem_prefix'=> '',
+			'dissem_prefix'=> '',
+			'sq_prefix'=> '',
+			'next_sq_num'=> '',
+			'so_prefix'=> '',
+			'next_so_num'=> '',
+			'ss_prefix'=> '',
+			'si_prefix'=> '',
+			'cn_prefix'=> '',
+			'next_cn_num'=> '',
+			'pb_prefix'=> '' 
+			
+	];
 	public static  function getUnits(){
 		return  self::$measurementUnits;
 	}
@@ -95,6 +120,9 @@ class Lookup extends Model
 	public static  function getPrefixKeys(){
 		return  self::$prefixKeys;
 		
+	}
+	public static  function getPrefix(){
+		return  self::$prefix;
 	}
 	
 }

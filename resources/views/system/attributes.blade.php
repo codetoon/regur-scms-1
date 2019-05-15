@@ -37,7 +37,7 @@
     
     <table class="table" id="attributes_table">
         <thead class="thead-light">
-            <th scope="col">Attribute Set</th>
+            <th scope="col">Attribute Name</th>
             <th scope="col">Default Value</th>
             <th scope="col">Required</th>
             <th scope="col">Action</th>
@@ -52,10 +52,9 @@ $(document).ready(function(){
     attributes_table= $("#attributes_table").DataTable({
             processing: false,
             serverSide: true,
-            ajax: {url: "/system/attributes/{attribute}/list", data:{
-                id:1
+            ajax: {url: "/system/attributes/{{ $attributeSet[0]->id }}/list"
             }
-                  },
+                  ,
             
             columns: [
                 {data: 'attribute_name'},
@@ -70,7 +69,7 @@ $(document).ready(function(){
                     }
                 },
                  {data: 'delete', searchable: false, orderable: false, render: function(row){
-                            var deleteBtnHTML= '<a href="javascript:void(0)"><button id="attribute_set_delete"><span data-feather="delete"></span>Delete</button></a>'
+                            var deleteBtnHTML= '<a href="javascript:void(0)"><button id="attribute_delete"><span data-feather="delete"></span>Delete</button></a>'
                                 return deleteBtnHTML;
                     } 
                 }
@@ -79,6 +78,32 @@ $(document).ready(function(){
             ]
         });
     });
+    
+    $(document).on('click',"#attribute_delete", function(e){
+        e.preventDefault();
+        var confirmation= confirm("Confirm delete?");
+        
+        if(confirmation){
+            showLoader();
+            var row= $(this).parents('tr')[0];
+            var data= attributes_table.row(row).data();
+            
+            axios.delete('/system/attributes/'+ data.id )
+                .then(function(response){
+                    attributes_table.ajax.reload();
+                    hideLoader();
+                })
+                
+                .catch(function(error){
+                 if(error.response.status== 422){
+                     attributes_table.ajax.reload();
+                    /* errors= error.response.data;*/
+                     hideLoader();
+                 }
+             })
+                    
+        }
+   }); 
     
 var app= new Vue({
         el: "#attributes_app",

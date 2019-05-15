@@ -8,10 +8,15 @@
             <div class="col-md-2">
                 <label class="curr_label" for="base_curr"><sup>*</sup>Base Currency</label></div>
              <div class="col-md-3">
-                    <select class="form-control"  id="base_curr"  autofocus>
+                    <select class="form-control" onchange="displayBaseCurr(this)" autofocus>
                              <option disabled value="">Select Base Currency</option>
-                            <option value= ""></option>
+                            <option value= "">INR</option>
+                        <option value= "">CDF</option>
+                        
                     </select>
+                </div>
+            <div class="col-md-3">
+                    <input type="text" id="selected_base_curr" class="form-control" value="">
                 </div>
             </div>
     
@@ -19,10 +24,14 @@
             <div class="col-md-2">
                 <label class="curr_label" for="curr_sel">Currency Selection</label></div>
              <div class="col-md-3">
-                    <select class="form-control"  id="curr_sel"  autofocus>
+                    <select class="form-control" onchange="displayCurrSel(this)"  autofocus>
                              <option disabled value="">Currency Selection</option>
-                            <option value= ""></option>
+                            <option value= "">INR</option>
+                        <option value= "">CDF</option>
                     </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="selected_curr"  class="form-control" value="">
                 </div>
             </div>
     
@@ -54,3 +63,22 @@
 </table>
 
 @endsection
+
+@push('js-script')
+<script type="text/javascript">
+        function displayBaseCurr(opt){
+        var selectedOption= opt.options[opt.selectedIndex].text;
+        document.getElementById('selected_base_curr').value= selectedOption;
+        }
+    
+        function displayCurrSel(curr){
+            var selectedCurr= curr.options[curr.selectedIndex].text;
+            document.getElementById('selected_curr').value= selectedCurr;
+        }
+</script>
+    
+   <!-- document.getElementsByClassName("displayOption").onchange= function(){
+        var sel= this.options[this.selectedIndex].text;
+        alert(sel);
+    }-->
+@endpush

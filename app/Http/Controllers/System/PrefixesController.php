@@ -25,28 +25,39 @@ class PrefixesController extends Controller
 	
 	public function show(){
 		$prefixKeys= Lookup::getPrefixKeys();
-		return view('system.prefixes',compact('prefixKeys'));
+		$prefixes= Prefix::where('organization_id', Auth::user()->organization_id)->get()->toArray();
+		$prefix= array_pluck($prefixes, 'prefix_value','prefix_key');
+		if(empty($prefix))
+		{
+			$prefix= Lookup::getPrefix();
+		}
+		
+		return view('system.prefixes',compact('prefixKeys', 'prefix'));
 	}
 	
 	public function store(Request $data){
 		$prefixes= $data->all();
 		$org_id= Auth::user()->organization_id;
-		
+		$prefix= new Prefix();
 		foreach ($prefixes as $key=>$value)
-		$prefix= Prefix::create([
+		$prefix= Prefix::updateOrCreate([
 					
 					'prefix_key'=> $key,
-					'prefix_value'=> $value,
-					'organization_id'=> $org_id
-			]);  
+					'organization_id'=> $org_id,
+			],
+			[
+					'prefix_value'=> $value
+			]
+				);  
+		return redirect('/system/prefixes');
 			
-			if($prefix->getValidator()->failed()){
+			/* if($prefix->getValidator()->failed()){
 				return new JsonResponse($prefix->getValidator()->errors()->all());
 			}
 			 
 			else{
 				return redirect('/system/prefixes');
-			}
+			} */
 			
 			
 		}

@@ -21,4 +21,16 @@ class CurrencyRatesController extends Controller
 	public function show(){
 		return view('system.currency-rates');
 	}
+	
+	public function list(){
+		
+	}
+	
+	public function store(Request $data){
+		
+	}
+	
+	public function destroy($id){
+		
+	}
 }

@@ -13,6 +13,8 @@ class Prefix extends Model
     
     private $validator;
     
+    protected $primaryKey= "id" ;/* ["id", "organization_id", "prefix_key"]'' */
+    
     public function __construct(array $attributes= []){
     	parent::__construct($attributes);
     }
@@ -34,7 +36,8 @@ class Prefix extends Model
     }
     public function validate(){
     	$this->validator= Validator::make($this->attributesToArray(), [
-    			'organization_id'=> 'required'
+    			'organization_id'=> 'required',
+    			'prefix_key'=> 'required',
     	]);
     
     	if($this->validator->fails()){
