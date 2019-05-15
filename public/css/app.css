@@ -342,6 +342,24 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     float: right;
 }
 
+.sell-tier-container{
+     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.sell-tier-container>div{
+     height: auto;
+    text-align: center;
+     width: 45%;
+    margin: 2% 1.5%;
+    padding: 2%
+}
+
+.save-sell-tier{
+  margin-left: 90%;
+}
+
 /* Mobile view */
 @media only screen and (max-width: 767px) {
     .responsive #top #main .sidebar {display:block !important; clear: both; }

@@ -93,3 +93,6 @@ Route::delete('/system/prefixes/{prefix}', 'System\PrefixesController@destroy');
 Route::get('/system/currency-rates', 'System\CurrencyRatesController@show');
 
 
+Route::get('/system/sell-price-tiers', 'System\SellPriceTiersController@show');
+
+

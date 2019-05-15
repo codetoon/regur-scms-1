@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCurrencyRatesTable extends Migration
+class CreateSellPriceTiersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateCurrencyRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('currency_rates', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('base_currency');
-            $table->string('currency_selected');
-            $table->decimal('buy_rate');
-            $table->decimal('sell_rate');
-            
+        Schema::create('sell_price_tiers', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateCurrencyRatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('currency_rates');
+        Schema::dropIfExists('sell_price_tiers');
     }
 }

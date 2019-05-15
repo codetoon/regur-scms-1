@@ -49,15 +49,14 @@ class PrefixesController extends Controller
 					'prefix_value'=> $value
 			]
 				);  
-		return redirect('/system/prefixes');
 			
-			/* if($prefix->getValidator()->failed()){
+			 if($prefix->getValidator()->failed()){
 				return new JsonResponse($prefix->getValidator()->errors()->all());
 			}
 			 
 			else{
 				return redirect('/system/prefixes');
-			} */
+			} 
 			
 			
 		}
