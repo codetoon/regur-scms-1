@@ -42,7 +42,7 @@ class CustomerTypesController extends Controller
 		}
 		
 		else{
-			return ['message'=> 'Successful'];
+			return response()->json( ['Customer type saved successfully']);
 		}
 	}
 	

@@ -11,6 +11,12 @@
             <li v-for="error in errors">{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
     <form method="post" action="" @submit.prevent= "onSubmit">
     @csrf
@@ -78,6 +84,8 @@
     })
     $(document).on('click', '#delete_btn_sales_groups', function(e){
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
         
         if(confirmation){
@@ -109,6 +117,7 @@ var app= new Vue({
             sales_group_field_label:"",
             sales_group_name: "",
             errors: [],
+            succ_messages: []
             },
         methods: {
             onSubmit: function(){
@@ -117,10 +126,11 @@ var app= new Vue({
                 $('#sales_group_add').prop('disabled', true);
                 axios.post('/system/sales-groups', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.sales_group_field_label="";
                         that.sales_group_name="";
+                        that.succ_messages= response.data;
                         sales_groups_table.ajax.reload();
                         $('#sales_group_add').prop('disabled', false);
                         hideLoader();
@@ -130,9 +140,18 @@ var app= new Vue({
                         hideLoader();
                         $('#sales_group_add').prop('disabled', false);
                     });
-              
+                this.resetMessages();
                 
             },
+            
+            resetMessages: function(){
+                this.succ_messages= [];
+               
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
+            }
             
         },
           

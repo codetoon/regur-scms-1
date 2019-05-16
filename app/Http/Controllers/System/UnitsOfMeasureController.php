@@ -41,7 +41,7 @@ class UnitsOfMeasureController extends Controller
    		}
    		
    		else{
-   			return ['message' => 'Successful'];
+   			return response()->json(['Measurement unit added successfully']);
    		}
    		
   	 }

@@ -6,7 +6,13 @@
 @verbatim
     <div class="alert alert-danger" v-if="errors.length">
         <ul>
-            <li v-for="errors in error">{{ error }}</li>
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </div>
+    
+      <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
         </ul>
     </div>
 @endverbatim
@@ -76,7 +82,10 @@ $(document).ready(function(){
     })
     
 $(document).on('click',"#payment_term_delete", function(e){
+    succ_messages=[];
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
         
         if(confirmation){
@@ -109,19 +118,23 @@ $(document).on('click',"#payment_term_delete", function(e){
             days: "",
             payment_type: "",
             errors: [],
+            succ_messages: []
             },
+        
         methods: {
             onSubmit: function(){
                 showLoader();              
                 var that= this;
+                 that.succ_messages=[];
                 $('#payment_term_add').prop('disabled', true);
                 axios.post('/system/payment-terms', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.name= "";
                         that.days= "";
                         that.payment_type="";
+                        that.succ_messages= response.data;
                         payment_terms_table.ajax.reload();
                         $('#payment_term_add').prop('disabled', false);
                         hideLoader();
@@ -131,9 +144,18 @@ $(document).on('click',"#payment_term_delete", function(e){
                         hideLoader();
                         $('#payment_term_add').prop('disabled', false);
                     });
-              
+                    
+                   this.resetMessages(); 
                 
             },
+            
+            resetMessages: function(){
+                this.succ_messages= [];
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
+            }
             
         },
           

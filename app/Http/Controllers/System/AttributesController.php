@@ -42,11 +42,11 @@ class AttributesController extends Controller
 		]);
 		
 		if($attribute->getValidator()->failed()){
-			return new JsonResponse($attribute->getValidator()->errors()->all());
+			return new JsonResponse($attribute->getValidator()->errors()->all(), 422);
 		}
 		
 		else{
-			return ['message' => 'Successful'];
+			return response()->json( ['Attribute saved successfully']);
 		}
 	}
 	

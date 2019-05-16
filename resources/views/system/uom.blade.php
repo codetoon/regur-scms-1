@@ -11,6 +11,12 @@
             <li v-for="error in errors">{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
     <form method="post" id="uom_form" @submit.prevent= "onSubmit">
         @csrf
@@ -53,6 +59,8 @@
     
     $(document).on('click', '#uom_delete', function(e){
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
         if(confirmation){
             showLoader();
@@ -81,6 +89,7 @@
         data: {
             unit_of_measure:"",
             errors: [],
+            succ_messages: []
             },
         methods: {
             onSubmit: function(){
@@ -89,9 +98,10 @@
                 $('#uom_add').prop('disabled', true);
                 axios.post('/system/units-of-measure', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.unit_of_measure="";
+                        that.succ_messages= response.data;
                         uom_table.ajax.reload();
                         $('#uom_add').prop('disabled', false);
                         hideLoader();
@@ -102,8 +112,16 @@
                         $('#uom_add').prop('disabled', false);
                     });
               
-                
+                this.resetMessages();
             },
+            
+            resetMessages: function(){
+                this.succ_messages= [];
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
+            }
             
         },
           

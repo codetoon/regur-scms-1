@@ -48,7 +48,7 @@ class PaymentTermsController extends Controller
    		}
    		
    		else{
-   			return ['message' => 'Successful'];
+   			return response()->json(['Payment term saved successfully']);
    		}
 	}
 	 

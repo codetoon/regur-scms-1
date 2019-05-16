@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSellPriceTiersTable extends Migration
+class ModifyAttributeSetIdProductGroups extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateSellPriceTiersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sell_price_tiers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::table('product_groups', function ($table){
+        	$table->unsignedInteger('attribute_set_id')->nullable()->change();
         });
     }
 
@@ -26,6 +25,6 @@ class CreateSellPriceTiersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sell_price_tiers');
+        //
     }
 }

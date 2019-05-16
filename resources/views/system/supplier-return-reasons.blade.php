@@ -10,6 +10,12 @@
             <li v-for= "error in errors">{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for= "message in succ_messages">{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
 <form method="post" action="" @submit.prevent="onSubmit">
     @csrf
@@ -60,6 +66,8 @@
         
         if(confirmation){
             showLoader();
+            app.resetMessages();
+            app.resetErrors();
             var row= $(this).parents('tr')[0];
             var data= supplier_return_reasons_table.row(row).data();
             
@@ -82,7 +90,8 @@
         el: "#supplier_return_reasons_app",
         data: {
             supplier_return_reason: "",
-            errors: []
+            errors: [],
+            succ_messages: []
         },
         
         methods: {
@@ -92,9 +101,10 @@
                 $("#supplier_return_reason_add").prop('disabled', true);
                 
                 axios.post('/system/supplier-return-reasons', this.$data)
-                    .then(function(){
+                    .then(function(response){
                         that.errors= [];
                         that.supplier_return_reason= "";
+                        that.succ_messages= response.data;
                         supplier_return_reasons_table.ajax.reload();
                         $("#supplier_return_reason_add").prop('disabled', false);
                         hideLoader();
@@ -105,8 +115,16 @@
                     $("#supplier_return_reason_add").prop('disabled', false);
                 });
                 
+                this.resetMessages();
                 
-                
+            },
+            
+            resetMessages: function(){
+                this.succ_messages= [];
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
             }
         }
     });

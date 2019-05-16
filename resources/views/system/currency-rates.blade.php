@@ -22,16 +22,16 @@
     
     <div class="row form-group">
             <div class="col-md-2">
-                <label class="curr_label" for="curr_sel">Currency Selection</label></div>
+                <label class="curr_label" for="foreign_curr">Currency Selection</label></div>
              <div class="col-md-3">
-                    <select class="form-control" onchange="displayCurrSel(this)"  autofocus>
+                    <select class="form-control" onchange="displayForeignCurr(this)"  id="foreign_curr" autofocus>
                              <option disabled value="">Currency Selection</option>
                             <option value= "">INR</option>
                         <option value= "">CDF</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <input type="text" id="selected_curr"  class="form-control" value="">
+                    <input type="text" id="selected_foreign_curr"  class="form-control" value="">
                 </div>
             </div>
     
@@ -71,9 +71,9 @@
         document.getElementById('selected_base_curr').value= selectedOption;
         }
     
-        function displayCurrSel(curr){
-            var selectedCurr= curr.options[curr.selectedIndex].text;
-            document.getElementById('selected_curr').value= selectedCurr;
+        function displayForeignCurr(curr){
+            var foreignCurr= curr.options[curr.selectedIndex].text;
+            document.getElementById('selected_foreign_curr').value= foreignCurr;
         }
 </script>
     

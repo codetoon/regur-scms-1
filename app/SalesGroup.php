@@ -43,8 +43,8 @@ class SalesGroup extends Model
     public function validate(){
     	 
     	$this->validator= Validator::make($this->attributesToArray(), [
-    			'sales_group_name'=> 'required|string|max:255',
-    			'organization_id'=> 'required'
+    			'sales_group_name'=>  ['required', 'string', 'max:255'],
+    			'organization_id'=>  ['required'],
     	]);
     	 
     	if($this->validator->fails()){

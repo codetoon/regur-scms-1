@@ -42,7 +42,7 @@ public function store(Request $data){
    		}
    		
    		else{
-   			return ['message' => 'Successful'];
+   			return response()->json(['Sales group saved successfully']);
    		}
    		
    }

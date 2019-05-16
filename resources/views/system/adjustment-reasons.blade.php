@@ -11,6 +11,12 @@
             <li v-for="error in errors" >{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+    	<ul>
+            <li v-for="message in succ_messages" >{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
     <form method="post" action="" @submit.prevent="onSubmit" >
         @csrf
@@ -62,6 +68,8 @@
 
 $(document).on('click',"#adjustment_reason_delete", function(e){
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
             
         if(confirmation){
@@ -73,6 +81,7 @@ $(document).on('click',"#adjustment_reason_delete", function(e){
                 .then(function(response){
                     adjustment_reasons_table.ajax.reload();
                     hideLoader();
+                   
                 })
             
                 .catch(function(error){
@@ -88,6 +97,7 @@ var app= new Vue({
     data: {
         adjustment_reason: "",
         errors: [],
+        succ_messages: []
         
     },
     
@@ -99,9 +109,10 @@ var app= new Vue({
                 
                 axios.post('/system/adjustment-reasons', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.adjustment_reason="";
+                        that.succ_messages= response.data;
                         adjustment_reasons_table.ajax.reload();
                         $('#adjustment_reason_add').prop('disabled', false);
                         hideLoader();
@@ -113,6 +124,15 @@ var app= new Vue({
                         $('#adjustment_reason_add').prop('disabled', false);
                     });
               
+                this.resetMessages();
+        },
+        
+        resetMessages: function(){
+                    this.succ_messages=[];
+                },
+        
+        resetErrors: function(){
+            this.errors= [];
         }
     }
 });

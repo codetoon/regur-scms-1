@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Illuminate\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +13,6 @@ use Yajra\DataTables\DataTables;
 use App\AttributeSet;
 use Symfony\Component\VarDumper\Tests\Cloner\DataTest;
 use App\Organization;
-use Illuminate\Http\Illuminate\Http;
 use App\Lookup;
 
 class AttributeSetsController extends Controller
@@ -28,7 +28,7 @@ class AttributeSetsController extends Controller
 	
 	public function list(){
 		$attributeSet= AttributeSet::where('organization_id', Auth::user()->organization_id	);
-		//$types= Lookup::getAttributeSetTypeLabels();
+		
 		return DataTables::of($attributeSet)
 		->editColumn('type', function($row){
 			$key= $row->type;
@@ -49,7 +49,7 @@ class AttributeSetsController extends Controller
    		}
    		
    		else{
-   			return ['message' => 'Successful'];
+   			return response()->json( ['Attribute set saved successfully']);
    		}
    		
    }

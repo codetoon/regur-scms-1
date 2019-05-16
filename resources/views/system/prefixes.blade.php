@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+<div><h5>Prefixes</h5></div>
+
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@elseif($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
  <form method="post" action="">
      @csrf
     

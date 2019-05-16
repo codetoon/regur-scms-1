@@ -6,9 +6,15 @@
 
 <div id="credit_reasons_app">
 @verbatim
-    <div class="alert alert-danger errors" v-if="errors.length">
+    <div class="alert alert-danger" v-if="errors.length">
         <ul>
            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+           <li v-for="message in succ_messages">{{ message }}</li>
         </ul>
     </div>
 @endverbatim
@@ -64,6 +70,8 @@
         });
     $(document).on('click',"#credit_reasons_delete", function(e){
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
         
         if(confirmation){
@@ -94,17 +102,20 @@
         data: {
             credit_reason:"",
             errors: [],
+            succ_messages: []
             },
         methods: {
             onSubmit: function(){
+                
                 showLoader();              
                 var that= this;
                 $('#credit_reasons_add').prop('disabled', true);
                 axios.post('/system/credit-reasons', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.credit_reason="";
+                        that.succ_messages= response.data;
                         credit_reasons_table.ajax.reload();
                         $('#credit_reasons_add').prop('disabled', false);
                         hideLoader();
@@ -114,9 +125,17 @@
                         hideLoader();
                         $('#credit_reasons_add').prop('disabled', false);
                     });
-              
+                this.resetMessages();
                 
+            
             },
+            
+            resetMessages: function(){
+                    this.succ_messages=[];
+                },
+            resetErrors: function(){
+                this.errors= [];
+            }
             
         },
           

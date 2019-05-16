@@ -45,7 +45,7 @@ class CreditReasonsController extends Controller
    		}
    		
    		else{
-   			return ['message' => 'Successful'];
+   			return response()->json( ['Credit reason saved successfully']); 
    		}
    		
    }

@@ -15,4 +15,8 @@ class SellPriceTiersController extends Controller
 	public function show(){
 		return view('system.sell-price-tiers');
 	}
+	
+	public function store() {
+		
+	}
 }

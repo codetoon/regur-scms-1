@@ -7,7 +7,13 @@
 @verbatim
     <div class="alert alert-danger" v-if="errors.length">
         <ul>
-            <li v-for="error in errors"></li>
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
         </ul>
     </div>
 @endverbatim
@@ -72,6 +78,8 @@
     
     $(document).on('click',"#attribute_set_delete", function(e){
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
         
         if(confirmation){
@@ -104,6 +112,7 @@ var app= new Vue({
             name:"",
             type:"",
             errors: [],
+            succ_messages: []
             },
         methods: {
             onSubmit: function(){
@@ -114,10 +123,11 @@ var app= new Vue({
                 $('#attribute_set_add').prop('disabled', true);
                 axios.post('/system/attribute-sets', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.name="";
                         that.type="";
+                        that.succ_messages= response.data;
                         attribute_sets_table.ajax.reload();
                         $('#attribute_set_add').prop('disabled', false);
                         hideLoader();
@@ -127,9 +137,18 @@ var app= new Vue({
                         hideLoader();
                         $('#attribute_set_add').prop('disabled', false);
                     });
-              
+                
+                this.resetMessages(); 
                 
             },
+            
+            resetMessages: function(){
+                this.succ_messages=[];
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
+            }
             
         },
           

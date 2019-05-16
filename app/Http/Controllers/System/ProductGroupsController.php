@@ -27,7 +27,7 @@ class ProductGroupsController extends Controller
 	}
 	
 	public function list(){
-		$productGroup= DB::table('product_groups')->where('product_groups.organization_id', Auth::user()->organization_id)->join('attribute_sets', 'attribute_sets.id', '=', 'product_groups.attribute_set_id')
+		$productGroup= DB::table('product_groups')->where('product_groups.organization_id', Auth::user()->organization_id)->leftJoin('attribute_sets', 'attribute_sets.id', '=', 'product_groups.attribute_set_id')
 					->select('attribute_sets.name', 'product_group_name', 'product_groups.id')->get();
 		return DataTables::of($productGroup)->make(true);
 	}
@@ -45,7 +45,7 @@ class ProductGroupsController extends Controller
 			return new JsonResponse($productGroup->getValidator()->errors()->all(), 422);
 		}
 		else{
-			return ['message'=> 'Successful'];
+			return response()->json(['Product group saved successfully']);
 		}
 	}
 	 

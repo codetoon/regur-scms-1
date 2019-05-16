@@ -9,6 +9,12 @@
             <li v-for="error in errors">{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+    	<ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
     <form method="post" action="" @submit.prevent= "onSubmit">
         @csrf
@@ -81,6 +87,8 @@ $(document).ready(function(){
     
     $(document).on('click',"#attribute_delete", function(e){
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
         
         if(confirmation){
@@ -113,6 +121,7 @@ var app= new Vue({
             default_value: "",
             errors: [],
             required: false,
+            succ_messages: [],
             attribute_set_id: "{{ $attributeSet[0]->id }}"
             },
         methods: {
@@ -123,11 +132,12 @@ var app= new Vue({
                 $('#attribute_add').prop('disabled', true);
                 axios.post("/system/attributes/"+ this.$data.attribute_set_id, this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.attribute_name="";
                         that.default_value="";
                         that.required= "";
+                        that.succ_messages= response.data;
                         attributes_table.ajax.reload();
                         $('#attribute_add').prop('disabled', false);
                         hideLoader();
@@ -138,9 +148,16 @@ var app= new Vue({
                         $('#attribute_add').prop('disabled', false);
                     });
               
-                
+                    this.resetMessages();
             },
             
+            resetMessages: function(){
+                this.succ_messages= [];
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
+            }
         },
           
 });  

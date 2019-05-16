@@ -51,11 +51,11 @@ class PrefixesController extends Controller
 				);  
 			
 			 if($prefix->getValidator()->failed()){
-				return new JsonResponse($prefix->getValidator()->errors()->all());
+				return redirect('/system/prefixes')->withErrors($prefix->getValidator)->withInput();
 			}
 			 
 			else{
-				return redirect('/system/prefixes');
+				return redirect('/system/prefixes')->with('message', 'Prefixe(s) saved successfully');
 			} 
 			
 			

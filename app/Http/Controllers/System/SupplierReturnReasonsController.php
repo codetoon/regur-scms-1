@@ -40,7 +40,7 @@ class SupplierReturnReasonsController extends Controller
 		}
 		
 		else{
-			return ['message' => 'Successful'];
+			return response()->json( ['Supplier return reason saved successfully']);
 		}
 	}
 	

@@ -9,6 +9,12 @@
             <li v-for="error in errors">{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
     <form method="post" action="" @submit.prevent= "onSubmit">
         @csrf
@@ -66,6 +72,8 @@
     
     $(document).on('click',"#attribute_set_delete", function(e){
         e.preventDefault();
+        app.resetMessages();
+        app.resetErrors();
         var confirmation= confirm("Confirm delete?");
         
         if(confirmation){
@@ -97,6 +105,7 @@
             product_group_name: "",
             attribute_set_id: "",
             errors: [],
+            succ_messages: []
             },
         methods: {
             onSubmit: function(){
@@ -105,10 +114,11 @@
                 $('#product_group_add').prop('disabled', true);
                 axios.post('/system/product-groups', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.product_group_name= "";
                         that.attribute_set_id= "";
+                        that.succ_messages= response.data;
                         product_groups_table.ajax.reload();
                         $('#product_group_add').prop('disabled', false);
                         hideLoader();
@@ -118,9 +128,18 @@
                         hideLoader();
                         $('#product_group_add').prop('disabled', false);
                     });
-              
+                    
+                    this.resetMessages();
                 
             },
+            
+            resetMessages: function(){
+                this.succ_messages= [];
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
+            }
             
         },
     });

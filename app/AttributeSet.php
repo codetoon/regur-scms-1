@@ -17,23 +17,22 @@ class AttributeSet extends Model
 	public function __construct(array $attributes= []){
 		parent::__construct($attributes);
 	}
-	
 	protected static function boot(){
 		parent::boot();
 		
 		self::saving(function ($model){
-			$model->validate();
+			return $model->validate();
 		});
 	}
 	
-	public function getValidator(){
-		return $this->validator;
-	}
-	
-	
     public function organization(){
- 		$this->belongsTo(Organization::class);   
-	}
+    	$this->belongsTo('Organization::class');
+    }
+    
+    public function getValidator()
+    {
+    	return $this->validator;
+    }
 	
 	public function attributes(){
 		$this->hasMany(Attribute::class);
@@ -41,9 +40,9 @@ class AttributeSet extends Model
 	
 	public function validate(){
 		$this->validator= Validator::make($this->attributesToArray(), [
-				'name'=> 'required|string|max: 255',
-				'type'=> 'required|string|max: 255',
-				'organization_id'=> 'required'
+				'name'=> ['required', 'string', 'max:255'],
+				'type'=> ['required', 'string', 'max:255'],
+				'organization_id'=> ['required']
 		]);
 		
 		if($this->validator->fails()){

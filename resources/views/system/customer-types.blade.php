@@ -12,6 +12,12 @@
             <li v-for="error in errors">{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
     <form method="post" action="" @submit.prevent= "onSubmit">
         @csrf
@@ -58,6 +64,8 @@
         var confirmation= confirm("Confirm delete?");
         if(confirmation){
             showLoader();
+            app.resetErrors();
+            app.resetMessages();
             var row= $(this).parents('tr')[0];
             var data= customer_types_table.row(row).data();
             
@@ -80,7 +88,8 @@
         
         data: {
             customer_type: "",
-            errors: []
+            errors: [],
+            succ_messages: []
         },
         
         methods: {
@@ -90,9 +99,10 @@
                 $('#customer_type_add').prop('disabled', true);
                 axios.post('/system/customer-types', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.customer_type="";
+                        that.succ_messages= response.data;    
                         customer_types_table.ajax.reload();
                         $('#customer_type_add').prop('disabled', false);
                         hideLoader();
@@ -102,7 +112,15 @@
                         hideLoader();
                         $('#customer_type_add').prop('disabled', false);
                     });
-              
+                this.resetMessages();
+            },
+            
+            resetMessages: function(){
+                this.succ_messages= []
+            },
+            
+            resetErrors: function(){
+                this.errors= [];
             }
         }
     });

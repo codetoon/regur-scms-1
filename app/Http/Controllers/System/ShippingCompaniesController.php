@@ -40,7 +40,7 @@ class ShippingCompaniesController extends Controller
     	}
     	 
     	else{
-    		return ['message' => 'Successful'];
+    		return response()->json(['Shipping company saved successfully']);
     	}
     }
     

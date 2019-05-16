@@ -45,7 +45,7 @@ class TaxesController extends Controller
     	}
     	 
     	else{
-    		return ['message' => 'Successful'];
+    		return response()->json(['Tax saved successfully']);
     	}
     }
     

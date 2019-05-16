@@ -9,6 +9,12 @@
             <li v-for="error in errors">{{ error }}</li>
         </ul>
     </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+            <li v-for="message in succ_messages">{{ message }}</li>
+        </ul>
+    </div>
 @endverbatim
     <form method="post" action="" @submit.prevent= "onSubmit">
         @csrf
@@ -58,6 +64,7 @@
         data: {
             company_name:"",
             errors: [],
+            succ_messages: []
             },
         methods: {
             onSubmit: function(){
@@ -66,9 +73,10 @@
                 $('#shipping_comp_add').prop('disabled', true);
                 axios.post('/system/shipping-companies', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.company_name="";
+                        that.succ_messages= response.data;
                         shipping_comp_table.ajax.reload();
                         $('#shipping_comp_add').prop('disabled', false);
                         hideLoader();
@@ -78,9 +86,12 @@
                         hideLoader();
                         $('#shipping_comp_add').prop('disabled', false);
                     });
-                
+                this.resetMessages();
             },
             
+            resetMessages: function(){
+                this.succ_messages= [];
+            }
         },
           
         });       

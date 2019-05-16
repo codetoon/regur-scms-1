@@ -6,9 +6,15 @@
 
 <div id="taxes_app">
 @verbatim
-    <div class="alert alert-danger errors" v-if="errors.length">
+    <div class="alert alert-danger" v-if="errors.length">
         <ul>
            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </div>
+    
+    <div class="alert alert-success" v-if="succ_messages.length">
+        <ul>
+           <li v-for="message in succ_messages">{{ message }}</li>
         </ul>
     </div>
 @endverbatim
@@ -132,6 +138,7 @@ var app= new Vue({
             sales_tax: false,
             purchase_tax: false,
             errors: [],
+            succ_messages: []
             },
         methods: {
             onSubmit: function(){
@@ -142,13 +149,14 @@ var app= new Vue({
                 
                 axios.post('/system/taxes', this.$data)
                   
-                    .then(function(){
+                    .then(function(response){
                         that.errors=[];
                         that.tax_description="";
                         that.tax_code="";
                         that.tax_rate="";
                         that.purchase_tax=false;
                         that.sales_tax= false;
+                        that.succ_messages= response.data;
                         taxes_table.ajax.reload();
                         $('#tax_add').prop('disabled', false);
                         hideLoader();
@@ -159,10 +167,15 @@ var app= new Vue({
                         $('#tax_add').prop('disabled', false);
                     });
               
-                
+               this.resetMessages(); 
             
             
         },
+            
+        resetMessages: function(){
+            this.succ_messages= [];
+        },
+        
           
         }
 });  

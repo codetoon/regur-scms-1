@@ -41,13 +41,14 @@ class AdjustmentReasonsController extends Controller
    			return new JsonResponse($adjustmentReason->getValidator()->errors()->all(), 422);
    		}
    		else{
-   			return ['message'=> 'Successful'];
+   			return response()->json( ['Adjustment reason saved successfully']);
    		}
    }
    
    protected function destroy($id){
    	$adjustmentReason= AdjustmentReason::findOrFail($id);
    	$adjustmentReason->delete();
+   	
    	
    }
    	
