@@ -69,7 +69,7 @@
 $(document).on('click',"#adjustment_reason_delete", function(e){
         e.preventDefault();
         app.resetMessages();
-        app.resetErrors();
+        app.resetErrors();  
         var confirmation= confirm("Confirm delete?");
             
         if(confirmation){

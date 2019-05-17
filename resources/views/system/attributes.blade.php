@@ -2,7 +2,17 @@
 
 @section('content')
 <div><h5>{{$attributeSet[0]->name}}</h5></div>
+
 <div id="attributes_app">
+    <!--<div class="col-md-3">
+                <label for="attribute_set_id">Default Attribute Set</label>
+                <select class="form-control"  id="attribute_set_id" v-model="attribute_set_id" autofocus>
+                         <option disabled value="">Please select Attribute Set</option>
+                    @foreach($attributeSet as $value)
+                        <option value= "{{ $value->id }}">{{ $value->name }}</option>
+                    @endforeach
+                </select>
+    </div>-->
 @verbatim
     <div class="alert alert-danger" v-if="errors.length">
         <ul>

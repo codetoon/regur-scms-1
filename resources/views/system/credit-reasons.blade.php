@@ -86,14 +86,11 @@
                 })
                 
                 .catch(function(error){
-                 if(error.response.status== 422){
-                     credit_reasons_table.ajax.reload();
-                    /* errors= error.response.data;*/
-                     hideLoader();
-                 }
-             })
+                   hideLoader();
+                })
+             }
                     
-        }
+        
    }); 
         
     var app= new Vue({

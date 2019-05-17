@@ -360,6 +360,20 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
   margin-left: 90%;
 }
 
+#add-prefix{
+    float: right;
+    margin-right: -700px;
+}
+
+#payment_terms_table, #attribute_sets_table{
+    width: 100%;
+}
+
+#payment_term_add{
+    margin-top: 28px;
+    padding-left:10px;
+}
+
 /* Mobile view */
 @media only screen and (max-width: 767px) {
     .responsive #top #main .sidebar {display:block !important; clear: both; }

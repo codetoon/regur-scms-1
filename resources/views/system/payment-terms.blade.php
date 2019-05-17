@@ -38,11 +38,11 @@
                 @endforeach
                 </select>
             </div>
-            <div style="padding-top: 28px; padding-left:10px"><button type="submit" class="btn btn-success" id="payment_term_add">Add</button></div>
+            <div><button type="submit" class="btn btn-success" id="payment_term_add">Add</button></div>
         </div>
     </form>
 </div>
-<table class="table" id="payment_terms_table" style="width: 100%">
+<table class="table" id="payment_terms_table">
     <thead class="thead-light">
         <th scope="col">Name</th>
         <th scope="col">Days</th>

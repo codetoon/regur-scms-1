@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class CreditReason extends Model
@@ -39,6 +40,7 @@ class CreditReason extends Model
     {
     	return $this->validator;
     }
+    
     
     public function validate(){
     	

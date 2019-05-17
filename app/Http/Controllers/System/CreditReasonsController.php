@@ -13,6 +13,9 @@ use App\CreditReason;
 use Symfony\Component\VarDumper\Tests\Cloner\DataTest;
 use App\Organization;
 use Illuminate\Http\Illuminate\Http;
+use App\User;
+use Illuminate\Auth\Access\Gate;
+use App\App;
 
 
 class CreditReasonsController extends Controller
@@ -21,20 +24,18 @@ class CreditReasonsController extends Controller
 		$this->middleware('auth');
 	}
 	
-   public function show(){
-   	return view('system.credit-reasons');
-   		
-   		
-   		
+   public function show(CreditReason $creditReason){
+   	//$this->authorize('view', $creditReason);
+   		return view('system.credit-reasons');
    }
-	 public function list(){
-	 		$creditReason= CreditReason::where('organization_id', Auth::user()->organization_id);
+	 public function list(CreditReason $creditReason){
+	 		//$this->authorize('view', $creditReason);
+	 		$creditReason= CreditReason::where('organization_id', Auth::user()->organization_id)->get(); 
  			return DataTables::of($creditReason)->make(true);
  		}
    
    public function store(Request $data){
    		$organization= new Organization();
-   		
    		$creditReason= CreditReason::create([
    			'credit_reason'=> $data['credit_reason'],
    			'organization_id'=> Auth::user()->organization_id
@@ -45,13 +46,13 @@ class CreditReasonsController extends Controller
    		}
    		
    		else{
-   			return response()->json( ['Credit reason saved successfully']); 
+   			return response()->json(['Credit reason saved successfully']); 
    		}
    		
    }
    
-   public function destroy($id){
-   	$creditReason= CreditReason::findOrFail($id);
+   public function destroy(CreditReason $creditReason){
+   	$this->authorize('delete', $creditReason);
    	$creditReason->delete();
   }
    	

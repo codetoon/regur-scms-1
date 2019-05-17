@@ -163,7 +163,7 @@
         </div>
     </div>
    <div class="form-group">
-                <button type="submit" class="btn btn-success" style="float: right; margin-right: -700px;">
+                <button type="submit" class="btn btn-success " id="add-prefix">
                     Save
                 </button>
             </div>  

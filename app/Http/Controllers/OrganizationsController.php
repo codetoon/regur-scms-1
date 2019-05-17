@@ -19,7 +19,7 @@ class OrganizationsController extends Controller
 	public function __construct(){
 		$this->middleware('auth');
 	}
- 	 public function edit(){
+ 	 public function edit($id){
  		$countries= Country::get();
  		$timezones= Timezone::get();
  		$industries= Industry::get();
@@ -34,10 +34,11 @@ class OrganizationsController extends Controller
  	} 
  	
  	
- 	protected function update(Request $data){
+ 	protected function update($id, Request $data, Organization $organization){
+		$this->authorize('update', $organization);
  		$organization= Organization::where('id', Auth::user()->organization_id)->update($data->except('_token'));
 
- 		return redirect('/company/organization-details');
+ 		return back();
  	}
  	
 

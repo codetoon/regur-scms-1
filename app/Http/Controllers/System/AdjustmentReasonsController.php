@@ -26,7 +26,7 @@ class AdjustmentReasonsController extends Controller
    }
    
    public function list(){
-   		$adjustmentReason= AdjustmentReason::where('organization_id', Auth::user()->organization_id);
+   		$adjustmentReason= AdjustmentReason::where('organization_id', Auth::user()->organization_id)->get();
    		return DataTables::of($adjustmentReason)->make(true);
    }
    
@@ -45,8 +45,9 @@ class AdjustmentReasonsController extends Controller
    		}
    }
    
-   protected function destroy($id){
-   	$adjustmentReason= AdjustmentReason::findOrFail($id);
+   protected function destroy(AdjustmentReason $adjustmentReason){
+   	$this->authorize('delete', $adjustmentReason);
+   	//$adjustmentReason= AdjustmentReason::findOrFail($id);
    	$adjustmentReason->delete();
    	
    	

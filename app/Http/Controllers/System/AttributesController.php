@@ -21,8 +21,8 @@ class AttributesController extends Controller
 	
 	public function show($id){
 		$attributeSet= AttributeSet::where('id', $id)->get();
-		return view('system.attributes', compact('attributeSet'));
-		
+		$attributeSets= AttributeSet::where('organization_id', Auth::user()->organization_id)->get();
+		return view('system.attributes', compact('attributeSet'));		
 	}
 	
 	public function list($id){

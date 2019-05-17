@@ -40,7 +40,7 @@
     </div>
     </form>
 </div>
-<table class="table" id="attribute_sets_table" style="width: 100%">
+<table class="table" id="attribute_sets_table">
     <thead class="thead-light">
         <th scope="col">Attribute Set Name</th>
         <th scope="col">Type</th>
