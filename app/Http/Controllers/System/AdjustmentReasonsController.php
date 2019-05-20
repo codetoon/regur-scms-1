@@ -45,9 +45,10 @@ class AdjustmentReasonsController extends Controller
    		}
    }
    
-   protected function destroy(AdjustmentReason $adjustmentReason){
+   protected function destroy($id){
+   	$adjustmentReason= AdjustmentReason::findOrFail($id);
    	$this->authorize('delete', $adjustmentReason);
-   	//$adjustmentReason= AdjustmentReason::findOrFail($id);
+   	
    	$adjustmentReason->delete();
    	
    	

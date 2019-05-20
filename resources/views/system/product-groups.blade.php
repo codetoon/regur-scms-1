@@ -88,11 +88,10 @@
                 })
                 
                 .catch(function(error){
-                 if(error.response.status== 422){
+                    alert(error.response.data.message);
                      product_groups_table.ajax.reload();
                     /* errors= error.response.data;*/
                      hideLoader();
-                 }
              })
                     
         }

@@ -53,7 +53,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="industry_id" id="industry" value="{{ old('industry_id', $organization[0]->industry_name)}}">
                                   @foreach($industries as $industry) 
-									<option value= "{{ $industry->id }}">{{ $industry->industry_name }}</option>
+									<option value= "{{ $industry->id }}" {{$organization[0]->industry_id == $industry->id ? 'selected': ''}}>{{ $industry->industry_name }}</option>
                                   @endforeach
                                   </select>
                               </div>
@@ -64,7 +64,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="organization_type" id="organization_type" value="{{ old('organization_type')}}">
                                     @foreach($organizationTypes as $key=> $organizationType)
-                                  <option value= "{{ $key }}">{{ $organizationType }}</option>
+                                  <option value= "{{ $key }}" {{$organization[0]->organization_type == $key ? 'selected': ''}}>{{ $organizationType }}</option>
                                     @endforeach
                                   </select>
                               </div>
@@ -84,7 +84,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="dashboard_data_source" id="dashboard_data_source" value="{{ old('dashboard_data_source')}}">
                                     @foreach($dashboardDataSources as $key=>$dashboardDataSource)
-                                  <option value= "{{ $key }}">{{ $dashboardDataSource }}</option>
+                                  <option value= "{{ $key }}" {{$organization[0]->dashboard_data_source == $key ? 'selected': ''}}>{{ $dashboardDataSource }}</option>
                                     @endforeach
                                   </select>
                               </div>
@@ -109,7 +109,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="timezone_id" id="timezone_id" value="{{ old('timezone_id', $organization[0]->timezone_id)}}">
                                     @foreach($timezones as $timezone)
-                                  <option value= "{{ $timezone->id }}">{{ $timezone->timezone }}</option>
+                                  <option value= "{{ $timezone->id }}" {{$organization[0]->timezone_id == $timezone->id ? 'selected': ''}}>{{ $timezone->timezone }}</option>
                                     @endforeach
                                   </select>
                               </div>
@@ -120,7 +120,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="financial_year_end" id="financial_year_end" value="{{ old('financial_year_end')}}">
                                     @foreach($financialYearEndings as $key=> $financialYearEnding)
-                                    <option value= "{{ $key }}">{{ $financialYearEnding }}</option>
+                                    <option value= "{{ $key }}"  {{$organization[0]->financial_year_end == $key ? 'selected': ''}}>{{ $financialYearEnding }}</option>
                                     @endforeach
                                   </select>
                               </div>
@@ -131,7 +131,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="unit_of_measure" id="unit_of_measure" value="{{ old('unit_of_measure')}}">
                                   @foreach($measurementUnits as $key=> $measurementUnit)
-                                      <option value= "{{ $key }}">{{ $measurementUnit }}</option>
+                                      <option value= "{{ $key }}"  {{$organization[0]->unit_of_measure == $key ? 'selected': ''}}>{{ $measurementUnit }}</option>
                                     @endforeach
                                   </select>
                               </div>
@@ -142,7 +142,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="date_format" id="date_format" value="{{ old('date_format')}}">
                                     @foreach($dateFormats as $key=> $dateFormat)
-                                        <option value= "{{ $key }}">{{ $dateFormat }}</option>
+                                        <option value= "{{ $key }}" {{$organization[0]->date_format == $key ? 'selected': ''}}>{{ $dateFormat }}</option>
                                     @endforeach
                                   </select>
                               </div>
@@ -210,7 +210,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="postal_country_id" id="country" value="{{ old('postal_country_id', $organization[0]->postal_country_name)}}">
                                   @foreach($countries as $country) 
-									<option value= "{{ $country->id }}">{{ $country->country_name }}</option>
+									<option value= "{{ $country->id }}" {{$organization[0]->postal_country_id == $country->id ? 'selected': ''}}>{{ $country->country_name }}</option>
                                   @endforeach
                                   </select>
                               </div>
@@ -275,7 +275,7 @@
                               <div class="col-sm-8">
                                   <select class="form-control" name="physical_country_id" id="country" value="{{ old('physical_country_id', $organization[0]->physical_country_name)}}">
                                   @foreach($countries as $country) 
-									<option value= "{{ $country->id }}">{{ $country->country_name }}</option>
+									<option value= "{{ $country->id }}" {{$organization[0]->physical_country_id == $country->id ? 'selected': ''}}>{{ $country->country_name }}</option>
                                   @endforeach
                                   </select>
                               </div>

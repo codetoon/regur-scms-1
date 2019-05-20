@@ -19,11 +19,14 @@ class SupplierReturnReasonsController extends Controller
     	$this->middleware('auth');
 	}
 	public function show(){
+		
+		$supplierReturnReason = SupplierReturnReason::get();
+		//$this->authorize('view', $supplierReturnReason);
 		return view('system.supplier-return-reasons');
 	}
 	
-	public function list(){
-		$supplierReturnReason= SupplierReturnReason::where('organization_id', Auth::user()->organization_id);
+	public function list(SupplierReturnReason $supplierReturnReason){
+		$supplierReturnReason= SupplierReturnReason::where('organization_id', Auth::user()->organization_id)->get();
 		return DataTables::of($supplierReturnReason)->make(true);
 	}
 	
@@ -40,12 +43,13 @@ class SupplierReturnReasonsController extends Controller
 		}
 		
 		else{
-			return response()->json( ['Supplier return reason saved successfully']);
+			return response()->json(['Supplier return reason saved successfully']);
 		}
 	}
 	
 	public function destroy($id){
 		$supplierReturnReason= SupplierReturnReason::findOrFail($id);
+		$this->authorize('delete', $supplierReturnReason);
 		$supplierReturnReason->delete();
 	}
 }

@@ -100,11 +100,11 @@
                 })
                 
                 .catch(function(error){
-                 if(error.response.status== 422){
+                     app.errors= error.response.data.message.split();
                      sales_groups_table.ajax.reload();
                     /* errors= error.response.data;*/
                      hideLoader();
-                 }
+                 
              })
                     
         }

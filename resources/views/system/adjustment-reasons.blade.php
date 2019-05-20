@@ -85,6 +85,7 @@ $(document).on('click',"#adjustment_reason_delete", function(e){
                 })
             
                 .catch(function(error){
+                   app.errors= error.response.data.message.split();
                    hideLoader();
                 })
             

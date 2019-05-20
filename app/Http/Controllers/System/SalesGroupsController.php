@@ -49,6 +49,7 @@ public function store(Request $data){
    
    public function destroy($id){
    	$salesGroup= SalesGroup::findOrFail($id);
+   	$this->authorize('delete', $salesGroup);
    	$salesGroup->delete();
   }
 	

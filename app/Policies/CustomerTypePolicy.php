@@ -42,7 +42,13 @@ class CustomerTypePolicy
      */
     public function update(User $user, CustomerType $customerType)
     {
-        //
+    	if($user->organization_id === $customerType->organization_id){
+    		return true;
+    	}
+    	
+    	else{
+    		abort(403, 'This action is unauthorized');
+    	}
     }
 
     /**
@@ -59,7 +65,7 @@ class CustomerTypePolicy
         }
         
         else{
-        	abort(403, 'Access forbidden');
+        	abort(403, 'This action is unauthorized');
         }
     }
 

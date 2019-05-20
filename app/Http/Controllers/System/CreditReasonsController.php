@@ -51,7 +51,8 @@ class CreditReasonsController extends Controller
    		
    }
    
-   public function destroy(CreditReason $creditReason){
+   public function destroy($id){
+   	$creditReason= CreditReason::findOrFail($id);
    	$this->authorize('delete', $creditReason);
    	$creditReason->delete();
   }

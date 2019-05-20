@@ -100,11 +100,11 @@ $(document).on('click',"#payment_term_delete", function(e){
                 })
                 
                 .catch(function(error){
-                 if(error.response.status== 422){
+                    alert(error.response.data.message);
                      payment_terms_table.ajax.reload();
                     /* errors= error.response.data;*/
                      hideLoader();
-                 }
+                 
              })
                     
         }

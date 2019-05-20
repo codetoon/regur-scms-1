@@ -50,8 +50,9 @@ class AttributesController extends Controller
 		}
 	}
 	
-	protected function destroy($id){
+	public function destroy($id){
 		$attribute= Attribute::findOrFail($id);
+		$this->authorize('delete', $attribute);
 		$attribute->delete();
 	
 	}

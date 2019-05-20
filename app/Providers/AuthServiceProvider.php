@@ -4,8 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\CreditReason;
-use App\Policies\CreditReasonPolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +15,18 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
          //'App\Model' => 'App\Policies\ModelPolicy',
-    	CreditReason::class=> CreditReasonPolicy::class
+    	'App\CreditReason'=> 'App\Policies\CreditReasonPolicy',
+    	'App\AdjustmentReason'=> 'App\Policies\AdjustmentReasonPolicy',
+    	'App\CustomerType'=> 'App\Policies\CustomerTypePolicy',
+    	'App\PaymentTerm'=> 'App\Policies\PaymentTermPolicy',
+    	'App\ProductGroup'=> 'App\Policies\ProductGroupPolicy',
+    	'App\SalesGroup'=> 'App\Policies\SalesGroupPolicy',
+    	'App\SupplierReturnReason'=> 'App\Policies\SupplierReturnReasonPolicy',
+    	'App\Organization'=> 'App\Policies\OrganizationPolicy',
+    	'App\UnitOfMeasure'=> 'App\Policies\UnitOfMeasurePolicy',
+    	'App\Attribute'=> 'App\Policies\AttributePolicy'
+    		
+    		
     ];
 
     /**

@@ -34,7 +34,8 @@ class OrganizationsController extends Controller
  	} 
  	
  	
- 	protected function update($id, Request $data, Organization $organization){
+ 	protected function update($id, Request $data){
+ 		$organization= Organization::findOrFail($id);
 		$this->authorize('update', $organization);
  		$organization= Organization::where('id', Auth::user()->organization_id)->update($data->except('_token'));
 

@@ -77,11 +77,9 @@
                     hideLoader();
             })
             .catch(function(error){
-                if(error.response.status= 422){
-                    /* errors= error.response.data;*/
-                     supplier_return_reasons_table.ajax.reload();
+                     app.errors= error.response.data.message.split();
                      hideLoader();
-                }
+                
             })
         }
     });

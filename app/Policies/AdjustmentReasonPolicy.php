@@ -42,7 +42,13 @@ class AdjustmentReasonPolicy
      */
     public function update(User $user, AdjustmentReason $adjustmentReason)
     {
-        //
+    	if($user->organization_id === $adjustmentReason->organization_id){
+    		return true;
+    	}
+    	
+    	else{
+    		abort(403, 'This action is unauthorized');
+    	}
     }
 
     /**
@@ -59,7 +65,7 @@ class AdjustmentReasonPolicy
         }
         
         else{
-        	abort(403, 'Access forbidden');
+        	abort(403, 'This action is unauthorized');
         }
     }
 
