@@ -48,7 +48,6 @@ class CustomerTypesController extends Controller
 	
 	public function destroy($id){
 		$customerType= CustomerType::findOrFail($id);
-		$this->authorize('delete', $customerType);
 		$customerType->delete();
 		
 	}

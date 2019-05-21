@@ -54,7 +54,6 @@ class PaymentTermsController extends Controller
 	 
 	public function destroy($id){
 		$paymentTerm= PaymentTerm::findOrFail($id);
-		$this->authorize('delete', $paymentTerm);
 		$paymentTerm->delete();
 	
 	}

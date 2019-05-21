@@ -51,7 +51,6 @@ class TaxesController extends Controller
     
     public function destroy($id){
     	$tax= Tax::findOrFail($id);
-    	$this->authorize('delete', $tax);
     	$tax->delete();
     }
 }

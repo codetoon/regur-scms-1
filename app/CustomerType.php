@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerType extends Model
 {	
@@ -22,6 +23,16 @@ class CustomerType extends Model
  		
  		self::saving(function($model){
  			return $model->validate();
+ 		});
+ 		
+ 		self::deleting(function ($model){
+ 			if(Auth::user()->can('delete', $model)){
+ 				return true;
+ 			}
+ 			
+ 			else{
+ 				return false;
+ 			}
  		});
  	}
  	

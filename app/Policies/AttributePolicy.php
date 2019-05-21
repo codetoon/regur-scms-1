@@ -56,13 +56,8 @@ class AttributePolicy
      * @return mixed
      */
     public function delete(User $user, Attribute $attribute)
-    {
-       $attributeSet= DB::table('attribute_sets')->join('attributes', 'attributes.attribute_set_id', '=',
-       		'attribute_sets.id')->select('attribute_sets.*')->get();
-       
-       if($user->organization_id === $attributeSet->organization_id){
-       		
-       }
+    {	$attributeSet= AttributeSet::where('id', $attribute->attribute_set_id)->get();
+    	return $user->organization_id === $attributeSet[0]->organization_id;
        
     }
 

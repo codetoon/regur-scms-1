@@ -25,12 +25,10 @@ class CreditReasonsController extends Controller
 	}
 	
    public function show(CreditReason $creditReason){
-   	//$this->authorize('view', $creditReason);
    		return view('system.credit-reasons');
    }
 	 public function list(CreditReason $creditReason){
-	 		//$this->authorize('view', $creditReason);
-	 		$creditReason= CreditReason::where('organization_id', Auth::user()->organization_id)->get(); 
+	 		$creditReason= CreditReason::where('organization_id', Auth::user()->organization_id)->get();
  			return DataTables::of($creditReason)->make(true);
  		}
    
@@ -53,8 +51,17 @@ class CreditReasonsController extends Controller
    
    public function destroy($id){
    	$creditReason= CreditReason::findOrFail($id);
-   	$this->authorize('delete', $creditReason);
-   	$creditReason->delete();
+   	$deletedRow= $creditReason->delete();
+   	if($deletedRow == true){
+   		return response()->json(['Credit reason deleted successfully']);
+   	}
+   	
+   	else {
+   		return abort(403, 'This action is unauthorized');
+   	}
+   	/* $deletedRows = DB::table('credit_reasons')->where('id', $id)->delete();
+   	var_dump( $deletedRows); die(); */
+ 
   }
    	
    

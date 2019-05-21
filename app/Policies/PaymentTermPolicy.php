@@ -42,15 +42,7 @@ class PaymentTermPolicy
      */
     public function update(User $user, PaymentTerm $paymentTerm)
     {
-    	if($user->organization_id === $paymentTerm->organization_id){
-    	
-    		return true;
-    	}
-    	 
-    	else{
-    		abort('403', 'This action is unautorized');
-    	
-    	}
+    	return $user->organization_id === $paymentTerm->organization_id;
     }
 
     /**
@@ -62,15 +54,7 @@ class PaymentTermPolicy
      */
     public function delete(User $user, PaymentTerm $paymentTerm)
     {
-    	if($user->organization_id === $paymentTerm->organization_id){
-    		 
-    		return true;
-    	}
-    	
-    	else{
-    		abort('403', 'This action is unautorized');
-    		 
-    	}
+    	return $user->organization_id === $paymentTerm->organization_id;
     }
  
     /**

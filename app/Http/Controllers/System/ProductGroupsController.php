@@ -51,9 +51,10 @@ class ProductGroupsController extends Controller
 	 
 	protected function destroy( $id){
 		$productGroup= ProductGroup::findOrFail($id);
-		$this->authorize('delete', $productGroup);
 		$productGroup->delete();
-	
+		
+		dd($productGroup->delete());
+		
 	}
 	
 }

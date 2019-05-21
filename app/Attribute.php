@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class Attribute extends Model
@@ -25,6 +26,15 @@ class Attribute extends Model
     	 
     	self::saving(function($model){
     		return $model->validate();
+    	});
+    	
+    	self::deleting(function ($model){
+    		if(Auth::user()->can('delete', $model)){
+    				return true;
+    		}
+    		else{
+    			return false;
+    		}
     	});
     		 
     }

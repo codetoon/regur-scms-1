@@ -79,6 +79,7 @@ $(document).on('click',"#adjustment_reason_delete", function(e){
 
             axios.delete('/system/adjustment-reasons/'+ data.id)
                 .then(function(response){
+                    app.succ_messages= response.data;
                     adjustment_reasons_table.ajax.reload();
                     hideLoader();
                    

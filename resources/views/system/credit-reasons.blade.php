@@ -81,6 +81,7 @@
             
             axios.delete('/system/credit-reasons/'+ data.id )
                 .then(function(response){
+                    app.succ_messages= response.data;
                     credit_reasons_table.ajax.reload();
                     hideLoader();
                 })

@@ -108,16 +108,17 @@ $(document).ready(function(){
             
             axios.delete('/system/attributes/'+ data.id )
                 .then(function(response){
+                    app.succ_messages= response.data;
                     attributes_table.ajax.reload();
                     hideLoader();
                 })
                 
                 .catch(function(error){
-                 if(error.response.status== 422){
-                     attributes_table.ajax.reload();
-                    /* errors= error.response.data;*/
+                    
+                    attributes_table.ajax.reload();
+                    app.errors= error.response.data.message.split();
                      hideLoader();
-                 }
+                 
              })
                     
         }

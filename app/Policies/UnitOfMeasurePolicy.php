@@ -43,13 +43,7 @@ class UnitOfMeasurePolicy
      */
     public function update(User $user, UnitOfMeasure $unitOfMeasure)
     {
-        if($user->organization_id === $unitOfMeasure->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+        return $user->organization_id === $unitOfMeasure->organization_id;
     }
 
     /**
@@ -61,13 +55,7 @@ class UnitOfMeasurePolicy
      */
     public function delete(User $user, UnitOfMeasure $unitOfMeasure)
     {
-    	if($user->organization_id === $unitOfMeasure->organization_id){
-    		return true;
-    	}
-    	
-    	else{
-    		abort(403, 'This action is unauthorized');
-    	}
+    	return $user->organization_id === $unitOfMeasure->organization_id;
     }
 
     /**

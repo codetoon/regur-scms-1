@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Validator;
 use Symfony\Component\Routing\Loader\ProtectedPhpFileLoader;
 use function Mockery\Fixtures\parent;
+use Illuminate\Support\Facades\Auth;
 
 
 class PaymentTerm extends Model
@@ -24,6 +25,16 @@ class PaymentTerm extends Model
 		
 		self::saving(function ($model){
 			return $model->validate();
+		});
+		
+		self::deleting(function ($model){
+			if(Auth::user()->can('delete', $model)){
+				return true;
+			}
+			
+			else{
+				return false;
+			}
 		});
 	}
 	

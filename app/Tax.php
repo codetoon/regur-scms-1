@@ -4,6 +4,7 @@ namespace App;
 use Validator;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Tax extends Model
 {	

@@ -26,8 +26,22 @@ class CreditReason extends Model
     	parent::boot();
     	
     	self::saving(function($model){
+    		
     		return $model->validate();
+    		
     	});
+    	
+    	self::deleting(function ($model){
+			if(Auth::user()->can('delete', $model)){
+				return true;
+			}
+			
+			else{
+				return false;
+			}
+			
+		});
+    	
     	
     }
     
@@ -51,7 +65,6 @@ class CreditReason extends Model
     	
     if($this->validator->fails()){
     		return false;
-    		
     	}
     	else {
     		return true;

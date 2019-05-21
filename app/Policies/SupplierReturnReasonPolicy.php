@@ -41,13 +41,7 @@ class SupplierReturnReasonPolicy
      */
     public function update(User $user, SupplierReturnReason $supplierReturnReason)
     {	
-        if($user->organization_id === $supplierReturnReason->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+        return $user->organization_id === $supplierReturnReason->organization_id;
     }
 
     /**
@@ -59,13 +53,7 @@ class SupplierReturnReasonPolicy
      */
     public function delete(User $user, SupplierReturnReason $supplierReturnReason)
     {	
-        if($user->organization_id === $supplierReturnReason->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+        return $user->organization_id === $supplierReturnReason->organization_id;
     }
 
     /**

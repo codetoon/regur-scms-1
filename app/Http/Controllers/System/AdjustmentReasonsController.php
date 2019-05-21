@@ -47,9 +47,15 @@ class AdjustmentReasonsController extends Controller
    
    protected function destroy($id){
    	$adjustmentReason= AdjustmentReason::findOrFail($id);
-   	$this->authorize('delete', $adjustmentReason);
+   	$deletedRow= $adjustmentReason->delete();
    	
-   	$adjustmentReason->delete();
+   	if($deletedRow == true){
+   		return response()->json(['Adjustment reason deleted successfully']);
+   	}
+   	
+   	else {
+   		return abort(403, 'This action is unauthorized');
+   	}
    	
    	
    }

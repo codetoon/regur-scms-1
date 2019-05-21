@@ -24,7 +24,7 @@ class UnitsOfMeasureController extends Controller
 		return view('system.uom');
 	}
 	public function list(){
-		$uom= UnitOfMeasure::/* where('organization_id', Auth::user()->organization_id)-> */get();
+		$uom= UnitOfMeasure::where('organization_id', Auth::user()->organization_id)->get();
 		return DataTables::of($uom)->make(true);
 	}
 	
@@ -48,7 +48,6 @@ class UnitsOfMeasureController extends Controller
    	
    public function destroy($id){
    	$uom= UnitOfMeasure::findOrFail($id);
-   	$this->authorize('delete', $unitOfMeasure);
    	$uom->delete();
   		}
    	

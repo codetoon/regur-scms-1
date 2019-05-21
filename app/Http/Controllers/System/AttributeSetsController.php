@@ -14,6 +14,7 @@ use App\AttributeSet;
 use Symfony\Component\VarDumper\Tests\Cloner\DataTest;
 use App\Organization;
 use App\Lookup;
+use App\Attribute;
 
 class AttributeSetsController extends Controller
 { 
@@ -56,6 +57,25 @@ class AttributeSetsController extends Controller
    
    public function destroy($id){
    	$attributeSet= AttributeSet::findOrFail($id);
-   	$attributeSet->delete();
+   	$attributes= Attribute::where('attribute_set_id', $id)->get();
+   	
+   	if($attributes->isEmpty()){
+   		$deletedRow= $attributeSet->delete();
+   		
+   		if($deletedRow == true){
+   			return response()->json(['Attribute set deleted successfully']);
+   		}
+   		
+   		else {
+   			return abort(403, 'This action is unauthorized');
+   		}
+   		
+   		
+   	}
+   
+   	else{
+   		return response()->json(['This attribute set contains attributes']);
+   	}
+   	
    }
 }

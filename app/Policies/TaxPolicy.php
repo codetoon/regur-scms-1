@@ -42,13 +42,7 @@ class TaxPolicy
      */
     public function update(User $user, Tax $tax)
     {
-        if($user->organization_id === $tax->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+    	//
     }
 
     /**
@@ -60,13 +54,7 @@ class TaxPolicy
      */
     public function delete(User $user, Tax $tax)
     {
-        if($user->organization_id === $tax->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+       //
     }
 
     /**

@@ -42,15 +42,7 @@ class ProductGroupPolicy
      */
     public function update(User $user, ProductGroup $productGroup)
     {
-    	if($user->organization_id === $productGroup->organization_id){
-    		 
-    		return true;
-    	}
-    	 
-    	else{
-    		abort('403', 'This action is unauthorized');
-    		 
-    	}
+    	return $user->organization_id === $productGroup->organization_id;
     }
 
     /**
@@ -62,15 +54,7 @@ class ProductGroupPolicy
      */
     public function delete(User $user, ProductGroup $productGroup)
     {
-    	if($user->organization_id === $productGroup->organization_id){
-    		 
-    		return true;
-    	}
-    	
-    	else{
-    		abort('403', 'This action is unauthorized');
-    		 
-    	}
+    	return $user->organization_id === $productGroup->organization_id;
     } 
 
     /**

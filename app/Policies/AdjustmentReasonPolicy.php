@@ -42,13 +42,7 @@ class AdjustmentReasonPolicy
      */
     public function update(User $user, AdjustmentReason $adjustmentReason)
     {
-    	if($user->organization_id === $adjustmentReason->organization_id){
-    		return true;
-    	}
-    	
-    	else{
-    		abort(403, 'This action is unauthorized');
-    	}
+    	return $user->organization_id === $adjustmentReason->organization_id;
     }
 
     /**
@@ -60,13 +54,7 @@ class AdjustmentReasonPolicy
      */
     public function delete(User $user, AdjustmentReason $adjustmentReason)
     {
-        if($user->organization_id === $adjustmentReason->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+        return $user->organization_id === $adjustmentReason->organization_id;
     }
 
     /**

@@ -42,7 +42,7 @@ class SalesGroupPolicy
      */
     public function update(User $user, SalesGroup $salesGroup)
     {
-        //
+        return  $user->organization_id === $salesGroup->organization_id;
     }
 
     /**
@@ -54,13 +54,7 @@ class SalesGroupPolicy
      */
     public function delete(User $user, SalesGroup $salesGroup)
     {
-        if($user->organization_id === $salesGroup->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+        return $user->organization_id === $salesGroup->organization_id;
     }
 
     /**

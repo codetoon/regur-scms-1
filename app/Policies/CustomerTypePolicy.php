@@ -42,13 +42,8 @@ class CustomerTypePolicy
      */
     public function update(User $user, CustomerType $customerType)
     {
-    	if($user->organization_id === $customerType->organization_id){
-    		return true;
-    	}
+    	return $user->organization_id === $customerType->organization_id;
     	
-    	else{
-    		abort(403, 'This action is unauthorized');
-    	}
     }
 
     /**
@@ -60,13 +55,7 @@ class CustomerTypePolicy
      */
     public function delete(User $user, CustomerType $customerType)
     {
-        if($user->organization_id === $customerType->organization_id){
-        	return true;
-        }
-        
-        else{
-        	abort(403, 'This action is unauthorized');
-        }
+        return $user->organization_id === $customerType->organization_id;
     }
 
     /**

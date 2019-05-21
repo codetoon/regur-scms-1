@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use function Mockery\Fixtures\parent;
 
@@ -22,6 +23,16 @@ class AttributeSet extends Model
 		
 		self::saving(function ($model){
 			return $model->validate();
+		});
+		
+		self::deleting(function ($model){
+			if(Auth::user()->can('delete', $model)){
+				return true;
+				}
+				
+			else{
+				return false;
+			}
 		});
 	}
 	

@@ -89,16 +89,16 @@
             
             axios.delete('/system/attribute-sets/'+ data.id )
                 .then(function(response){
+                    app.succ_messages= response.data;
                     attribute_sets_table.ajax.reload();
                     hideLoader();
                 })
                 
                 .catch(function(error){
-                 if(error.response.status== 422){
+                     app.errors= error.response.data.message.split();
                      attribute_sets_table.ajax.reload();
-                    /* errors= error.response.data;*/
                      hideLoader();
-                 }
+                 
              })
                     
         }

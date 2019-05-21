@@ -52,8 +52,17 @@ class AttributesController extends Controller
 	
 	public function destroy($id){
 		$attribute= Attribute::findOrFail($id);
-		$this->authorize('delete', $attribute);
-		$attribute->delete();
+		$deletedRow= $attribute->delete();
+		
+		if($deletedRow == true){
+			return response()->json(['Attribute deleted successfully']);
+		}
+		
+		else {
+			return abort(403, 'This action is unauthorized');
+		}
+		
+		
 	
 	}
 	

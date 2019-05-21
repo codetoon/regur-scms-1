@@ -79,18 +79,10 @@ class CreditReasonPolicy
      * @return mixed
      */
     public function delete(User $user, CreditReason $creditReason)
-    {
-       if($user->organization_id === $creditReason->organization_id){
-       	
-       		return true;
-       }
-       
-       else{
-       		abort('403', 'This action is unauthorized');
-       	
-       }
-       
-       
+    {	
+    	
+    	 return $user->organization_id === $creditReason->organization_id;
+     
     }
 
     /**
