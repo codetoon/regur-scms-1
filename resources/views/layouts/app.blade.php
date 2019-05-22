@@ -117,7 +117,7 @@
                         <a class="nav-link dropdown collapsed" href="#" data-toggle="collapse" id="menu-item-2" data-target="#submenu-list-2" >
                         <span class="sidebar-icon" data-feather="users"></span>
                         <span class="sidebar-menu-item">{{ __('Customers') }}</span>
-                       <span class="drop-btn" data-feather="chevron-down" ></span>
+                       <span class="drop-btn" data-feather="chevron-down"></span>
                         </a>
                             <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="menu-item-2" id="submenu-list-2">
                                 <li><a href="#" class="submenu-list-item"><span data-feather="users"></span>Customer 1</a></li>
@@ -229,8 +229,8 @@
          
      }
 			 $(document).ready(function(){
-			  $('#toggle-button').click(function(){
-			     if( $('.sidebar-menu-item').is(':visible') ){
+             $('#toggle-button').click(function(){
+                 if( $('.sidebar-menu-item').is(':visible') ){
                      $('.company-name').css({'display': 'none'});
                      $('.company-logo').css({'display': 'inline-block'});
                      $('.sidebar-menu-item').hide();
@@ -244,9 +244,9 @@
                      
 
                  }
-			      
-			      else if($('.sidebar-menu-item').is(':hidden')){
-			         $( '.company-name').css({display: 'inline-block'});
+                 
+                 else if($('.sidebar-menu-item').is(':hidden')){
+                    $( '.company-name').css({display: 'inline-block'});
                     $('.company-logo').css({display: 'none'});
                     $('.sidebar-menu-item').show();
                     $('.drop-btn').show();
@@ -257,31 +257,33 @@
                     createCookie("sidebar", "visible");
                  }
                  
-			      else{
-			          return;
-			      }
-			 });
+                 else{
+                     return;
+                 }
+            });
 
 			 $('#toggle-button-mobile').click(function(){
-			     if($('.sidebar-menu-item').is(':visible')){
-			         $('.sidebar-menu').hide("slide", {direction: "left"}, 100);
-			         $('.main-content').addClass('main-content-view');
-			      }
-			
-			     else if($('.sidebar-menu-item').is(':hidden')){
-			          $('.sidebar-menu').show("slide", {direction: "left"}, 100);
-			          $('.main-content').removeClass('main-content-view');
-                    
-			     
+                if($('.sidebar-menu-item').is(':visible')){
+                    $('.sidebar-menu').hide("slide", {direction: "left"}, 100);
+                    $('.sidebar-menu').css({'height': '100%'});
+                    $('.main-content').addClass('main-content-view');
                  }
-			     else{
-			         return;
-			      }
-			                 
-			
-			  });
-			
-			 });      
+
+                else if($('.sidebar-menu-item').is(':hidden')){
+                     $('.sidebar-menu').show("slide", {direction: "left"}, 100);
+                     $('.sidebar-menu').css({'height': '100%'});
+                     $('.main-content').removeClass('main-content-view');
+                 }
+                
+                        
+                else{
+                    return;
+                }
+                            
+
+                });
+           
+            });
 			
 			$(".dropdown").click(function(){
 			  if($(this).hasClass('collapsed')){

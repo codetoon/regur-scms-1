@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Organization;
+use Illuminate\Validation\ValidationException;
 
 
 class RegisterController extends Controller
@@ -51,16 +52,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(Request $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        	'mobile_number'=>['required', 'numeric'],
-        	'company_name'=>['required', 'string', 'max:255']
-        ]);
-    }
+    
 
     /**
      * Create a new user instance after a valid registration.
@@ -90,17 +82,22 @@ class RegisterController extends Controller
         	'mobile_number' => $data['mobile_number']
 
         ]);
+
+        if($user->getValidator()->failed()){
+        	DB::rollback();
+        	return redirect('/signup')->withErrors($user->getValidator)->withInput();
+        }
         
         DB::commit();
         //return $user;
         //return $organization;
         return redirect('/home');
         
-       
     	}
+    	
     	catch (Exception $e){
     		DB::rollback();
-    		echo $e->getMessage();
+    		return $e->getMessage();
     	}
  
 }

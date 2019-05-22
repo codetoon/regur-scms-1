@@ -1,7 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div><h5>{{$attributeSet[0]->name}}</h5></div>
+<div class="form-group row">
+            <div class="col-md-3">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                     {{$attributeSet[0]->name}}
+                    </button>
+                <div class="dropdown-menu">
+                    @foreach($allAttributeSets as $allAttributeSet)
+                    <a class="dropdown-item" href="/system/attributes/{{ $allAttributeSet->id}}" >{{ $allAttributeSet->name}} </a>    
+                    @endforeach
+                </div>
+                </div>
+            </div>
+   
+        </div>
+ 
+
 
 <div id="attributes_app">
     <!--<div class="col-md-3">
@@ -28,20 +44,7 @@
 @endverbatim
     <form method="post" action="" @submit.prevent= "onSubmit">
         @csrf
-        <div class="form-group row">
-            <div class="col-md-3">
-                <div class="dropdown">
-                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                     Attribute Sets
-                    </button>
-                <div class="dropdown-menu">
-                    @foreach($allAttributeSets as $allAttributeSet)
-                    <a class="dropdown-item" href="/system/attributes/{{ $allAttributeSet->id}}">{{ $allAttributeSet->name}} </a>    
-                    @endforeach
-                </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="form-group row">
             <div class="col-md-3">
                 <label for="attribute_name"><sup>*</sup>Attribute Name</label>

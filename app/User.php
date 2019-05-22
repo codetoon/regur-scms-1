@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Validator;
 
 class User extends Authenticatable
 {	
@@ -40,8 +41,45 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-   public function organization(){
-   		$this->belongsTo(Organization::class);
+   private $validator;
+    
+   public function __construct(array $attributes=[]){
+   		parent::__construct($attributes);
+   }
+   
+   protected static function boot(){
+   		parent::boot();
+   	
+   	self::saving(function ($model){
+   		return $model->validate();
+   	});
+   }
+    
+ 	public function organization(){
+    	$this->belongsTo('Organization::class');
+    }
+    
+   
+   public function getValidator(){
+   		return $this->validator;
+   }
+   
+   public function validate(){
+		$this->validator= Validator::make($this->attributesToArray(), [
+				'first_name' => ['required', 'string', 'max:255'],
+				'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+				'password' => ['required', 'string', 'min:6', 'confirmed'],
+				'mobile_number'=>['required', 'numeric']
+		]);
+		
+   	
+   	if($this->validator->fails()){
+   		return false;
+   	}
+   	
+   	else{
+   		return true;
+   	}
    }
     
 }
