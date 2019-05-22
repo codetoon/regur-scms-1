@@ -49,7 +49,13 @@ class SupplierReturnReasonsController extends Controller
 	
 	public function destroy($id){
 		$supplierReturnReason= SupplierReturnReason::findOrFail($id);
-		$this->authorize('delete', $supplierReturnReason);
-		$supplierReturnReason->delete();
+		$deletedRow= $supplierReturnReason->delete();
+		
+		if($deletedRow== true){
+			return response()->json(['Supplier return reason deleted successfully']);
+		}
+		else{
+			return response()->json(['This action is unauthorized'], 403);
+		}
 	}
 }

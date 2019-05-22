@@ -25,7 +25,7 @@ class CustomerTypesController extends Controller
 	}
 	
 	public function list(){
-		$customerType= CustomerType::where('organization_id', Auth::user()->organization_id)->get();
+		$customerType= CustomerType::/* where('organization_id', Auth::user()->organization_id)-> */get();
 		return DataTables::of($customerType)->make(true);
 	}
 	
@@ -48,7 +48,14 @@ class CustomerTypesController extends Controller
 	
 	public function destroy($id){
 		$customerType= CustomerType::findOrFail($id);
-		$customerType->delete();
+		$deletedRow= $customerType->delete();
+		
+		if($deletedRow== true){
+			return response()->json(['Customer type deleted successfully']);
+		}
+		else{
+			return response()->json(['This action is unauthorized'], 403);
+		}
 		
 	}
 }

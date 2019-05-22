@@ -73,11 +73,12 @@
             
             axios.delete('/system/supplier-return-reasons/'+ data.id)
                 .then(function(response){
+                    app.succ_messages= response.data;
                     supplier_return_reasons_table.ajax.reload();
                     hideLoader();
             })
             .catch(function(error){
-                     app.errors= error.response.data.message.split();
+                     app.errors= error.response.data;
                      hideLoader();
                 
             })

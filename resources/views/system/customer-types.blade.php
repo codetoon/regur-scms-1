@@ -71,11 +71,12 @@
             
             axios.delete('/system/customer-types/'+ data.id)
                 .then(function(response){
+                app.succ_messages= response.data;
                 customer_types_table.ajax.reload();
                 hideLoader();
             })
             .catch(function(error){
-                errors= error.response.data;
+                app.errors= error.response.data;
                 hideLoader();
             })
             

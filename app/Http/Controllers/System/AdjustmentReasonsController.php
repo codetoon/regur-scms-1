@@ -54,7 +54,7 @@ class AdjustmentReasonsController extends Controller
    	}
    	
    	else {
-   		return abort(403, 'This action is unauthorized');
+   		return response()->json(['This action is unauthorized'], 403);
    	}
    	
    	

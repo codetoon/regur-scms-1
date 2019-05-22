@@ -49,8 +49,14 @@ public function store(Request $data){
    
    public function destroy($id){
    	$salesGroup= SalesGroup::findOrFail($id);
-   
-   	$salesGroup->delete();
+   	$deletedRow= $salesGroup->delete();
+   	
+   	if($deletedRow== true){
+   		return response()->json(['Sales group deleted successfully']);
+   	}
+   	else{
+   		return response()->json(['This action is unauthorized'], 403);
+   	}
   }
 	
 	

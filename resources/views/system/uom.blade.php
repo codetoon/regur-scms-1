@@ -69,12 +69,13 @@
             
              axios.delete('/system/units-of-measure/'+ data.id )
                 .then(function(response){
+                    app.succ_messages= response.data;
                     uom_table.ajax.reload();
                     hideLoader();
                 })
                 
                 .catch(function(error){
-                     app.errors= error.response.data.message.split();
+                     app.errors= error.response.data;
                      uom_table.ajax.reload();
                      hideLoader();
                  

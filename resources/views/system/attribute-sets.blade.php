@@ -95,7 +95,7 @@
                 })
                 
                 .catch(function(error){
-                     app.errors= error.response.data.message.split();
+                     app.errors= error.response.data;
                      attribute_sets_table.ajax.reload();
                      hideLoader();
                  

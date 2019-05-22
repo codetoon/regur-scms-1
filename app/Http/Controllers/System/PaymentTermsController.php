@@ -54,7 +54,13 @@ class PaymentTermsController extends Controller
 	 
 	public function destroy($id){
 		$paymentTerm= PaymentTerm::findOrFail($id);
-		$paymentTerm->delete();
-	
+		$deletedRow= $paymentTerm->delete();
+		
+		if($deletedRow== true){
+			return response()->json(['Payment term deleted successfully']);
+		}
+		else{
+			return response()->json(['This action is unauthorized'], 403);
+		}
 	}
 }

@@ -42,10 +42,10 @@
         <div class="company-logo company"><a href="#" >{{ __('Logo') }}</a></div>
             <div class="col">
                 <div class="row">
-                    <div class="col-md-1 col-sm-1 col-1 nav-container toggle-button" id="toggle-button">
+                    <div class="col-md-1 col-sm-1 col-1 nav-container toggle-btn" id="toggle-button">
                         <a class="text-white" href="#" ><span data-feather="menu"></span></a> 
                     </div>
-                    <div class="col-md-1 col-sm-1 col-1 nav-container toggle-button" id="toggle-button-mobile" >
+                    <div class="col-md-1 col-sm-1 col-1 nav-container toggle-btn" id="toggle-button-mobile" >
                         <a class=" text-white" href="#"><span data-feather="menu"></span></a> 
                     </div>
                     <div class="col-md-9 col-sm-9 col-9">
@@ -143,7 +143,8 @@
                        <span class="drop-btn" data-feather="chevron-down" ></span>
                         </a>
                             <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="menu-item-3" id="submenu-list-3">
-                                <li><a href="/company/organization-details/{{ Auth::user()->organization_id }}" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
+                                <li><a href="/company/organization-details/{{ +
+                                    Auth::user()->organization_id }}" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
                                 <li><a href="#" class="submenu-list-item dropdown collapsed" data-toggle="collapse" id="submenu-item" data-target="sub-submenu"><span data-feather="users"></span>{{ __('System') }}<span class="drop-btn" data-feather="chevron-down" ></span></a><ul class="collapse dropdown-content dropdown-sidebar-expanded"aria-labelledby="submenu-item" id="sub-submenu" >
                                     <li>
                                         <a href="/system/adjustmentReasons" class=""><span data-feather="users"></span>{{ __('Adjustment Reasons') }}</a>

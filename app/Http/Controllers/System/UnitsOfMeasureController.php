@@ -48,7 +48,14 @@ class UnitsOfMeasureController extends Controller
    	
    public function destroy($id){
    	$uom= UnitOfMeasure::findOrFail($id);
-   	$uom->delete();
+   	$deletedRow= $uom->delete();
+   	
+   	if($deletedRow== true){
+   		return response()->json(['Unit of measure deleted successfully']);
+   	}
+   	else{
+   		return response()->json(['This action is unauthorized'], 403);
+   	}
   		}
    	
    

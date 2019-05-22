@@ -83,14 +83,14 @@
             
             axios.delete('/system/product-groups/'+ data.id )
                 .then(function(response){
+                    app.succ_messages= response.data;
                     product_groups_table.ajax.reload();
                     hideLoader();
                 })
                 
                 .catch(function(error){
-                    alert(error.response.data.message);
                      product_groups_table.ajax.reload();
-                    /* errors= error.response.data;*/
+                     app.errors= error.response.data;
                      hideLoader();
              })
                     

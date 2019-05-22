@@ -78,7 +78,7 @@ Route::delete('/system/attribute-sets/{attributeSet}', 'System\AttributeSetsCont
 Route::get('/system/taxes', 'System\TaxesController@show');
 Route::get('/system/taxes/list', 'System\TaxesController@list');
 Route::post('/system/taxes', 'System\TaxesController@store');
-Route::delete('/system/taxes/{tax}', 'System\TaxesController@destroy');
+//Route::delete('/system/taxes/{tax}', 'System\TaxesController@destroy');
 
 Route::get('/system/attributes/{attribute}', 'System\AttributesController@show');
 Route::get('/system/attributes/{attribute}/list', 'System\AttributesController@list')->name('attributes.list');

@@ -87,7 +87,7 @@
                 })
                 
                 .catch(function(error){
-                   app.errors= error.response.data.message.split();
+                   app.errors= error.response.data;
                    hideLoader();
                 })
              }

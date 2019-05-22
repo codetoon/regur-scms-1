@@ -49,8 +49,5 @@ class TaxesController extends Controller
     	}
     }
     
-    public function destroy($id){
-    	$tax= Tax::findOrFail($id);
-    	$tax->delete();
-    }
+    
 }

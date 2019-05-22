@@ -95,14 +95,14 @@ $(document).on('click',"#payment_term_delete", function(e){
             
             axios.delete('/system/payment-terms/'+ data.id )
                 .then(function(response){
+                    app.succ_messages= response.data;
                     payment_terms_table.ajax.reload();
                     hideLoader();
                 })
                 
                 .catch(function(error){
-                    alert(error.response.data.message);
                      payment_terms_table.ajax.reload();
-                    /* errors= error.response.data;*/
+                     app.errors= error.response.data;
                      hideLoader();
                  
              })

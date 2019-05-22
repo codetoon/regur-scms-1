@@ -28,8 +28,7 @@ class AttributeSetsController extends Controller
 	}
 	
 	public function list(){
-		$attributeSet= AttributeSet::where('organization_id', Auth::user()->organization_id	);
-		
+		$attributeSet= AttributeSet::where('organization_id', Auth::user()->organization_id	)->get();
 		return DataTables::of($attributeSet)
 		->editColumn('type', function($row){
 			$key= $row->type;
@@ -67,14 +66,14 @@ class AttributeSetsController extends Controller
    		}
    		
    		else {
-   			return abort(403, 'This action is unauthorized');
+   			return response()->json(['This action is unauthorized'], 403);
    		}
    		
    		
    	}
    
    	else{
-   		return response()->json(['This attribute set contains attributes']);
+   		return response()->json(['This attribute set contains attributes'], 422);
    	}
    	
    }

@@ -20,9 +20,10 @@ class AttributesController extends Controller
 	}
 	
 	public function show($id){
-		$attributeSet= AttributeSet::where('id', $id)->get();
-		$attributeSets= AttributeSet::where('organization_id', Auth::user()->organization_id)->get();
-		return view('system.attributes', compact('attributeSet'));		
+		$allAttributeSets= AttributeSet::where('organization_id', Auth::user()->organization_id)->get();
+		$attributeSet= AttributeSet::where('id', $id)->where('organization_id', Auth::user()->organization_id)->get();
+		
+		return view('system.attributes', compact('attributeSet', 'allAttributeSets'));
 	}
 	
 	public function list($id){
@@ -59,11 +60,8 @@ class AttributesController extends Controller
 		}
 		
 		else {
-			return abort(403, 'This action is unauthorized');
+			return response()->json(['This action is unauthorized'], 403);
 		}
-		
-		
-	
 	}
 	
 

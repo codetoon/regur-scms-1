@@ -51,9 +51,15 @@ class ProductGroupsController extends Controller
 	 
 	protected function destroy( $id){
 		$productGroup= ProductGroup::findOrFail($id);
-		$productGroup->delete();
+		$deletedRow= $productGroup->delete();
 		
-		dd($productGroup->delete());
+		if($deletedRow== true){
+			return response()->json(['Product group deleted successfully']);
+		}
+		else{
+			return response()->json(['This action is unauthorized'], 403);
+		}
+		
 		
 	}
 	

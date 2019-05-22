@@ -95,14 +95,14 @@
             
             axios.delete('/system/sales-groups/'+ data.id )
                 .then(function(response){
+                    app.succ_messages= response.data;
                     sales_groups_table.ajax.reload();
                     hideLoader();
                 })
                 
                 .catch(function(error){
-                     app.errors= error.response.data.message.split();
                      sales_groups_table.ajax.reload();
-                    /* errors= error.response.data;*/
+                     app.errors= error.response.data;
                      hideLoader();
                  
              })

@@ -30,6 +30,20 @@
         @csrf
         <div class="form-group row">
             <div class="col-md-3">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                     Attribute Sets
+                    </button>
+                <div class="dropdown-menu">
+                    @foreach($allAttributeSets as $allAttributeSet)
+                    <a class="dropdown-item" href="/system/attributes/{{ $allAttributeSet->id}}">{{ $allAttributeSet->name}} </a>    
+                    @endforeach
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
                 <label for="attribute_name"><sup>*</sup>Attribute Name</label>
                 <input type="text" id="attribute_name" class="form-control" value="{{ old('attribute_name')}}" v-model="attribute_name" autofocus >
             </div>
@@ -116,7 +130,7 @@ $(document).ready(function(){
                 .catch(function(error){
                     
                     attributes_table.ajax.reload();
-                    app.errors= error.response.data.message.split();
+                    app.errors= error.response.data;
                      hideLoader();
                  
              })

@@ -57,7 +57,7 @@ class CreditReasonsController extends Controller
    	}
    	
    	else {
-   		return abort(403, 'This action is unauthorized');
+   		return response()->json(['This action is unauthorized'], 403);
    	}
    	/* $deletedRows = DB::table('credit_reasons')->where('id', $id)->delete();
    	var_dump( $deletedRows); die(); */
