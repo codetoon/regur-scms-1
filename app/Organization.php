@@ -68,15 +68,15 @@ class Organization extends Model
     }
     
     public function industry(){
-    	$this->belongsTo(Industry::class);
+    	return $this->belongsTo(Industry::class);
     }
     
     public function timezone(){
-    	$this->belongsTo(Timezone::class);
+    	return $this->belongsTo(Timezone::class);
     }
     
     public function country(){
-    	$this->belongsTo(Country::class);
+    	return $this->belongsTo(Country::class);
     }
     
     public function adjustmentReasons(){

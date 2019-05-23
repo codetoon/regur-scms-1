@@ -43,20 +43,20 @@ class User extends Authenticatable
     
    private $validator;
     
-   public function __construct(array $attributes=[]){
-   		parent::__construct($attributes);
-   }
-   
-   protected static function boot(){
-   		parent::boot();
-   	
-   	self::saving(function ($model){
-   		return $model->validate();
-   	});
-   }
+   public function __construct(array $attributes= []){
+		parent::__construct($attributes);
+	}
+	protected static function boot(){
+		parent::boot();
+		
+		self::saving(function ($model){
+			return $model->validate();
+		});
+		
+	}
     
  	public function organization(){
-    	$this->belongsTo('Organization::class');
+    	return $this->belongsTo('Organization::class');
     }
     
    
@@ -66,10 +66,11 @@ class User extends Authenticatable
    
    public function validate(){
 		$this->validator= Validator::make($this->attributesToArray(), [
-				'first_name' => ['required', 'string', 'max:255'],
+				'name' => ['required', 'string', 'max:255'],
 				'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
 				'password' => ['required', 'string', 'min:6', 'confirmed'],
-				'mobile_number'=>['required', 'numeric']
+				'mobile_number'=>['required', 'numeric'],
+				
 		]);
 		
    	

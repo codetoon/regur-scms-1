@@ -40,7 +40,7 @@ class Attribute extends Model
     }
     
     public function attributeSet(){
-		$this->belongsTo(AttributeSet::class);
+		return $this->belongsTo(AttributeSet::class);
     }
     
     public function getValidator()

@@ -59,6 +59,7 @@ class AttributeSetsController extends Controller
    	$attributes= Attribute::where('attribute_set_id', $id)->get();
    	
    	if($attributes->isEmpty()){
+   		
    		$deletedRow= $attributeSet->delete();
    		
    		if($deletedRow == true){

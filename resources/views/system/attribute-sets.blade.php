@@ -139,6 +139,7 @@ var app= new Vue({
                     });
                 
                 this.resetMessages(); 
+                this.resetErrors();
                 
             },
             

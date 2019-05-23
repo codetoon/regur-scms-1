@@ -85,7 +85,8 @@ class RegisterController extends Controller
 
         if($user->getValidator()->failed()){
         	DB::rollback();
-        	return redirect('/signup')->withErrors($user->getValidator)->withInput();
+        	return redirect('/signup')->withErrors($user->getValidator())->withInput();
+        	
         }
         
         DB::commit();

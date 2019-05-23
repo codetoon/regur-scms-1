@@ -47,7 +47,7 @@ class CreditReason extends Model
     
     
     public function organizations(){
-    	$this->belongsTo(Organization::class);
+    	return $this->belongsTo(Organization::class);
     }
     
     public function getValidator()

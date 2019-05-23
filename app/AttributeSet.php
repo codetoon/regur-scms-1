@@ -37,7 +37,7 @@ class AttributeSet extends Model
 	}
 	
     public function organization(){
-    	$this->belongsTo('Organization::class');
+    	return $this->belongsTo('Organization::class');
     }
     
     public function getValidator()
