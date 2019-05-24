@@ -66,7 +66,7 @@ class User extends Authenticatable
    
    public function validate(){
 		$this->validator= Validator::make($this->attributesToArray(), [
-				'name' => ['required', 'string', 'max:255'],
+				'first_name' => ['required', 'string', 'max:255'],
 				'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
 				'password' => ['required', 'string', 'min:6', 'confirmed'],
 				'mobile_number'=>['required', 'numeric'],

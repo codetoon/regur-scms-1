@@ -70,6 +70,10 @@ class RegisterController extends Controller
     		
     	]);
     	
+    	if($organization->getValidator()->failed()){
+    		$orgErrors= $organization->getValidator()->messages()->all();
+    	}
+    	
     	
 
     	$splitName= explode(" ", $data['name'], 2);
@@ -83,11 +87,17 @@ class RegisterController extends Controller
 
         ]);
 
-        if($user->getValidator()->failed()){
-        	DB::rollback();
-        	return redirect('/signup')->withErrors($user->getValidator())->withInput();
+        if($user->getValidator()->failed()){  
+        	$userErrors= $user->getValidator()->messages()->all();
         	
         }
+        
+        if($user->getValidator()->failed() or $organization->getValidator()->failed()){
+        	
+        	return redirect('/signup')->with('errors', array_merge($userErrors, $orgErrors))->withInput();	
+        }
+        
+        
         
         DB::commit();
         //return $user;

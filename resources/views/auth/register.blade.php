@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-
 @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
-@elseif($errors->any())
+
+@elseif(count($errors)>0)
     <div class="alert alert-danger">
         <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+            @foreach ($errors as $key=>$value)
+            <li>{{ $value }}</li>
             @endforeach
         </ul>
     </div>
@@ -26,31 +26,26 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><sup>*</sup>{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}"  autofocus>
-
-                               <!-- @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif-->
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"  autofocus>
+                              
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label for="company_name" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}</label>
+                            <label for="company_name" class="col-md-4 col-form-label text-md-right"><sup>*</sup>{{ __('Company Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="company_name" type="text" class="form-control{{ $errors->has('company_name') ? ' is-invalid' : '' }}" name="company_name" value="{{ old('company_name') }}"  autofocus>
+                                <input id="company_name" type="text" class="form-control" name="company_name" value="{{ old('company_name') }}"  autofocus>
 
                                
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right"><sup>*</sup>{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" > 
@@ -58,7 +53,7 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="mobile_number" class="col-md-4 col-form-label text-md-right">{{ __('Mobile number') }}</label>
+                            <label for="mobile_number" class="col-md-4 col-form-label text-md-right"><sup>*</sup>{{ __('Mobile number') }}</label>
 
                             <div class="col-md-6">
                                 <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ old('mobile_number') }}" >
@@ -68,7 +63,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"><sup>*</sup>{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" >
@@ -76,7 +71,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"><sup>*</sup>{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >

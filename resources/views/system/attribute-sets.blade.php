@@ -138,7 +138,7 @@ var app= new Vue({
                         $('#attribute_set_add').prop('disabled', false);
                     });
                 
-                this.resetMessages(); 
+                this.resetMessages();
                 this.resetErrors();
                 
             },
