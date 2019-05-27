@@ -63,6 +63,10 @@ body {
     cursor: pointer;
 }
 
+.navbar-top{
+    padding-bottom: 0px;
+    padding-top: 0;
+}
 
 #toggle-button-mobile{
     display: none;

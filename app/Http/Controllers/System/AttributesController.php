@@ -23,6 +23,9 @@ class AttributesController extends Controller
 		$allAttributeSets= AttributeSet::where('organization_id', Auth::user()->organization_id)->get();
 		$attributeSet= AttributeSet::where('id', $id)->where('organization_id', Auth::user()->organization_id)->get();
 		
+		$attribute= Attribute::where('attribute_set_id', $id);
+		
+		$this->authorize('view', $attribute);
 		return view('system.attributes', compact('attributeSet', 'allAttributeSets'));
 	}
 	

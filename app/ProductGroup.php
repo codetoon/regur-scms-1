@@ -19,10 +19,17 @@ class ProductGroup extends Model
     }
     protected static function boot(){
     	parent::boot();
-    
-    	self::saving(function ($model){
-    		return $model->validate();
+    	
+    	self::creating(function ($model){
+    		if(Auth::user()->can('create', $model)){
+    			return $model->validate();
+    		}
+    		else
+    		{
+    			return false;
+    		}
     	});
+    	
     	
     	self::deleting(function ($model){
     		if(Auth::user()->can('delete', $model)){
@@ -48,7 +55,12 @@ class ProductGroup extends Model
     			'product_group_name'=> ['required', 'string', 'max:255'],
     			'organization_id'=>['required']
     	]);
-    	 
+    	
+    	
+    	
+    	$this->validator->errors()->add('organization_id', 'Something is wrong with this field!');
+    	return  false; 
+    	
     	if($this->validator->fails()){
     		return false;
     	}

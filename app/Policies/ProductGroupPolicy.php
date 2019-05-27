@@ -28,9 +28,9 @@ class ProductGroupPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
-    {
-        //
+    public function create(User $user, ProductGroup $productGroup)
+    {	
+        return $user->organization_id === $productGroup->organization_id;
     }
 
     /**

@@ -21,7 +21,8 @@ class AttributePolicy
      * @return mixed
      */
     public function view(User $user, Attribute $attribute)
-    {	//$attributeSet= AttributeSet::where('id', $attribute->attribute_set_id)->get();
+    {	//return true;
+    	$attributeSet= AttributeSet::where('id', $attribute->attribute_set_id)->get();
     	return $user->organization_id === $attributeSet[0]->organization_id;
     }
 

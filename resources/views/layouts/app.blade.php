@@ -18,7 +18,7 @@
     <!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
    
     
@@ -27,7 +27,7 @@
 <body>
 <div id="page-activity">
     <div>
-            <div class="navbar navbar-dark fixed-top bg-dark shadow row" style="padding-bottom: 0px; padding-top: 0">
+            <div class="navbar navbar-dark fixed-top bg-dark shadow row navbar-top" >
         @guest
             <ul>
                 <li class="nav-item">
@@ -211,7 +211,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>     
         <script src="{{ asset('js/functions.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+       <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
@@ -225,7 +225,6 @@
          var cookie = escape(key) + "=" + escape(value) + ";";
          document.cookie = cookie;
          console.log(cookie);
-         
      }
 			 $(document).ready(function(){
              $('#toggle-button').click(function(){
@@ -285,13 +284,14 @@
             });
 			
 			$(".dropdown").click(function(){
+          
 			  if($(this).hasClass('collapsed')){
                   $(this).find(".drop-btn").css({ transform: 'rotate(180deg)'});
 			  }
 			  
 			  else{   
 			      $(this).find(".drop-btn").css({ transform: 'rotate(0deg)'});
-                 
+                    
                  
 			  }
 			  

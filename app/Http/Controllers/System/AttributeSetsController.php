@@ -58,24 +58,13 @@ class AttributeSetsController extends Controller
    	$attributeSet= AttributeSet::findOrFail($id);
    	$attributes= Attribute::where('attribute_set_id', $id)->get();
    	
-   	if($attributes->isEmpty()){
+	   	if(!$attributes->isEmpty()){
+	   		return response()->json(['This attribute set contains attributes'], 422);
+	   	}
+	
+	   	else{
+	   		$attributeSet->delete();
+	   	}
    		
-   		$deletedRow= $attributeSet->delete();
-   		
-   		if($deletedRow == true){
-   			return response()->json(['Attribute set deleted successfully']);
-   		}
-   		
-   		else {
-   			return response()->json(['This action is unauthorized'], 403);
-   		}
-   		
-   		
-   	}
-   
-   	else{
-   		return response()->json(['This attribute set contains attributes'], 422);
-   	}
-   	
-   }
+	}
 }
