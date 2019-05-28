@@ -140,20 +140,57 @@
                         <li class="nav-item">
                         <a class="nav-link dropdown collapsed" href="#" data-toggle="collapse" id="menu-item-3" data-target="#submenu-list-3" >
                         <span class="sidebar-icon" data-feather="settings"></span>
-                        <span class="sidebar-menu-item">{{ __('Settings') }}</span>
-                       <span class="drop-btn" data-feather="chevron-down" ></span>
+                        <span class="sidebar-menu-item">Settings</span>
+                        <span class="drop-btn" data-feather="chevron-down" ></span>
                         </a>
                             <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="menu-item-3" id="submenu-list-3">
-                                <li><a href="/company/organization-details/{{ Auth::user()->organization_id }}" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
+                                <li><a href="/company/organization-details/{{ Auth::user()->organization_id }}" class="submenu-list-item"><span data-feather="users"></span>Organization</a></li>
+                                
                                 <li>
-                                    <a href="#" class="submenu-list-item dropdown collapsed" data-toggle="collapse" id="submenu-item" data-target="sub-submenu"><span data-feather="users"></span>{{ __('System') }}<span class="drop-btn" data-feather="chevron-down" ></span></a>
-                                    <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="submenu-item" id="sub-submenu">
-                                        <li>
-                                            <a href="/system/adjustment-reasons" class="submenu-list-item">{{ __('Adjustment Reasons') }}</a>
-                                        </li>
-                                    </ul>
+                                   <a href="#" class="submenu-list-item system-submenu nav-link dropdown collapsed" data-toggle="collapse" id="submenu-item" data-target="#sub-submenu-list"><span data-feather="users"></span>System<span class="sub-submenu-btn" data-feather="chevron-right" ></span></a>
+                                    <div class="sub-submenu-container">
+                                        <ul class="collapse dropdown-sidebar-expanded sub-submenu-list" id="sub-submenu-list" aria-labelledby="submenu-item">
+                                            <li>
+                                                <a href="/system/adjustment-reasons" class="submenu-list-item">Adjustment Reasons</a>
+                                            </li>
+                                            <li>
+                                                <a href="/system/attribute-sets" class="submenu-list-item">Attribute Sets</a>
+                                            </li>
+                                            <li>
+                                                <a href="/system/credit-reasons" class="submenu-list-item">Credit Reasons</a>
+                                            </li>
+                                            <li>
+                                                <a href="/system/customer-types" class="submenu-list-item">Customer Types</a>
+                                            </li>
+                                            <li>
+                                                <a href="/system/prefixes" class="submenu-list-item">Prefixes</a>
+                                            </li>
+                                            <li>
+                                                <a href="/system/product-groups" class="submenu-list-item">Product Groups</a>
+                                            </li>
+                                            <li>
+                                                <a href="/system/payment-terms" class="submenu-list-item">Payment Terms</a>
+                                            </li>
+                                             <li>
+                                                <a href="/system/sales-groups" class="submenu-list-item">Sales Groups</a>
+                                            </li>
+                                             <li>
+                                                <a href="/system/shipping-companies" class="submenu-list-item">Shipping Companies</a>
+                                            </li>
+                                             <li>
+                                                <a href="/system/supplier-return-reasons" class="submenu-list-item">Supplier Return Reasons</a>
+                                            </li>
+                                             <li>
+                                                <a href="/system/taxes" class="submenu-list-item">Taxes</a>
+                                            </li>
+                                             <li>
+                                                <a href="/system/units-of-measure" class="submenu-list-item">Units of Measure</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
+                            
                         </li>
                     </ul>
 
@@ -300,8 +337,27 @@
                  
 			  }
 			  
-			})
+			});
          
+            
+           
+            
+         
+            $(".system-submenu").hover(function(){
+                $(this).find('.sub-submenu-btn').css({ transform: 'rotate(180deg)'});
+                $(".sub-submenu-container").show();
+            });
+            
+                $(".system-submenu").hover(function(){
+                $(this).find('.sub-submenu-btn').css({ transform: 'rotate(0deg)'});
+                });
+        function hideSubmenu(){
+           document.onclick= function(e){
+               if(e.target.className !== 'system-submenu'){
+                   $(".sub-submenu-container").hide();
+               }
+           }
+                }
         
         </script>
         @stack('js-script')

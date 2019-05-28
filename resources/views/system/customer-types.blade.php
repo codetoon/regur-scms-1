@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div><h2>Customer Types</h2></div>
+<div><h5>Customer Types</h5></div>
 
 
 <div id="customer_types_app">

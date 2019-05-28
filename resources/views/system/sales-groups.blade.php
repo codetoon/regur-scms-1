@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div><h2>Sales Groups</h2></div>
+<div><h5>Sales Groups</h5></div>
 
 <div id="sales_group_app">
 @verbatim

@@ -186,6 +186,8 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     text-decoration: none;
     color: #333 ;
 }
+
+
 .dropdown-content{
     /*position: relative;*/
     background-color: transparent;
@@ -219,6 +221,24 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     left: 0;
     float: left;
 }
+
+.sub-submenu-container {
+    height: 230px;
+    left: 143.5%;
+    width: 230px;
+    position:absolute;
+    background-color: #f8f9fa;
+    display: none;
+    
+}
+
+
+.sub-submenu-list{
+    overflow-y: scroll;
+    height: 100%;
+    list-style-type: none;  
+}
+
 @supports ((position: -webkit-sticky) or (position: sticky)) {
   .sidebar-sticky {
     position: -webkit-sticky;
