@@ -60,9 +60,9 @@
                             var deleteBtnHTML= '<a href="javascript:void(0)"><button id="credit_reasons_delete"><span data-feather="delete"></span>Delete</button></a>'
                             
                             return deleteBtnHTML;
-                    }
+                        }
                      
-                     }
+                    }
                 
                 ],
                 dataSrc: ""

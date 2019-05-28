@@ -18,6 +18,7 @@
     <!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
    
@@ -144,10 +145,12 @@
                         </a>
                             <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="menu-item-3" id="submenu-list-3">
                                 <li><a href="/company/organization-details/{{ Auth::user()->organization_id }}" class="submenu-list-item"><span data-feather="users"></span>{{ __('Organization') }}</a></li>
-                                <li><a href="#" class="submenu-list-item dropdown collapsed" data-toggle="collapse" id="submenu-item" data-target="sub-submenu"><span data-feather="users"></span>{{ __('System') }}<span class="drop-btn" data-feather="chevron-down" ></span></a><ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="submenu-item" id="sub-submenu" >
-                                    <li>
-                                        <a href="/system/adjustmentReasons" class=""><span data-feather="users"></span>{{ __('Adjustment Reasons') }}</a>
-                                    </li>
+                                <li>
+                                    <a href="#" class="submenu-list-item dropdown collapsed" data-toggle="collapse" id="submenu-item" data-target="sub-submenu"><span data-feather="users"></span>{{ __('System') }}<span class="drop-btn" data-feather="chevron-down" ></span></a>
+                                    <ul class="collapse dropdown-content dropdown-sidebar-expanded" aria-labelledby="submenu-item" id="sub-submenu">
+                                        <li>
+                                            <a href="/system/adjustment-reasons" class="submenu-list-item">{{ __('Adjustment Reasons') }}</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -211,8 +214,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>     
         <script src="{{ asset('js/functions.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
-       <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
         <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -261,6 +263,7 @@
             });
 
 			 $('#toggle-button-mobile').click(function(){
+                
                 if($('.sidebar-menu-item').is(':visible')){
                     $('.sidebar-menu').hide("slide", {direction: "left"}, 100);
                     $('.sidebar-menu').css({'height': '100%'});
@@ -284,12 +287,14 @@
             });
 			
 			$(".dropdown").click(function(){
-          
+                 
 			  if($(this).hasClass('collapsed')){
+                  
                   $(this).find(".drop-btn").css({ transform: 'rotate(180deg)'});
 			  }
 			  
 			  else{   
+                  
 			      $(this).find(".drop-btn").css({ transform: 'rotate(0deg)'});
                     
                  
