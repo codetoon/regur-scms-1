@@ -147,8 +147,12 @@ body {
 }
 
 
-.drop-arrow{
+.drop-btn, .sub-submenu-btn{
+  float: right;
+}
 
+.sub-submenu-btn{
+    margin-right: 18px;
 }
 
 .sidebar-menu-expanded{
@@ -177,7 +181,8 @@ body {
      font-weight: 500;
      cursor: pointer;
      line-height: 1.5;
-    
+     display: block;
+
 }
 
 
@@ -193,9 +198,10 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     background-color: transparent;
     list-style-type: none;
     display: block;
-    min-width: 150px;
+    min-width: 212px;
+    width: 99.9%;
     background-color: #f8f9fa;
-    width: auto;
+    padding-left: 33.5px;
     padding-bottom: 5px;
     padding-top: 5px;
 
@@ -222,21 +228,26 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     float: left;
 }
 
-.sub-submenu-container {
+#sub-submenu-container {
     height: 230px;
-    left: 143.5%;
-    width: 230px;
+    left: 100.5%;
+    top: 30px;
+    width: 214px;
     position:absolute;
     background-color: #f8f9fa;
     display: none;
+    z-index: 1051;
     
 }
 
+/*#system-submenu:hover + #sub-submenu-container{
+    display: block;
+}*/
 
 .sub-submenu-list{
     overflow-y: scroll;
     height: 100%;
-    list-style-type: none;  
+    list-style-type: none;
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -302,7 +313,6 @@ a.submenu-list-item:hover .feather, a.submenu-list-item{
     padding: 2%
    
 }
-
 
 
 /* Anmation */
